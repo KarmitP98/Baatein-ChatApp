@@ -8,6 +8,7 @@ import { LoginPageRoutingModule } from "./login-routing.module";
 
 import { LoginPage } from "./login.page";
 import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule( {
                imports: [
@@ -15,7 +16,8 @@ import { MatInputModule } from "@angular/material/input";
                    FormsModule,
                    IonicModule,
                    LoginPageRoutingModule,
-                   MatInputModule
+                   MatInputModule,
+                   MatIconModule
                ],
                declarations: [ LoginPage ]
            } )

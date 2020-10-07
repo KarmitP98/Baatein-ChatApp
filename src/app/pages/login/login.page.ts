@@ -1,29 +1,39 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "../../services/data.service";
+import { Platform } from "@ionic/angular";
+import { NgForm } from "@angular/forms";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component( {
                 selector: "app-login",
                 templateUrl: "./login.page.html",
                 styleUrls: [ "./login.page.scss" ]
             } )
-export class LoginPage implements OnInit, OnDestroy {
+export class LoginPage implements OnInit {
 
-    email: string;
-    password: string;
+    userEmail: string;
+    userPassword: string;
+    @ViewChild( "loginForm", { static: false } ) loginForm: NgForm;
 
-    constructor( private ds: DataService ) { }
+    constructor( public ds: DataService,
+                 private afa: AngularFireAuth,
+                 public platform: Platform ) { }
 
-    ngOnInit() { }
-
-    ngOnDestroy(): void {}
+    ngOnInit() {
+    }
 
     login(): void {
-        this.ds.loginWithEmail( this.email, this.password );
+        this.ds.loginWithEmail( this.userEmail, this.userPassword );
+        this.loginForm.resetForm();
     }
 
-    keypressed( $event: KeyboardEvent ): void {
-        if ( $event.key === "Enter" ) {
-            this.login();
+    loginWithProvider( provider: string ) {
+        if ( this.platform.is( "cordova" ) ) {
+
+        } else {
+            this.ds.loginOAuth( provider );
+            this.loginForm.resetForm();
         }
     }
+
 }

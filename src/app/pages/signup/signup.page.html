@@ -4,77 +4,101 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content class = "ion-text-center ion-padding">
-<!--    <ion-slides [options] = "slideOpts" pager = "true">-->
-<!--        <ion-slide>-->
-<!--                        <div style = "width: 100%; margin-top: 20%">-->
-<!--                            <ion-avatar (click) = "presentModal()" style = "margin: auto; width: 100px; height:-->
-<!--                                100px">-->
-<!--                                <ion-img [src] = "proPicUrl">-->
-<!--                                </ion-img>-->
-<!--                            </ion-avatar>-->
-<!--                            <ion-button (click) = "presentModal()">Pick an Avatar!-->
-<!--                            </ion-button>-->
-<!--                        </div>-->
-<!--            <ion-item>-->
-<!--                <ion-label position = "floating">User Name</ion-label>-->
-<!--                <ion-input [(ngModel)] = "userName" clearInput =-->
-<!--                        "true" name = "userName"-->
-<!--                           placeholder = "User Name"-->
-<!--                           required type = "text">-->
-<!--                </ion-input>-->
-<!--                <ion-icon name = "person" slot = "end"></ion-icon>-->
-<!--            </ion-item>-->
-<!--            <ion-fab horizontal = "start" vertical = "bottom" slot = "fixed">-->
-<!--                <ion-fab-button routerLink = '/login'-->
-<!--                                color = "danger">-->
-<!--                    <ion-icon name = "arrow-back"></ion-icon>-->
-<!--                </ion-fab-button>-->
-<!--            </ion-fab>-->
-<!--            <ion-fab horizontal = "end" vertical = "bottom">-->
-<!--                <ion-fab-button (click) = "changePage(1)" color = "warning">-->
-<!--                    <ion-icon name = "arrow-forward"></ion-icon>-->
-<!--                </ion-fab-button>-->
-<!--            </ion-fab>-->
-<!--        </ion-slide>-->
+<ion-content class = "ion-padding ion-text-center">
+    <h3 style = "margin-top: 5vh">Welcome to New User Registration!</h3>
 
-<!--        <ion-slide>-->
-<!--            <ion-item>-->
-<!--                <ion-label position = "floating">Email</ion-label>-->
-<!--                <ion-input [(ngModel)] = "userEmail" clearInput = "true"-->
-<!--                           email name = "userEmail" placeholder = "Email"-->
-<!--                           required type = "email"></ion-input>-->
-<!--                <ion-icon name = "mail" slot = "end"></ion-icon>-->
-<!--            </ion-item>-->
-<!--            <ion-item>-->
-<!--                <ion-label position = "floating">Password</ion-label>-->
-<!--                <ion-input [(ngModel)] = "userPassword"-->
-<!--                           clearInput = "true" minlength = "6"-->
-<!--                           name = "password" placeholder = "Password"-->
-<!--                           required type = "password"></ion-input>-->
-<!--                <ion-icon name = "eye-off" slot = "end"></ion-icon>-->
-<!--            </ion-item>-->
-<!--            <ion-fab horizontal = "start" vertical = "bottom">-->
-<!--                <ion-fab-button (click) = "changePage(0)"-->
-<!--                                [disabled] = "(ds.loadingSubject | async)"-->
-<!--                                color = "warning">-->
-<!--                    <ion-icon name = "arrow-back"></ion-icon>-->
-<!--                </ion-fab-button>-->
-<!--            </ion-fab>-->
-<!--            <ion-fab *ngIf = "userPassword && userEmail && userName"-->
-<!--                     horizontal = "end" vertical = "bottom">-->
-<!--                <ion-fab-button (click) = "signUp()"-->
-<!--                                [disabled] = "(ds.loadingSubject |async)"-->
-<!--                                color = "success">-->
-<!--                    <ion-icon name = "arrow-forward"></ion-icon>-->
-<!--                </ion-fab-button>-->
-<!--            </ion-fab>-->
-<!--        </ion-slide>-->
-<!--    </ion-slides>-->
+    <form #signForm = "ngForm" (ngSubmit) = "signUp()"
+          style = "margin-top: 5vh">
 
-<!--    <ion-fab *ngIf = "ds.loadingSubject |-->
-<!--     async" horizontal = "center" style = "width: 100px; height: 50px;"-->
-<!--             vertical = "center">-->
-<!--        <ion-spinner color = "warning"></ion-spinner>-->
-<!--    </ion-fab>-->
+        <mat-form-field>
+            <mat-label>User Name</mat-label>
+            <input (keypress) = '$event.key === "Enter" && signForm.valid ?
+                   signUp() : ""' [(ngModel)] = "user.uName"
+                   autocomplete = "false"
+                   matInput
+                   minlength = "3"
+                   name = "userName"
+                   placeholder = "George"
+                   required
+                   type = "text">
+            <mat-icon matSuffix>
+                <ion-icon name = "person"></ion-icon>
+            </mat-icon>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>User Email</mat-label>
+            <input (keypress) = '$event.key === "Enter" && signForm.valid ?
+                   signUp() : ""' [(ngModel)] = "user.uEmail" email
+                   matInput
+                   name = "userEmail"
+                   placeholder = "george7921@gmail.com"
+                   required
+                   type = "email"
+            >
+            <mat-icon matSuffix>
+                <ion-icon name = "mail"></ion-icon>
+            </mat-icon>
+        </mat-form-field>
+
+        <br>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input (keypress) = '$event.key === "Enter" && signForm.valid ?
+                   signUp() : ""' [(ngModel)] = "password"
+                   matInput
+                   minlength = "6"
+                   name = "password"
+                   placeholder = "******"
+                   required
+                   type = "password">
+            <mat-icon matSuffix>
+                <ion-icon name = "key"></ion-icon>
+            </mat-icon>
+        </mat-form-field>
+
+        <ion-card-subtitle>
+            <b>Note: </b>Password must contain atleast 6 characters!
+        </ion-card-subtitle>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input (keypress) = '$event.key === "Enter" && signForm.valid ?
+                   signUp() : ""' [(ngModel)] = "user.uPhone"
+                   matInput
+                   name = "phone"
+                   pattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                   placeholder = "123-456-7890"
+                   type = "tel">
+            <mat-icon matSuffix>
+                <ion-icon name = "call"></ion-icon>
+            </mat-icon>
+        </mat-form-field>
+
+    </form>
+
+
+    <ion-fab horizontal = "start" slot = "fixed" vertical = "bottom">
+        <ion-fab-button color = "warning"
+                        routerDirection = "back" routerLink = "/login">
+            <ion-icon name = "chevron-back"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab horizontal = "end" slot = "fixed" vertical = "bottom">
+        <ion-fab-button (click) = "signUp()"
+                        [disabled] = "!signForm.valid">
+            <ion-icon name = "person-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab horizontal = "center" vertical = "center">
+        <ion-spinner *ngIf = "ds.loadingSubject | async"
+                     color = "warning"></ion-spinner>
+    </ion-fab>
+
 </ion-content>

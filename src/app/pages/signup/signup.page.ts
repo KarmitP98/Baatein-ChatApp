@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonSlides } from "@ionic/angular";
 import { DataService } from "../../services/data.service";
+import { UserModel } from "../../shared/models";
+import { NgForm } from "@angular/forms";
 
 @Component( {
                 selector: "app-signup",
@@ -9,28 +10,18 @@ import { DataService } from "../../services/data.service";
             } )
 export class SignupPage implements OnInit {
 
-    userName: string;
-    userEmail: string;
-    userPassword: string;
-    userPhone: number;
-    userProPicUrl: string;
+    user: UserModel = { uId: "", uEmail: "", uName: "" };
+    password: string;
 
-    @ViewChild( IonSlides ) slides: IonSlides;
+    @ViewChild( "signForm", { static: false } ) signForm: NgForm;
 
-    slideOpts = {
-        initialSlide: 0
-    };
-
-    constructor(public ds: DataService) { }
+    constructor( public ds: DataService ) { }
 
     ngOnInit() {
     }
 
-    changePage( page: number ): void {
-        this.slides.slideTo( page );
-    }
-
     signUp(): void {
-
+        this.ds.signUpWithEmail( this.user, this.password );
+        this.signForm.resetForm();
     }
 }

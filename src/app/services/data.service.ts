@@ -4,7 +4,6 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { ToastController } from "@ionic/angular";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import { userError } from "@angular/compiler-cli/src/transformers/util";
 import { UserModel } from "../shared/models";
 import * as firebase from "firebase";
 
@@ -22,13 +21,14 @@ export class DataService {
         private router: Router
     ) { }
 
-    public signUpWithEmail( email: string, password: string, name: string ) {
+    public signUpWithEmail( user: UserModel, password: string ) {
 
         this.afa.setPersistence( firebase.auth.Auth.Persistence.SESSION )
             .then( () => {
-                this.afa.createUserWithEmailAndPassword( email, password )
-                    .then( user => {
-                        this.addUser( { uEmail: email, uId: user.user.uid, uName: name } );
+                this.afa.createUserWithEmailAndPassword( user.uEmail, password )
+                    .then( value => {
+                        user.uId = value.user.uid;
+                        this.addUser( user );
                     } )
                     .catch( reason => {
                         this.showToast( "User cannot be created!", 4000, "danger" );
@@ -76,14 +76,16 @@ export class DataService {
             } );
     }
 
-    private showToast( message: string, time?: number, color? ) {
-        this.tc.create( {
-                            message,
-                            duration: time || 2000,
-                            position: "top",
-                            translucent: true,
-                            mode: "ios",
-                            color: color || "primary"
-                        } );
+    async showToast( message: string, time?: number, color? ) {
+        const toast = await this.tc.create( {
+                                                message: message,
+                                                duration: time || 2000,
+                                                position: "bottom",
+                                                translucent: true,
+                                                animated: true,
+                                                color: color || "primary"
+                                            } );
+
+        await toast.present();
     }
 }
