@@ -8,17 +8,17 @@ import { DataService } from "../../services/data.service";
             } )
 export class LoginPage implements OnInit, OnDestroy {
 
-    public email: string = "";
-    public password: string = "";
+    email: string;
+    password: string;
 
-    constructor( public ds: DataService ) { }
+    constructor( private ds: DataService ) { }
 
     ngOnInit() { }
 
     ngOnDestroy(): void {}
 
     login(): void {
-
+        this.ds.loginWithEmail( this.email, this.password );
     }
 
     keypressed( $event: KeyboardEvent ): void {
