@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/auth";
 
@@ -16,10 +16,12 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
         state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         return new Promise( resolve => {
-            this.afa.currentUser.then( value => {
+            const sub = this.afa.authState.subscribe( value => {
                 if ( value ) {
+                    sub.unsubscribe();
                     resolve( true );
                 } else {
+                    sub.unsubscribe();
                     resolve( this.router.navigate( [ "/login" ] ) );
                 }
             } );
@@ -32,11 +34,13 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
         currentState: RouterStateSnapshot,
         nextState?: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return new Promise( resolve => {
-            this.afa.currentUser.then( value => {
+            const sub = this.afa.authState.subscribe( value => {
                 if ( value ) {
+                    sub.unsubscribe();
                     resolve( false );
                 } else {
-                    resolve( this.router.navigate( [ "/login" ] ) );
+                    sub.unsubscribe();
+                    resolve( true );
                 }
             } );
         } );

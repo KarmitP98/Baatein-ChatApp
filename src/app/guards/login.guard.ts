@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/auth";
 
@@ -16,11 +16,12 @@ export class LoginGuard implements CanActivate {
         state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         return new Promise( resolve => {
-            this.afa.currentUser.then( value => {
-                console.log(value);
+            const sub = this.afa.authState.subscribe( value => {
                 if ( value ) {
-                    resolve( this.router.navigate( [ "/" + value.uid ] ) );
+                    sub.unsubscribe();
+                    resolve( this.router.navigate( [ "/", value.uid ] ) );
                 } else {
+                    sub.unsubscribe();
                     resolve( true );
                 }
             } );

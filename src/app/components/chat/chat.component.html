@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar color = "primary">
+        <ion-title>{{oUser.uName}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf = "chat" class = "ion-text-center ion-padding">
+
+    <ion-card *ngFor = "let message of messages" [color] = "message.from ===
+    this.user.uId ? 'primary' : 'light'"
+    >
+        <ion-card-content>
+            {{message.data}}
+        </ion-card-content>
+    </ion-card>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-item lines = "none">
+        <ion-input (keypress) = "$event.key === 'Enter' ? sendMessage(): ''"
+                   [(ngModel)] = "text"
+                   color = "dark"
+                   name = "message"
+                   placeholder = "Enter a message..."
+                   type = "text">
+        </ion-input>
+        <ion-icon (click) = "sendMessage()" color = "primary"
+                  name = "paper-plane"
+                  slot = "end">
+        </ion-icon>
+    </ion-item>
+
+</ion-footer>
+

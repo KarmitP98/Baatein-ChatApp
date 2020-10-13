@@ -20,10 +20,10 @@ const routes: Routes = [
         canActivate: [ LoginGuard ]
     },
     {
-        path: ":userId",
-        loadChildren: () => import("./pages/dashboard/dashboard.module").then( m => m.DashboardPageModule ),
-        canActivate: [ AuthGuard ],
-        canDeactivate: [ AuthGuard ]
+        path : ":uId",
+        loadChildren : () => import("./pages/dashboard/dashboard.module").then( m => m.DashboardPageModule ),
+        canActivate : [ AuthGuard ],
+        canDeactivate : [ AuthGuard ]
     }
 ];
 

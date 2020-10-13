@@ -1,9 +1,38 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>dashboard</ion-title>
+<ion-header *ngIf = "user">
+    <ion-toolbar color = "light">
+        <ion-title>{{user.uName}}</ion-title>
+        <ion-buttons slot = "end">
+            <ion-button (click) = "openMenu($event)" fill = "clear">
+                <ion-icon name = "ellipsis-vertical"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf = "user" class = "ion-text-center">
+
+    <div class = "cont ion-text-left">
+        <div class = "scroll" scrollX = "true">
+            <span *ngFor = "let user of users">
+                <ion-button (click) = "loadChat(user)"
+                            shape = "round">
+                    <ion-label>{{user.uName | initial}}</ion-label>
+                </ion-button>
+            </span>
+        </div>
+    </div>
+
+    <p *ngIf = "!this.chat" style = "margin-top: 40vh;">
+        Welcome to Baatein!
+        <br>
+        <b>
+            Click on a user to start chatting!
+        </b>
+    </p>
+
+    <app-chat *ngIf = "chat"
+              [@push] [data] = "{user: this.user, oUser: this.selectedUser}"
+              style = "right: 0;left: 0;height: 94%;"></app-chat>
 
 </ion-content>

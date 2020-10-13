@@ -7,14 +7,16 @@ import { IonicModule } from "@ionic/angular";
 import { DashboardPageRoutingModule } from "./dashboard-routing.module";
 
 import { DashboardPage } from "./dashboard.page";
+import { ChatComponent } from "../../components/chat/chat.component";
+import { InitialPipe } from "../../pipes/initial.pipe";
 
 @NgModule( {
-               imports: [
+               imports : [
                    CommonModule,
                    FormsModule,
                    IonicModule,
                    DashboardPageRoutingModule
                ],
-               declarations: [ DashboardPage ]
+               declarations : [ DashboardPage, ChatComponent, InitialPipe ]
            } )
 export class DashboardPageModule {}

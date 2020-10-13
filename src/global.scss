@@ -33,3 +33,25 @@
 mat-form-field {
   width: 80%;
 }
+
+.cont {
+  width: 100vw;
+  height: 5.5vh;
+  overflow: hidden;
+  white-space: nowrap;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll {
+    margin: auto;
+    overflow: auto;
+  }
+}
+
+.chatClass {
+  //position: absolute;
+  width: 100vw;
+  height: 80vh;
+}

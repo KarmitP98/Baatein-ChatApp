@@ -1,0 +1,19 @@
+.container {
+  width: 100vw;
+  background-color: lightblue;
+  overflow: hidden;
+  white-space: nowrap;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll {
+    overflow: auto;
+  }
+}
+
+app-chat {
+  display: flex;
+  flex-direction: column;
+}

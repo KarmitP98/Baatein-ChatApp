@@ -12,24 +12,29 @@ import { AngularFireAuth } from "@angular/fire/auth";
 export class LoginPage implements OnInit {
 
     userEmail: string;
-    userPassword: string;
-    @ViewChild( "loginForm", { static: false } ) loginForm: NgForm;
-
-    constructor( public ds: DataService,
-                 private afa: AngularFireAuth,
-                 public platform: Platform ) { }
-
+    userPassword : string;
+    @ViewChild( "loginForm", { static : false } ) loginForm : NgForm;
+    
+    constructor( public ds : DataService,
+                 private afa : AngularFireAuth,
+                 public platform : Platform ) { }
+    
     ngOnInit() {
     }
-
-    login(): void {
+    
+    loginTest() {
+        this.ds.loginWithEmail( "karmit1998@yahoo.com", "open1234" );
+        this.loginForm.resetForm();
+    }
+    
+    login() : void {
         this.ds.loginWithEmail( this.userEmail, this.userPassword );
         this.loginForm.resetForm();
     }
-
-    loginWithProvider( provider: string ) {
+    
+    loginWithProvider( provider : string ) {
         if ( this.platform.is( "cordova" ) ) {
-
+        
         } else {
             this.ds.loginOAuth( provider );
             this.loginForm.resetForm();

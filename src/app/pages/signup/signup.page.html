@@ -13,7 +13,7 @@
         <mat-form-field>
             <mat-label>User Name</mat-label>
             <input (keypress) = '$event.key === "Enter" && signForm.valid ?
-                   signUp() : ""' [(ngModel)] = "user.uName"
+                   signUp() : ""' [(ngModel)] = "uName"
                    autocomplete = "false"
                    matInput
                    minlength = "3"
@@ -31,7 +31,7 @@
         <mat-form-field>
             <mat-label>User Email</mat-label>
             <input (keypress) = '$event.key === "Enter" && signForm.valid ?
-                   signUp() : ""' [(ngModel)] = "user.uEmail" email
+                   signUp() : ""' [(ngModel)] = "uEmail" email
                    matInput
                    name = "userEmail"
                    placeholder = "george7921@gmail.com"
@@ -68,7 +68,7 @@
         <mat-form-field>
             <mat-label>Phone Number</mat-label>
             <input (keypress) = '$event.key === "Enter" && signForm.valid ?
-                   signUp() : ""' [(ngModel)] = "user.uPhone"
+                   signUp() : ""' [(ngModel)] = "uPhone"
                    matInput
                    name = "phone"
                    pattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}"
