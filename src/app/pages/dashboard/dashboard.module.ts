@@ -9,6 +9,7 @@ import { DashboardPageRoutingModule } from "./dashboard-routing.module";
 import { DashboardPage } from "./dashboard.page";
 import { ChatComponent } from "../../components/chat/chat.component";
 import { InitialPipe } from "../../pipes/initial.pipe";
+import { TextLayoutComponent } from "../../components/text-layout/text-layout.component";
 
 @NgModule( {
                imports : [
@@ -17,6 +18,6 @@ import { InitialPipe } from "../../pipes/initial.pipe";
                    IonicModule,
                    DashboardPageRoutingModule
                ],
-               declarations : [ DashboardPage, ChatComponent, InitialPipe ]
+               declarations : [ DashboardPage, ChatComponent, InitialPipe, TextLayoutComponent ]
            } )
 export class DashboardPageModule {}

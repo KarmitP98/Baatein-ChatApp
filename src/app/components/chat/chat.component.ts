@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ChatModel, TextModel, UserModel } from "../../shared/models";
 import * as firebase from "firebase";
 import { DataService } from "../../services/data.service";
 import { Subscription } from "rxjs";
+import { IonContent } from "@ionic/angular";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -13,6 +14,7 @@ import Timestamp = firebase.firestore.Timestamp;
 export class ChatComponent implements OnInit, OnDestroy {
     
     @Input( "data" ) data : { user : UserModel, oUser : UserModel };
+    @ViewChild( "content" ) ionContent : IonContent;
     text : string;
     messages : TextModel[] = [];
     user : UserModel;
@@ -33,6 +35,10 @@ export class ChatComponent implements OnInit, OnDestroy {
                                if ( value.length > 0 ) {
                                    this.chat = value[0];
                                    this.messages = this.chat.texts;
+                                   setTimeout( () => {
+                                       this.ionContent.scrollToBottom( 100 );
+                                   }, 50 );
+                                   this.updateChatStatus();
                                } else {
                                    this.chat = {
                                        chatId : "temp",
@@ -65,13 +71,26 @@ export class ChatComponent implements OnInit, OnDestroy {
                 sentTime : Timestamp.now(),
                 deleted : false
             };
-            
+    
             this.messages.push( tempText );
-            this.chat.texts = this.messages;
-            
-            this.ds.updateChat( this.chat, this.chat.chatId );
-            console.log( this.messages );
+            this.updateChat();
+    
             this.text = "";
         }
+    }
+    
+    updateChat() {
+        this.chat.texts = this.messages;
+        this.ds.updateChat( this.chat, this.chat.chatId );
+    }
+    
+    updateChatStatus() {
+        this.messages.forEach( value => {
+            if ( value.status === "sent" && value.from !== this.user.uId ) {
+                value.status = "seen";
+                value.lastUpdateTime = Timestamp.now();
+            }
+        } );
+        this.updateChat();
     }
 }

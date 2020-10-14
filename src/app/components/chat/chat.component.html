@@ -1,19 +1,22 @@
 <ion-header>
-    <ion-toolbar color = "primary">
+    <ion-toolbar color = "warning">
         <ion-title>{{oUser.uName}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf = "chat" class = "ion-text-center ion-padding">
+<ion-content #content *ngIf = "chat" class = "ion-text-center">
 
-    <ion-card *ngFor = "let message of messages" [color] = "message.from ===
-    this.user.uId ? 'primary' : 'light'"
-    >
-        <ion-card-content>
-            {{message.data}}
-        </ion-card-content>
+    <ion-card *ngFor = "let message of messages" class = "mat-elevation-z0">
+        <app-text-layout [ngClass] = "message.from === this.user.uId ? 'ion-float-right' :
+        'ion-float-left'"
+                         [text] = "{from: message.from === this.user.uId ?
+        this.user.uName : this.oUser.uName,data: message.data, status:
+        message.status,lastUpdate: message.lastUpdateTime, color:
+        message.from === this.user.uId ? 'primary' : 'warning',uName:
+        this.user.uName }">
+            >
+        </app-text-layout>
     </ion-card>
-
 
 </ion-content>
 
