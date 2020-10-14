@@ -1,0 +1,65 @@
+<ion-header class = "ion-text-center">
+    <ion-toolbar color = "warning">
+        <ion-title>
+            Select a Profile Picture!
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class = "ion-text-center ion-padding">
+
+    <ion-grid class = "ion-text-center">
+        <ion-row>
+            <ion-col *ngFor = "let item of avatars.slice(0,2)">
+                <ion-avatar [style] = "selected === item ?
+                    'border: green 2px solid': ''" class = "big-size">
+                    <ion-img (click) = "select(item)"
+                             [src] = "item"></ion-img>
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col *ngFor = "let item of avatars.slice(2,4)">
+                <ion-avatar [style] = "selected === item ?
+                    'border: green 2px solid': ''" class = "big-size">
+                    <ion-img (click) = "select(item)"
+                             [src] = "item"></ion-img>
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col *ngFor = "let item of avatars.slice(4,6)">
+                <ion-avatar [style] = "selected === item ?
+                    'border: green 2px solid': ''" class = "big-size">
+                    <ion-img (click) = "select(item)"
+                             [src] = "item"></ion-img>
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngFor = "let item of avatars.slice(7,9)">
+                <ion-avatar [style] = "selected === item ?
+                    'border: green 2px solid': ''" class = "big-size">
+                    <ion-img (click) = "select(item)"
+                             [src] = "item"></ion-img>
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngFor = "let item of avatars.slice(9,10)">
+                <ion-avatar [style] = "selected === item ?
+                    'border: green 2px solid': ''" class = "big-size">
+                    <ion-img (click) = "select(item)"
+                             [src] = "item"></ion-img>
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-button (click) = "dismiss()" color = "success" expand = "block">
+        Select
+    </ion-button>
+
+</ion-content>

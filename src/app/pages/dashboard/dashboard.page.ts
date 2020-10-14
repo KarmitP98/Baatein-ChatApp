@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { UserModel } from "../../shared/models";
+import { ChatModel, UserModel } from "../../shared/models";
 import { ActivatedRoute } from "@angular/router";
 import { DataService } from "../../services/data.service";
 import { UntilDestroy } from "@ngneat/until-destroy";
@@ -40,17 +40,19 @@ export class DashboardPage implements OnInit, OnDestroy {
     //                      "T" ];
     chat = false;
     userSub : Subscription;
+    chatSub : Subscription;
     user : UserModel;
     users : UserModel[] = [];
     selectedUser : UserModel;
+    chats : ChatModel[] = [];
     
     constructor( private route : ActivatedRoute,
                  public ds : DataService,
                  private pc : PopoverController,
                  private mc : ModalController ) {
-        
+    
         const uid = this.route.snapshot.params["uId"];
-        
+    
         this.userSub = this.ds.fetchUser()
                            .subscribe( value => {
                                if ( value ) {
@@ -58,7 +60,14 @@ export class DashboardPage implements OnInit, OnDestroy {
                                    this.users = value.filter( usr => usr.uId !== uid );
                                }
                            } );
-        
+    
+        this.chatSub = this.ds.fetchChats( "userIds", "array-contains", uid )
+                           .subscribe( value => {
+                               if ( value?.length > 0 ) {
+                                   this.chats = value;
+                               }
+                           } );
+    
     }
     
     ngOnInit() {
@@ -83,7 +92,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         await pop.present();
     }
     
-    loadChat( oUser : UserModel ) {
+    loadChatWith( oUser : UserModel ) {
         if ( this.selectedUser === oUser ) {
             this.chat = !this.chat;
         } else {
@@ -97,4 +106,12 @@ export class DashboardPage implements OnInit, OnDestroy {
         }
     }
     
+    loadChat( chat : ChatModel ) : void {
+        var oUser = this.getOtherUser( chat );
+        this.loadChatWith( oUser );
+    }
+    
+    getOtherUser( chat : ChatModel ) : UserModel {
+        return this.users.filter( usr => usr.uId === chat.userIds.filter( value => value !== this.user.uId )[0] )[0];
+    }
 }

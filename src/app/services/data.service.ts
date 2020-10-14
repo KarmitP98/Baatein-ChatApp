@@ -116,11 +116,12 @@ export class DataService {
     public fetchChats( child?, condition?, value? ) {
         if ( child ) {
             return this.afs
-                       .collection<ChatModel[]>( "chats", ref => ref.where( child, condition, value ) )
+                       .collection<ChatModel>( "chats", ref => ref.where( child, condition, value ) )
                        .valueChanges();
         }
         return this.afs
-                   .collection( "chats" );
+                   .collection<ChatModel>( "chats" )
+                   .valueChanges();
     }
     
     public fetchChatWith( uId1 : string, uId2 : string ) {

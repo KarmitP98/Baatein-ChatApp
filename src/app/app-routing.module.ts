@@ -15,16 +15,21 @@ const routes: Routes = [
         canActivate: [ LoginGuard ]
     },
     {
-        path: "signup",
-        loadChildren: () => import("./pages/signup/signup.module").then( m => m.SignupPageModule ),
-        canActivate: [ LoginGuard ]
+        path : "signup",
+        loadChildren : () => import("./pages/signup/signup.module").then( m => m.SignupPageModule ),
+        canActivate : [ LoginGuard ]
     },
     {
         path : ":uId",
         loadChildren : () => import("./pages/dashboard/dashboard.module").then( m => m.DashboardPageModule ),
         canActivate : [ AuthGuard ],
         canDeactivate : [ AuthGuard ]
+    },
+    {
+        path : "user-detail",
+        loadChildren : () => import("./pages/dashboard/user-detail/user-detail.module").then( m => m.UserDetailPageModule )
     }
+
 ];
 
 @NgModule( {

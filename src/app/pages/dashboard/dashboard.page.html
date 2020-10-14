@@ -27,11 +27,18 @@
 <ion-footer>
     <div class = "cont ion-text-left">
         <div class = "scroll" scrollX = "true">
+            <span *ngFor = "let chat of this.chats"
+                  style = "display: inline-block">
+                <ion-avatar (click) = "loadChat(chat)">
+                    <ion-img [src] = "getOtherUser(chat).uProPic"
+                             alt = "BS"></ion-img>
+                </ion-avatar>
+            </span>
             <span *ngFor = "let user of users">
-                <ion-button (click) = "loadChat(user)">
-<!--                    <ion-img src = "assets/icon/favicon.png" alt="Something"></ion-img>-->
-                    <ion-label>{{user.uName | initial}}</ion-label>
-                </ion-button>
+                <ion-avatar (click) = "loadChatWith(user)" style = "display:
+                inline-block">
+                    <ion-img [src] = "user.uProPic" alt = "Something"></ion-img>
+                </ion-avatar>
             </span>
         </div>
     </div>

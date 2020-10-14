@@ -5,10 +5,19 @@
 </ion-header>
 
 <ion-content class = "ion-padding ion-text-center">
-    <h3 style = "margin-top: 5vh">Welcome to New User Registration!</h3>
 
-    <form #signForm = "ngForm" (ngSubmit) = "signUp()"
-          style = "margin-top: 5vh">
+    <div style = "height: 10vh; margin-bottom: 40%; margin-top: 5vh;">
+        <h3>Welcome to New User Registration!</h3>
+        <ion-avatar (click) = "openProfileSelector()"
+                    style = "margin: auto; width: 100px; height: 100px;">
+            <ion-img [src] = "proPic">
+            </ion-img>
+        </ion-avatar>
+        <ion-button (click) = "openProfileSelector()">Pick an Avatar!
+        </ion-button>
+    </div>
+
+    <form #signForm = "ngForm" (ngSubmit) = "signUp()">
 
         <mat-form-field>
             <mat-label>User Name</mat-label>

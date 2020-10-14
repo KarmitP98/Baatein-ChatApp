@@ -12,6 +12,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MenuComponent } from "./components/menu/menu.component";
+import { ProSelectComponent } from "./components/pro-select/pro-select.component";
+import { UserPageComponent } from "./components/user-page/user-page.component";
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -25,7 +27,7 @@ const firebaseConfig = {
 };
 
 @NgModule( {
-               declarations : [ AppComponent, MenuComponent ],
+               declarations : [ AppComponent, MenuComponent, ProSelectComponent, UserPageComponent ],
                entryComponents : [],
                imports : [ BrowserModule,
                            IonicModule.forRoot(),

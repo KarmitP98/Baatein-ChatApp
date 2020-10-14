@@ -3,7 +3,8 @@ import { ChatModel, TextModel, UserModel } from "../../shared/models";
 import * as firebase from "firebase";
 import { DataService } from "../../services/data.service";
 import { Subscription } from "rxjs";
-import { IonContent } from "@ionic/angular";
+import { IonContent, ModalController } from "@ionic/angular";
+import { UserPageComponent } from "../user-page/user-page.component";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -22,9 +23,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     chat : ChatModel;
     chatSub : Subscription;
     
-    constructor( private ds : DataService ) {
+    constructor( private ds : DataService,
+                 private modalController : ModalController ) {
         
-    
+        
     }
     
     ngOnInit() {
@@ -93,4 +95,18 @@ export class ChatComponent implements OnInit, OnDestroy {
         } );
         this.updateChat();
     }
+    
+    async openUserDetails() {
+        const modal = await this.modalController.create( {
+                                                             component : UserPageComponent,
+                                                             componentProps : { user : this.oUser },
+                                                             swipeToClose : true,
+                                                             animated : true,
+                                                             mode : "md",
+                                                             showBackdrop : true
+                                                         } );
+        
+        return modal.present();
+    }
+    
 }

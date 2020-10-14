@@ -1,0 +1,20 @@
+<ion-header *ngIf = "user">
+  <ion-toolbar>
+    <ion-title>{{user.uName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf = "user">
+
+  <ion-fab horizontal = "start" vertical = "bottom">
+    <ion-fab-button (click) = "dismiss(false)" color = "danger">
+      <ion-icon name = "close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal = "end" vertical = "bottom">
+    <ion-fab-button (click) = "dismiss(false)" color = "success">
+      <ion-icon name = "save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
