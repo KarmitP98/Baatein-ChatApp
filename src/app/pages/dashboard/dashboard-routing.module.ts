@@ -11,7 +11,8 @@ const routes: Routes = [
     },
     {
         path : "details",
-        component : UserDetailPage
+        component : UserDetailPage,
+        loadChildren : () => import("../dashboard/user-detail/user-detail.module").then( m => m.UserDetailPageModule )
     }
 ];
 

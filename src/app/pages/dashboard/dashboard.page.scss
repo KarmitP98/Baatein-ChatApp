@@ -17,3 +17,16 @@ app-chat {
   display: flex;
   flex-direction: column;
 }
+
+.bottom-bar {
+  display: inline-block;
+
+  .icon-image {
+    margin: 4px;
+  }
+
+  .disabled {
+    filter: grayscale(100%);
+  }
+
+}

@@ -7,6 +7,7 @@ import { MenuComponent } from "../../components/menu/menu.component";
 import { ModalController, PopoverController } from "@ionic/angular";
 import { pushTrigger } from "../../shared/animations";
 import { Subscription } from "rxjs";
+import { UsersListComponent } from "../../components/user/users-list/users-list.component";
 
 @UntilDestroy( { checkProperties : true } )
 
@@ -18,26 +19,6 @@ import { Subscription } from "rxjs";
             } )
 export class DashboardPage implements OnInit, OnDestroy {
     
-    // items : string[] = [ "A",
-    //                      "B",
-    //                      "C",
-    //                      "D",
-    //                      "E",
-    //                      "F",
-    //                      "G",
-    //                      "H",
-    //                      "I",
-    //                      "J",
-    //                      "K",
-    //                      "L",
-    //                      "M",
-    //                      "N",
-    //                      "O",
-    //                      "P",
-    //                      "Q",
-    //                      "R",
-    //                      "S",
-    //                      "T" ];
     chat = false;
     userSub : Subscription;
     chatSub : Subscription;
@@ -45,6 +26,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     users : UserModel[] = [];
     selectedUser : UserModel;
     chats : ChatModel[] = [];
+    selectedChat : ChatModel;
     
     constructor( private route : ActivatedRoute,
                  public ds : DataService,
@@ -92,7 +74,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         await pop.present();
     }
     
-    loadChatWith( oUser : UserModel ) {
+    loadChatWith( oUser : UserModel, withChat? : ChatModel ) {
         if ( this.selectedUser === oUser ) {
             this.chat = !this.chat;
         } else {
@@ -100,6 +82,7 @@ export class DashboardPage implements OnInit, OnDestroy {
             
             setTimeout( value => {
                 this.selectedUser = oUser;
+                this.selectedChat = withChat;
                 this.chat = true;
                 
             }, 100 );
@@ -108,10 +91,29 @@ export class DashboardPage implements OnInit, OnDestroy {
     
     loadChat( chat : ChatModel ) : void {
         var oUser = this.getOtherUser( chat );
-        this.loadChatWith( oUser );
+        this.loadChatWith( oUser, chat );
     }
     
     getOtherUser( chat : ChatModel ) : UserModel {
         return this.users.filter( usr => usr.uId === chat.userIds.filter( value => value !== this.user.uId )[0] )[0];
+    }
+    
+    async openUsersList() {
+        const modal = await this.mc.create( {
+                                                component : UsersListComponent,
+                                                componentProps : { users : this.users },
+                                                mode : "md",
+                                                swipeToClose : true,
+                                                showBackdrop : false,
+                                                animated : true,
+                                                backdropDismiss : false
+                                            } );
+        
+        await modal.present();
+        
+        const { data } = await modal.onWillDismiss();
+        if ( data?.user ) {
+            this.loadChatWith( data.user );
+        }
     }
 }

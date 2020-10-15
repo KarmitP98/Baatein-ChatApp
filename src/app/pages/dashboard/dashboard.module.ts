@@ -11,6 +11,7 @@ import { ChatComponent } from "../../components/chat/chat.component";
 import { InitialPipe } from "../../pipes/initial.pipe";
 import { TextLayoutComponent } from "../../components/text-layout/text-layout.component";
 import { MatBadgeModule } from "@angular/material/badge";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule( {
                imports : [
@@ -18,7 +19,8 @@ import { MatBadgeModule } from "@angular/material/badge";
                    FormsModule,
                    IonicModule,
                    DashboardPageRoutingModule,
-                   MatBadgeModule
+                   MatBadgeModule,
+                   MatTooltipModule
                ],
                declarations : [ DashboardPage, ChatComponent, InitialPipe, TextLayoutComponent ]
            } )

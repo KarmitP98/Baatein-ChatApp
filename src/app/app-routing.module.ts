@@ -24,10 +24,6 @@ const routes: Routes = [
         loadChildren : () => import("./pages/dashboard/dashboard.module").then( m => m.DashboardPageModule ),
         canActivate : [ AuthGuard ],
         canDeactivate : [ AuthGuard ]
-    },
-    {
-        path : "user-detail",
-        loadChildren : () => import("./pages/dashboard/user-detail/user-detail.module").then( m => m.UserDetailPageModule )
     }
 
 ];

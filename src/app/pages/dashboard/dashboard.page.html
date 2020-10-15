@@ -20,25 +20,32 @@
         </b>
     </p>
     <app-chat *ngIf = "chat"
-              [@push] [data] = "{user: this.user, oUser: this.selectedUser}"
+              [@push] [data] = "{user: this.user, oUser: this.selectedUser,
+              chat: this.selectedChat}"
               style = "right: 0;left: 0;height: 100%;"></app-chat>
 
 </ion-content>
 <ion-footer>
     <div class = "cont ion-text-left">
         <div class = "scroll" scrollX = "true">
-            <span *ngFor = "let chat of this.chats"
-                  style = "display: inline-block">
-                <ion-avatar (click) = "loadChat(chat)">
+            <span class = "bottom-bar">
+                <ion-fab-button (click) = "openUsersList()"
+                                class = "icon-image"
+                                color = "primary">
+                    <ion-icon name = "add"></ion-icon>
+                </ion-fab-button>
+            </span>
+            <span *ngFor = "let chat of this.chats" class = "bottom-bar">
+                <ion-avatar (click) = "loadChat(chat)" [matTooltip] = "this.getOtherUser(chat).uName |
+                            initial"
+                            class = "icon-image"
+                            matTooltipPosition = "above">
                     <ion-img [src] = "getOtherUser(chat).uProPic"
-                             alt = "BS"></ion-img>
+                             alt = "BS">
+                    </ion-img>
                 </ion-avatar>
             </span>
-            <span *ngFor = "let user of users">
-                <ion-avatar (click) = "loadChatWith(user)" style = "display:
-                inline-block">
-                    <ion-img [src] = "user.uProPic" alt = "Something"></ion-img>
-                </ion-avatar>
+            <span *ngFor = "let user of users" class = "bottom-bar">
             </span>
         </div>
     </div>

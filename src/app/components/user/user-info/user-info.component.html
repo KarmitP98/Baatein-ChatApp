@@ -6,9 +6,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class = "ion-text-center">
 
-  <ion-list>
+  <ion-list lines = "full">
+    <ion-item class = "ion-text-center">
+      <ion-avatar>
+        <ion-img [src] = "this.user.uProPic"></ion-img>
+      </ion-avatar>
+    </ion-item>
     <ion-item>
       <ion-label>
         Name: {{user.uName}}

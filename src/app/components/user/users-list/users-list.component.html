@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color = "primary">
+        <ion-title>
+            Select Users to start Baatein!!!
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item (click) = "dismiss(user)"
+              *ngFor = "let user of users"
+              button
+              lines = "full">
+        <ion-avatar slot = "start">
+            <ion-img [src] = "user.uProPic"></ion-img>
+        </ion-avatar>
+        <ion-label>
+            {{user.uName}}
+        </ion-label>
+    </ion-item>
+
+    <ion-fab horizontal = "end" vertical = "bottom">
+        <ion-fab-button (click) = "dismiss()" color = "danger">
+            <ion-icon name = "close"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

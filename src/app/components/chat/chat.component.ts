@@ -4,7 +4,7 @@ import * as firebase from "firebase";
 import { DataService } from "../../services/data.service";
 import { Subscription } from "rxjs";
 import { IonContent, ModalController } from "@ionic/angular";
-import { UserPageComponent } from "../user-page/user-page.component";
+import { UserInfoComponent } from "../user/user-info/user-info.component";
 import Timestamp = firebase.firestore.Timestamp;
 
 @Component( {
@@ -14,7 +14,7 @@ import Timestamp = firebase.firestore.Timestamp;
             } )
 export class ChatComponent implements OnInit, OnDestroy {
     
-    @Input( "data" ) data : { user : UserModel, oUser : UserModel };
+    @Input( "data" ) data : { user : UserModel, oUser : UserModel, chat? : ChatModel };
     @ViewChild( "content" ) ionContent : IonContent;
     text : string;
     messages : TextModel[] = [];
@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.oUser = this.data.oUser;
         this.chatSub = this.ds.fetchChatWith( this.user.uId, this.oUser.uId )
                            .subscribe( value => {
-                               if ( value.length > 0 ) {
+                               if ( value?.length > 0 ) {
                                    this.chat = value[0];
                                    this.messages = this.chat.texts;
                                    setTimeout( () => {
@@ -98,7 +98,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     
     async openUserDetails() {
         const modal = await this.modalController.create( {
-                                                             component : UserPageComponent,
+                                                             component : UserInfoComponent,
                                                              componentProps : { user : this.oUser },
                                                              swipeToClose : true,
                                                              animated : true,
