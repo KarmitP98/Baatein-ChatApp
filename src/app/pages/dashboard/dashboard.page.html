@@ -38,6 +38,8 @@
             <span *ngFor = "let chat of this.chats" class = "bottom-bar">
                 <ion-avatar (click) = "loadChat(chat)" [matTooltip] = "this.getOtherUser(chat).uName |
                             initial"
+                            [ngClass] = "this.selectedChat === chat ?
+                            '':'disabled'"
                             class = "icon-image"
                             matTooltipPosition = "above">
                     <ion-img [src] = "getOtherUser(chat).uProPic"

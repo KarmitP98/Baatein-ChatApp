@@ -1,6 +1,13 @@
 <ion-header>
     <ion-toolbar (click) = "openUserDetails()" color = "warning">
-        <ion-title>{{oUser.uName}}</ion-title>
+        <ion-item color = "warning" lines = "none">
+            <ion-avatar slot = "start" style = "display: inline-flex">
+                <ion-img [src] = "this.oUser.uProPic"></ion-img>
+            </ion-avatar>
+            <ion-label>
+                {{oUser.uName}}</ion-label>
+
+        </ion-item>
     </ion-toolbar>
 </ion-header>
 
