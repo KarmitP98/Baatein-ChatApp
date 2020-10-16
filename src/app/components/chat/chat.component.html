@@ -4,9 +4,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content #content *ngIf = "chat" class = "ion-text-center">
+<ion-content #content *ngIf = "this.chat" class = "ion-text-center">
 
-    <ion-card *ngFor = "let message of messages" class = "mat-elevation-z0">
+    <ion-card *ngFor = "let message of this.chat.texts" class =
+            "mat-elevation-z0">
         <app-text-layout [ngClass] = "message.from === this.user.uId ? 'ion-float-right' :
         'ion-float-left'"
                          [text] = "{from: message.from === this.user.uId ?
