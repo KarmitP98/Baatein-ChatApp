@@ -8,6 +8,9 @@ import { ModalController, PopoverController } from "@ionic/angular";
 import { pushTrigger } from "../../shared/animations";
 import { Subscription } from "rxjs";
 import { UsersListComponent } from "../../components/user/users-list/users-list.component";
+import { textStatus } from "../../shared/constants";
+import * as firebase from "firebase";
+import Timestamp = firebase.firestore.Timestamp;
 
 @UntilDestroy( { checkProperties : true } )
 
@@ -19,14 +22,16 @@ import { UsersListComponent } from "../../components/user/users-list/users-list.
             } )
 export class DashboardPage implements OnInit, OnDestroy {
     
-    chat = false;
     userSub : Subscription;
     chatSub : Subscription;
+    
     user : UserModel;
+    isChatting = false;
     users : UserModel[] = [];
     selectedUser : UserModel;
     chats : ChatModel[] = [];
     selectedChat : ChatModel;
+    TS = textStatus;
     
     constructor( private route : ActivatedRoute,
                  public ds : DataService,
@@ -38,6 +43,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         this.userSub = this.ds.fetchUser()
                            .subscribe( value => {
                                if ( value ) {
+                                   console.log( "D:USUB" );
                                    this.user = value.filter( usr => usr.uId === uid )[0];
                                    if ( !this.user.onlineStatus || this.user.onlineStatus === "offline" ) {
                                        this.user.onlineStatus = "online";
@@ -51,6 +57,7 @@ export class DashboardPage implements OnInit, OnDestroy {
                            .subscribe( value => {
                                if ( value?.length > 0 ) {
                                    this.chats = value;
+                                   console.log( "D:CSUB" );
                                }
                            } );
         
@@ -61,6 +68,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     
     ngOnDestroy() : void {
         this.userSub.unsubscribe();
+        this.chatSub.unsubscribe();
     }
     
     async openMenu( $event : MouseEvent ) {
@@ -80,11 +88,11 @@ export class DashboardPage implements OnInit, OnDestroy {
     
     loadChatWith( oUser : UserModel, withChat? : ChatModel ) {
         if ( this.selectedUser === oUser ) {
-            this.chat = !this.chat;
+            this.isChatting = !this.isChatting;
             this.selectedChat = null;
             this.selectedUser = null;
         } else {
-            this.chat = false;
+            this.isChatting = false;
             this.selectedChat = null;
             
             setTimeout( value => {
@@ -92,7 +100,7 @@ export class DashboardPage implements OnInit, OnDestroy {
                 if ( withChat ) {
                     this.selectedChat = withChat;
                 }
-                this.chat = true;
+                this.isChatting = true;
                 
             }, 100 );
         }
@@ -125,7 +133,6 @@ export class DashboardPage implements OnInit, OnDestroy {
                                                 animated : true,
                                                 backdropDismiss : false
                                             } );
-        
         await modal.present();
         
         const { data } = await modal.onWillDismiss();
@@ -136,17 +143,45 @@ export class DashboardPage implements OnInit, OnDestroy {
     
     public getChatUnreadMessages( chat : ChatModel ) : number {
         var sum = 0;
-        
-        chat.texts.forEach( value => value.status !== "read" ? sum++ : "" );
-        
+        chat.texts.forEach( value => value.status !== this.TS.seen && value.from !== this.user.uId ? sum++ : "" );
         return sum;
     }
     
     public isUserOnline( chat : ChatModel ) : boolean {
-        return this.users.filter( value => value.uId === this.getOtherUser( chat ).uId )[0].onlineStatus === "online";
+        return this.getOtherUser( chat )[0].onlineStatus === "online";
     }
     
     private hasChatsWith( oUserId : string ) : boolean {
         return this.chats.some( value => value.userIds.some( value1 => value1 === oUserId ) );
     }
+    
+    private updateChatTextStatus() {
+        this.chats.forEach( chat => {
+            chat.texts.forEach( text => {
+                if ( text.status === "sent" && text.from !== this.user.uId ) {
+                    text.status = this.TS.received;
+                    text.lastUpdateTime = Timestamp.now();
+                }
+            } );
+            this.updateChat( chat );
+        } );
+    }
+    
+    private updateUserInChat() {
+        this.chats.forEach( chat => {
+            chat.users.forEach( user => {
+                if ( user.uId === this.user.uId ) {
+                    user = this.user;
+                } else {
+                    user = this.getOtherUser( chat );
+                }
+            } );
+            this.updateChat( chat );
+        } );
+    }
+    
+    private updateChat( chat : ChatModel ) {
+        this.ds.updateChat( chat, chat.chatId );
+    }
+    
 }

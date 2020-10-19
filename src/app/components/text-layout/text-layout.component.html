@@ -19,9 +19,13 @@
                       this.text.from"
                       name = "checkmark">
             </ion-icon>
-            <ion-icon *ngIf = "text.status === 'seen' && this.text.uName ===
-                      this.text.from"
+            <ion-icon *ngIf = "text.status === 'received' && this.text.uName
+             === this.text.from"
                       name = "checkmark-done">
+            </ion-icon>
+            <ion-icon *ngIf = "text.status === 'seen' && this.text.uName
+             === this.text.from" color = "primary"
+                      name = "checkmark-done-circle">
             </ion-icon>
         </sub>
     </b>

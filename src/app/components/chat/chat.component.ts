@@ -37,7 +37,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         if ( this.data.chat ) {
             this.chat = this.data.chat;
             this.subToChat( this.data.chat );
-            
         } else {
             this.chat = {
                 chatId : this.afs.createId(),
@@ -97,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
     
     updateChatStatus() {
-        this.messages.forEach( value => {
+        this.chat.texts.forEach( value => {
             if ( value.status === "sent" && value.from !== this.user.uId ) {
                 value.status = "seen";
                 value.lastUpdateTime = Timestamp.now();
@@ -110,8 +109,9 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chatSub = this.ds.fetchChats( "chatId", "==", c.chatId )
                            .subscribe( value => {
                                if ( value?.length ) {
+                                   console.log( "C:CSUB" );
                                    this.chat = value[0];
-                
+                                   this.updateChatStatus();
                                    setTimeout( () => {
                                        this.ionContent.scrollToBottom();
                                    }, 100 );
