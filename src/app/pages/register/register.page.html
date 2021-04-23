@@ -1,0 +1,41 @@
+<ion-content fullscreen class = "ion-padding ion-text-center">
+	<img src = "assets/icon/logo_light.png" alt = "Snazzy Labs Logo Light">
+	<br>
+	<form class = "w-100"
+	      #f = "ngForm" (ngSubmit) = "register()">
+		<div class = "input-field">
+			<input type = "email"
+			       name = "email"
+			       id = "email"
+			       [(ngModel)] = "email"
+			       placeholder = "Enter you email..."
+			       matInput
+			       required
+			       email>
+			<mat-icon matSuffix>email</mat-icon>
+		</div>
+		<div class = "input-field">
+			<input type = "text"
+			       name = "name"
+			       id = "name"
+			       [(ngModel)] = "name"
+			       placeholder = "Enter you name..."
+			       matInput
+			       required
+			       email>
+			<mat-icon matSuffix>person</mat-icon>
+		</div>
+		<div class = "input-field">
+			<input type = "password"
+			       name = "password"
+			       id = "password"
+			       [(ngModel)] = "password"
+			       placeholder = "*********"
+			       matInput
+			       required>
+			<mat-icon matSuffix>password</mat-icon>
+		</div>
+		<p>Already have an account? <b routerLink = "/login">Login!</b></p>
+		<button class = "go success" type = "submit">Register</button>
+	</form>
+</ion-content>

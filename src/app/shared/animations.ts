@@ -1,50 +1,50 @@
-import { animate, AnimationTriggerMetadata, keyframes, state, style, transition, trigger } from "@angular/animations";
+import { animate, AnimationTriggerMetadata, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 export const pushTrigger : AnimationTriggerMetadata =
-    trigger( "push", [
-        state( "in", style( {
-                                transform : "scale(0)"
+    trigger( 'push', [
+        state( 'in', style( {
+                                transform: 'scale(0)',
                             } ) ),
-        transition( "void => *", [
+        transition( 'void => *', [
             animate( 100, keyframes( [
                                          style( {
-                                                    transform : "scale(0)"
+                                                    transform: 'scale(0)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.25)"
+                                                    transform: 'scale(0.25)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.50)"
+                                                    transform: 'scale(0.50)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.75)"
+                                                    transform: 'scale(0.75)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(1)"
-                                                } )
-                                     ] ) )
+                                                    transform: 'scale(1)',
+                                                } ),
+                                     ] ) ),
         ] ),
-        state( "out", style( {
-                                 transform : "scale(1)"
+        state( 'out', style( {
+                                 transform: 'scale(1)',
                              } ) ),
-        
-        transition( "* => void", [
+
+        transition( '* => void', [
             animate( 100, keyframes( [
                                          style( {
-                                                    transform : "scale(1)"
+                                                    transform: 'scale(1)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.75)"
+                                                    transform: 'scale(0.75)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.5)"
+                                                    transform: 'scale(0.5)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0.25)"
+                                                    transform: 'scale(0.25)',
                                                 } ),
                                          style( {
-                                                    transform : "scale(0)"
-                                                } )
-                                     ] ) )
-        ] )
+                                                    transform: 'scale(0)',
+                                                } ),
+                                     ] ) ),
+        ] ),
     ] );

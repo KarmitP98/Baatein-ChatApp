@@ -10,49 +10,36 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
-.loading-spinner {
-  width: 100px;
-  height: 100px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap');
 
-mat-form-field {
-  width: 80%;
-}
+@import url(theme/common.scss);
 
-.cont {
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  overflow: hidden;
-  white-space: nowrap;
+:root {
+	--primary: rgb(0, 86, 253);
+	--white-background: rgb(255, 255, 255);
+	--subtitle: rgb(155, 155, 155);
+	--card-background: linear-gradient(to right bottom, rgb(245, 244, 244), rgba(236, 230, 230, 0.83));
+	--story-background: linear-gradient(to right bottom, rgba(0, 86, 253, 1), rgba(253, 0, 228, 0.5));
+	--main-background: linear-gradient(to right bottom, rgba(217, 230, 254, 1), rgba(251, 218, 248, 0.01));
+	--bsb: 0 8px 16px rgba(0,0,0,0.15);
+	--bsp: 0 8px 8px rgba(var(--primary), 0.15);
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scroll {
-    margin: auto;
-    overflow: auto;
-  }
-}
-
-.chatClass {
-  //position: absolute;
-  width: 100vw;
-  height: 80vh;
+	--ion-background-color: var(--main-background);
+	
+	--ion-font-family: 'Nunito', sans-serif;
 }
