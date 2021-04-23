@@ -1,8 +1,9 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 import { UserModel } from '../models/model';
+import { Observable } from 'rxjs';
+import firebase from 'firebase';
 
 @Injectable( {
                  providedIn: 'root',
@@ -19,7 +20,7 @@ export class UserService {
         // section CreateUser
         return this.afs.collection( 'users' )
                    .doc( user.id )
-                   .set( { user } );
+                   .set( user );
     }
     
     /**
@@ -28,9 +29,9 @@ export class UserService {
      * @param condition
      * @param value
      */
-    public getCurrentUser( attribute, condition, value ): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
+    public getCurrentUser( attribute, condition, value ): Observable<any> {
         // section getCurrentUser
-        return this.afs.collection<UserModel>( 'users', ref => ref.where( attribute, condition, value ) ).get().toPromise();
+        return this.afs.collection<UserModel>( 'users', ref => ref.where( 'email', '==', 'a@b.com' ) ).valueChanges();
     }
     
     /**
@@ -39,10 +40,10 @@ export class UserService {
      * @param condition
      * @param value
      */
-    public fetchUsers( attribute?, condition?, value? ) {
+    public fetchUsers( attribute?: string | firebase.firestore.FieldPath, condition?: '<' | '<=' | '==' | '!=' | '>=' | '>' | 'array-contains' | 'in' | 'array-contains-any' | 'not-in', value?: any ) {
         // section FetchUsers
         if (attribute) {
-            return this.afs.collection<UserModel>( 'users', ref => ref.where( attribute, condition, value ) ).valueChanges();
+            return this.afs.collection<UserModel>( 'users', ref => ref.where( attribute, condition, value ) );
         }
         return this.afs.collection<UserModel>( 'users' );
     }

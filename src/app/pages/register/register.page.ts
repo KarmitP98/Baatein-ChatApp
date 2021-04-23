@@ -9,16 +9,17 @@ import { USERSTATUS } from '../../constants/constants';
                 styleUrls: [ './register.page.scss' ],
             } )
 export class RegisterPage implements OnInit {
-
+    
     email = '';
     name = '';
     password = '';
-
+    phone = '';
+    
     constructor( private authService: AuthService ) { }
-
+    
     ngOnInit() {
     }
-
+    
     register() {
         const user: UserModel = {
             id: '',
@@ -28,8 +29,9 @@ export class RegisterPage implements OnInit {
             ghostMode: '',
             profilePic: '',
             status: USERSTATUS.online,
+            phone: this.phone,
         };
-
+        
         this.authService.signUp( user );
     }
 }

@@ -12,15 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 @NgModule( {
-             imports: [
-               CommonModule,
-               FormsModule,
-               IonicModule,
-               LoginPageRoutingModule,
-               MatFormFieldModule,
-               MatIconModule,
-               MatInputModule,
-             ],
+               imports: [
+                   CommonModule,
+                   FormsModule,
+                   IonicModule,
+                   LoginPageRoutingModule,
+                   MatFormFieldModule,
+                   MatIconModule,
+                   MatInputModule,
+               ],
                declarations: [ LoginPage ],
            } )
 export class LoginPageModule {}

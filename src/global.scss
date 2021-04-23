@@ -33,13 +33,17 @@
 	--primary: rgb(0, 86, 253);
 	--white-background: rgb(255, 255, 255);
 	--subtitle: rgb(155, 155, 155);
-	--card-background: linear-gradient(to right bottom, rgb(245, 244, 244), rgba(236, 230, 230, 0.83));
+	--card-background: linear-gradient(to right bottom, rgb(221, 221, 221), rgba(255, 255, 255, 0.83));
 	--story-background: linear-gradient(to right bottom, rgba(0, 86, 253, 1), rgba(253, 0, 228, 0.5));
 	--main-background: linear-gradient(to right bottom, rgba(217, 230, 254, 1), rgba(251, 218, 248, 0.01));
-	--bsb: 0 8px 16px rgba(0,0,0,0.15);
+	--bsb: 0 8px 16px rgba(0, 0, 0, 0.15);
 	--bsp: 0 8px 8px rgba(var(--primary), 0.15);
-
+	
 	--ion-background-color: var(--main-background);
 	
 	--ion-font-family: 'Nunito', sans-serif;
+}
+
+* {
+	font-family: 'Nunito', sans-serif;
 }

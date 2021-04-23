@@ -6,6 +6,7 @@ export class UserModel {
     profilePic = '';
     ghostMode = '';
     status = 0;
+    phone = '';
 }
 
 export class Chat {

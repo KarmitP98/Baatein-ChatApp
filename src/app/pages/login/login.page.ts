@@ -9,13 +9,13 @@ import { AuthService } from '../../services/auth.service';
 export class LoginPage implements OnInit {
     password = '';
     email = '';
-
-    constructor(public authService : AuthService) { }
-
+    
+    constructor( public authService: AuthService ) { }
+    
     ngOnInit() {
     }
-
+    
     login() {
-        console.log( 'Login Pressed' );
+        this.authService.login( this.email, this.password );
     }
 }

@@ -1,75 +1,76 @@
-.input-field{
-	display: flex;
+.input-field {
 	position: relative;
+	display: flex;
 	
-	justify-content: flex-start;
 	align-items: center;
+	justify-content: flex-start;
 	
 	width: 80%;
 	height: fit-content;
+	
+	padding: 1em 2em;
+	
+	transition: all 0.1s ease-in-out;
+	border-radius: 10px;
 	
 	background: var(--white-background);
 	
-	padding: 1em 2em;
-	border-radius: 10px;
-	
 	box-shadow: var(--bsb);
 	
-	transition: all 0.1s ease-in-out;
-	
 }
 
-.input-field:focus-within , .input-field:active{
+.input-field:focus-within, .input-field:active {
 	//outline: 2px solid var(--primary);
-	box-shadow: 0 4px 32px rgba(0,0,0,0.05);
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
 }
 
-input{
-	width: 90%;
-	height: 100%;
-	background: none;
-	border: none;
-	
+input {
 	font-size: 1.2em;
 	font-weight: 500;
+	width: 90%;
+	height: 100%;
+	
+	border: none;
+	background: none;
 	
 }
-input:focus, input:active{
+
+input:focus, input:active {
 	outline: none;
 }
 
-button.go{
-	display: flex;
-	position: relative;
-	
-	justify-content: center;
-	align-items: center;
-	
-	width: 80%;
-	height: fit-content;
-	
-	padding: 1em 2em;
-	
+button.go {
 	font-size: 1.2em;
 	font-weight: 700;
+	
+	position: relative;
+	display: flex;
+	
+	align-items: center;
+	justify-content: center;
+	
+	width: 80%;
+	
+	height: fit-content;
+	padding: 1em 2em;
 	color: white;
 	
-	box-shadow: var(--bsb);
-	
-	background: none;
-	outline: none;
 	border: none;
 	
 	border-radius: 10px;
+	outline: none;
+	background: none;
+	
+	box-shadow: var(--bsb);
 }
 
-button.success{
-	box-shadow: var(--bsp) !important;
-	background: var(--primary);
-	text-transform: uppercase;
+button.success {
 	letter-spacing: 1px;
+	text-transform: uppercase;
+	background: var(--primary);
+	box-shadow: var(--bsp) !important;
 }
 
-button{
+button {
 
 }

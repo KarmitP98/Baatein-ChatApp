@@ -10,15 +10,15 @@ import { RegisterPage } from './register.page';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
-@NgModule({
-              imports: [
-                  CommonModule,
-                  FormsModule,
-                  IonicModule,
-                  RegisterPageRoutingModule,
-                  MatInputModule,
-                  MatIconModule,
-              ],
-  declarations: [RegisterPage]
-})
+@NgModule( {
+               imports: [
+                   CommonModule,
+                   FormsModule,
+                   IonicModule,
+                   RegisterPageRoutingModule,
+                   MatInputModule,
+                   MatIconModule,
+               ],
+               declarations: [ RegisterPage ],
+           } )
 export class RegisterPageModule {}

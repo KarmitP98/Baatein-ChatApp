@@ -1,38 +1,47 @@
-<ion-content fullscreen class = "ion-padding ion-text-center">
-	<img src = "assets/icon/logo_light.png" alt = "Snazzy Labs Logo Light">
+<ion-content class = "ion-padding ion-text-center" fullscreen>
+	<img alt = "Snazzy Labs Logo Light" src = "assets/icon/logo_light.png">
 	<br>
-	<form class = "w-100"
-	      #f = "ngForm" (ngSubmit) = "register()">
+	<form #f = "ngForm"
+	      (ngSubmit) = "register()" class = "w-100">
 		<div class = "input-field">
-			<input type = "email"
-			       name = "email"
+			<input [(ngModel)] = "email"
+			       email
 			       id = "email"
-			       [(ngModel)] = "email"
-			       placeholder = "Enter you email..."
 			       matInput
+			       name = "email"
+			       placeholder = "Enter you email..."
 			       required
-			       email>
+			       type = "email">
 			<mat-icon matSuffix>email</mat-icon>
 		</div>
 		<div class = "input-field">
-			<input type = "text"
-			       name = "name"
+			<input [(ngModel)] = "name"
 			       id = "name"
-			       [(ngModel)] = "name"
-			       placeholder = "Enter you name..."
 			       matInput
+			       name = "name"
+			       placeholder = "Enter you name..."
 			       required
-			       email>
+			       type = "text">
 			<mat-icon matSuffix>person</mat-icon>
 		</div>
 		<div class = "input-field">
-			<input type = "password"
-			       name = "password"
-			       id = "password"
-			       [(ngModel)] = "password"
-			       placeholder = "*********"
+			<input [(ngModel)] = "phone"
+			       id = "phone"
 			       matInput
-			       required>
+			       name = "phone"
+			       placeholder = "Phone number"
+			       required
+			       type = "tel">
+			<mat-icon matSuffix>phone</mat-icon>
+		</div>
+		<div class = "input-field">
+			<input [(ngModel)] = "password"
+			       id = "password"
+			       matInput
+			       name = "password"
+			       placeholder = "*********"
+			       required
+			       type = "password">
 			<mat-icon matSuffix>password</mat-icon>
 		</div>
 		<p>Already have an account? <b routerLink = "/login">Login!</b></p>

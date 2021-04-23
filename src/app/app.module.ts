@@ -11,6 +11,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk',
@@ -30,7 +31,8 @@ const firebaseConfig = {
                           IonicModule.forRoot(),
                           AppRoutingModule,
                           AngularFireModule.initializeApp( firebaseConfig ),
-                          BrowserAnimationsModule ],
+                          BrowserAnimationsModule,
+                          MatIconModule ],
                providers: [
                    StatusBar,
                    SplashScreen,

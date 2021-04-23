@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div *ngIf = "currentUser" class = "ion-header">
+	Hello {{currentUser.name}}
+	<ion-button (click) = "this.as.signOut()" fill = "none">
+		<ion-icon name = "power"></ion-icon>
+	</ion-button>
+</div>
 
-<ion-content>
-	<button class="go success">Logout</button>
+<ion-content *ngIf = "currentUser" class = "ion-text-center"
+             fullscreen>
+	<div class = "content">
+		<app-stories></app-stories>
+		<app-chats></app-chats>
+	</div>
 </ion-content>

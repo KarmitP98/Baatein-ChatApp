@@ -1,6 +1,6 @@
 import { animate, AnimationTriggerMetadata, keyframes, state, style, transition, trigger } from '@angular/animations';
 
-export const pushTrigger : AnimationTriggerMetadata =
+export const pushTrigger: AnimationTriggerMetadata =
     trigger( 'push', [
         state( 'in', style( {
                                 transform: 'scale(0)',
@@ -27,7 +27,7 @@ export const pushTrigger : AnimationTriggerMetadata =
         state( 'out', style( {
                                  transform: 'scale(1)',
                              } ) ),
-
+        
         transition( '* => void', [
             animate( 100, keyframes( [
                                          style( {

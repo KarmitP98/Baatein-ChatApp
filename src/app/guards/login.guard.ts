@@ -7,19 +7,19 @@ import { Observable } from 'rxjs';
                  providedIn: 'root',
              } )
 export class LoginGuard implements CanActivate {
-
-    constructor( private router : Router,
-                 private afa : AngularFireAuth ) {}
-
+    
+    constructor( private router: Router,
+                 private afa: AngularFireAuth ) {}
+    
     canActivate(
-        next : ActivatedRouteSnapshot,
-        state : RouterStateSnapshot ) : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        
         return new Promise( resolve => {
             const sub = this.afa.authState.subscribe( value => {
                 if (value) {
                     sub.unsubscribe();
-                    resolve( this.router.navigate( [ '/', value.uid ] ) );
+                    resolve( this.router.navigate( [ '/snazzy' ] ) );
                 }
                 else {
                     sub.unsubscribe();
@@ -28,5 +28,5 @@ export class LoginGuard implements CanActivate {
             } );
         } );
     }
-
+    
 }

@@ -34,10 +34,7 @@ export class AuthService {
         this.afa.signInWithEmailAndPassword( email, password )
             .then( res => {
                 if (res) {
-                    this.userService.getCurrentUser( 'id', '==', res.user.uid )
-                        .then( value => {
-                            console.log( value );
-                        } );
+                    this.navigateIn( res.user.uid );
                 }
             } )
             .catch( error => {
@@ -56,7 +53,7 @@ export class AuthService {
                 if (res) {
                     user.id = res.user.uid;
                     this.userService.createUser( user )
-                        .then( () => this.navigateIn( user ) );
+                        .then( () => this.navigateIn( user.id ) );
                 }
             } );
     }
@@ -73,12 +70,12 @@ export class AuthService {
     
     /**
      * Navigate to dashboard
-     * @param user
      * @private
+     * @param uid
      */
-    private navigateIn( user ): void {
+    private navigateIn( uid: string ): void {
         // section NavgiateIn
-        localStorage.setItem( 'user', JSON.stringify( user ) );
+        localStorage.setItem( 'UID', JSON.stringify( uid ) );
         this.router.navigate( [ '/snazzy' ] )
             .then( res => console.log( 'User has been logged in!' ) );
     }

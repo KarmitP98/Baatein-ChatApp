@@ -1,0 +1,15 @@
+::-webkit-scrollbar {
+	display: none;
+}
+
+.content {
+	position: relative;
+	display: flex;
+	
+	overflow-x: scroll;
+	overflow-y: hidden;
+	
+	align-items: center;
+	justify-content: flex-start;
+	
+}

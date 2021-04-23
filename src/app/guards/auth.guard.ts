@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
                  providedIn: 'root',
              } )
 export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
-
-    constructor( private afa : AngularFireAuth,
-                 private router : Router ) {}
-
+    
+    constructor( private afa: AngularFireAuth,
+                 private router: Router ) {}
+    
     canActivate(
-        next : ActivatedRouteSnapshot,
-        state : RouterStateSnapshot ) : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        
         return new Promise( resolve => {
             const sub = this.afa.authState.subscribe( value => {
                 if (value) {
@@ -28,12 +28,12 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
             } );
         } );
     }
-
+    
     canDeactivate(
-        component : unknown,
-        currentRoute : ActivatedRouteSnapshot,
-        currentState : RouterStateSnapshot,
-        nextState? : RouterStateSnapshot ) : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        component: unknown,
+        currentRoute: ActivatedRouteSnapshot,
+        currentState: RouterStateSnapshot,
+        nextState?: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return new Promise( resolve => {
             const sub = this.afa.authState.subscribe( value => {
                 if (value) {
@@ -47,5 +47,5 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
             } );
         } );
     }
-
+    
 }
