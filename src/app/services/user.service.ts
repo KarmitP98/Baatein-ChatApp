@@ -28,7 +28,7 @@ export class UserService {
      * @param condition
      * @param value
      */
-    public getCurrentUser( attribute, condition, value ): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
+    public getCurrentUser( attribute, condition, value ): Promise<any> {
         // section getCurrentUser
         return this.afs.collection<UserModel>( 'users', ref => ref.where( attribute, condition, value ) ).get().toPromise();
     }
