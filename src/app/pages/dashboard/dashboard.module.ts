@@ -12,6 +12,7 @@ import { StoriesComponent } from '../../components/stories/stories.component';
 import { ChatsComponent } from '../../components/chats/chats.component';
 import { StoryComponent } from '../../components/stories/story/story.component';
 import { ChatComponent } from '../../components/chats/chat/chat.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule( {
                imports: [
@@ -20,6 +21,7 @@ import { ChatComponent } from '../../components/chats/chat/chat.component';
                    IonicModule,
                    DashboardPageRoutingModule,
                    MatFormFieldModule,
+                   MatIconModule,
                ],
                declarations: [ DashboardPage, StoriesComponent, ChatsComponent, StoryComponent, ChatComponent ],
            } )

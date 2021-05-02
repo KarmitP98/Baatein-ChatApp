@@ -1,16 +1,18 @@
-<div class = "content">
+<div *ngIf = "data" class = "content">
 	<div class = "avatar">
-		Avatar
+		<img [src] = "data.imageUrl" alt = "Avatar">
 	</div>
 	<div class = "card-body">
 		<div class = "card-title">
-			Title
+			{{data.title}}
 		</div>
 		<div class = "card-text">
-			Text
+			{{data.text}}
 		</div>
 		<div class = "card-status">
-			Status
+			<!--			<mat-icon>done_all</mat-icon>-->
+			<span class = "time">8:43 PM</span>
+			<ion-icon color = "primary" name = "checkmark-done" size = "small"></ion-icon>
 		</div>
 	</div>
 </div>

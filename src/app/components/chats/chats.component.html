@@ -1,12 +1,5 @@
-<div class = "content">
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
-	<app-chat></app-chat>
+<div *ngIf = "chats" class = "content">
+	<app-chat
+		*ngFor = "let chat of chats"
+		[data] = "chat"></app-chat>
 </div>
