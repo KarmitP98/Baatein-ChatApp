@@ -7,10 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
             } )
 export class ChatComponent implements OnInit {
     
-    @Input() data: { imageUrl: string, title: string, text: string } = { imageUrl: '', title: 'Title', text: '' };
+    @Input() data: { avatar: string, name: string, message: string, id: number, lastMessageDate: Date };
     
     constructor() { }
     
-    ngOnInit() {}
+    ngOnInit() {
+    }
     
 }

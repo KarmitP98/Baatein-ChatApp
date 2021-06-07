@@ -18,10 +18,16 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
         return new Promise( resolve => {
             const sub = this.afa.authState.subscribe( value => {
                 if (value) {
+                    if (!localStorage.getItem( 'UID' )) {
+                        localStorage.setItem( 'UID', JSON.stringify( value.uid ) );
+                    }
                     sub.unsubscribe();
                     resolve( true );
                 }
                 else {
+                    if (localStorage.getItem( 'UID' )) {
+                        localStorage.removeItem( 'UID' );
+                    }
                     sub.unsubscribe();
                     resolve( this.router.navigate( [ '/login' ] ) );
                 }

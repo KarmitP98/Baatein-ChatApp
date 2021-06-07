@@ -18,10 +18,16 @@ export class LoginGuard implements CanActivate {
         return new Promise( resolve => {
             const sub = this.afa.authState.subscribe( value => {
                 if (value) {
+                    if (!localStorage.getItem( 'UID' )) {
+                        localStorage.setItem( 'UID', JSON.stringify( value.uid ) );
+                    }
                     sub.unsubscribe();
                     resolve( this.router.navigate( [ '/snazzy' ] ) );
                 }
                 else {
+                    if (localStorage.getItem( 'UID' )) {
+                        localStorage.removeItem( 'UID' );
+                    }
                     sub.unsubscribe();
                     resolve( true );
                 }

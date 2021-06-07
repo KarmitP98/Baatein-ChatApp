@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import SAMPLE_CHATS from '../../constants/chats';
 
 @Component( {
                 selector: 'app-chats',
@@ -7,17 +8,11 @@ import { Component, OnInit } from '@angular/core';
             } )
 export class ChatsComponent implements OnInit {
     
-    chats: { imageUrl: string, title: string, text: string }[] = [];
+    chats: { avatar: string, name: string, message: string, id: number, lastMessageDate: Date }[] = SAMPLE_CHATS;
     
     constructor() { }
     
-    async ngOnInit() {
-        const photos: { url, title, thumbnailUrl }[] = await fetch( `https://jsonplaceholder.typicode.com/photos?_limit=10` )
-            .then( response => response.json() );
-        
-        for (let { url, title, thumbnailUrl } of photos) {
-            this.chats.push( { title: 'Some Title', text: url, imageUrl: thumbnailUrl } );
-        }
+    ngOnInit() {
     }
     
 }

@@ -1,5 +1,5 @@
-<div *ngIf = "currentUser" class = "ion-header">
-	Hello {{currentUser.name}}
+<div class = "ion-header">
+	Hello {{currentUser?.name}}
 	<ion-button (click) = "this.as.signOut()" fill = "none">
 		<ion-icon name = "power"></ion-icon>
 	</ion-button>

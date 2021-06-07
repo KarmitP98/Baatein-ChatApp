@@ -1,13 +1,13 @@
 <div *ngIf = "data" class = "content">
 	<div class = "avatar">
-		<img [src] = "data.imageUrl" alt = "Avatar">
+		<img [src] = "data.avatar" alt = "Avatar">
 	</div>
 	<div class = "card-body">
 		<div class = "card-title">
-			{{data.title}}
+			{{data.name}}
 		</div>
 		<div class = "card-text">
-			{{data.text}}
+			{{data.message}}
 		</div>
 		<div class = "card-status">
 			<!--			<mat-icon>done_all</mat-icon>-->

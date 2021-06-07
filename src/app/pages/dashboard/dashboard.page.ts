@@ -21,6 +21,7 @@ export class DashboardPage implements OnInit, OnDestroy {
                            .fetchUsers( 'id', '==', JSON.parse( localStorage.getItem( 'UID' ) ) )
                            .valueChanges()
                            .subscribe( user => this.currentUser = user ? user[0] : undefined );
+    
     }
     
     ngOnDestroy(): void {
