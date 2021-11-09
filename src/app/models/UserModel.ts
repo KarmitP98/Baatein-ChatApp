@@ -3,7 +3,11 @@ export enum StatusModel {
     online
 }
 
-export default class User {
+export enum Theme {
+    light = "light", dark = "dark"
+}
+
+export class UserModel {
     private uId : string;
     private name : string;
     private email : string;
@@ -14,6 +18,7 @@ export default class User {
     private status : StatusModel;
     private lastSeen : Date;
     private ghostMode : boolean;
+    private theme : Theme;
     
     constructor( uId : string, name : string, email : string, password : string, profilePic : string, dob : Date, tofd : string, status : StatusModel, lastSeen : Date, ghostMode : boolean ) {
         this.uId = uId;
