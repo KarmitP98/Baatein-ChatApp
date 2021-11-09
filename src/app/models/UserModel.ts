@@ -19,5 +19,6 @@ export class UserModel {
     public lastSeen : Date;
     public ghostMode : boolean;
     public theme : Theme;
-    
+    public createdAt : Date;
+    public updatedAt : Date;
 }

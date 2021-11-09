@@ -15,6 +15,13 @@ export enum ChatStatus {
     live
 }
 
+export enum MessageStatus {
+    unsent,
+    error,
+    sent,
+    seen
+}
+
 export class MessageModel {
     public time : Date;
     public lastUpdatedAt : Date;
@@ -24,7 +31,9 @@ export class MessageModel {
     public fromId : string;
     public type : MessageType;
     public cId : string;
-    
+    public status : MessageStatus;
+    public createdAt : Date;
+    public updatedAt : Date;
 }
 
 export default class ChatModel {
@@ -34,5 +43,6 @@ export default class ChatModel {
     public messages : MessageModel[];
     public name : string;
     public status : ChatStatus;
-    
+    public createdAt : Date;
+    public updatedAt : Date;
 }
