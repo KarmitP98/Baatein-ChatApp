@@ -1,0 +1,9 @@
+<svg fill = "none" height = "12" viewBox = "0 0 20 12" width = "20"
+     xmlns = "http://www.w3.org/2000/svg">
+    <path d = "M13.3333 1.83337L10.4167 5.16671M1.66667 6.00004L6.04167 10.1667L8.22917 7.66671L1.66667 6.00004Z"
+          stroke = "#0056FD" stroke-linecap = "round" stroke-linejoin = "round"
+          stroke-width = "2"/>
+    <path d = "M6.66667 6.00004L11.0417 10.1667L18.3333 1.83337"
+          stroke = "#0056FD" stroke-linecap = "round" stroke-linejoin = "round"
+          stroke-width = "2"/>
+</svg>
