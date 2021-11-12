@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { SignupPageComponent } from "./signup-page.component";
 
 const routes : Routes = [
-    { path : "signup", loadChildren : () => import("./pages/signup-page/signup-page.module").then( m => m.SignupPageComponentModule ) }
+    { path : "", component : SignupPageComponent }
 
 ];
 
@@ -12,4 +13,4 @@ const routes : Routes = [
                ],
                exports : [ RouterModule ]
            } )
-export class AppRoutingModule {}
+export class SignupPageRoutingModule {}
