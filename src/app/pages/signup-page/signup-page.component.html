@@ -1,3 +1,66 @@
-<p>
-    signup-page works!
-</p>
+<ion-header>
+    <ion-toolbar color = "primary" mode = "md">
+        <ion-title>Snazzy Chats</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-slides #slides
+                [options] = "{initialSlide:1}"
+                pager = "true">
+        <ion-slide
+                class = "ion-padding ion-align-items-center ion-justify-content-center">
+            <div class = "page signup">
+                <form #emailForm = "ngForm" (submit) = "handleEmailSubmit()">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input [(ngModel)] = "email" id = "email" matInput
+                               name = "email"
+                               placeholder = "Please enter your email"
+                               required
+                               type = "email">
+                    </mat-form-field>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <ion-button color = "success" size = "block"
+                                type = "submit">
+                        Signup
+                    </ion-button>
+                </form>
+            </div>
+        </ion-slide>
+        <ion-slide
+                class = "ion-padding ion-align-items-center ion-justify-content-center">
+            <div class = "page signup">
+                <form #userNameForm = "ngForm"
+                      (submit) = "handleUserNameSubmit()">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input [(ngModel)] = "name" id = "name" matInput
+                               name = "name"
+                               placeholder = "Please enter your name"
+                               required
+                               type = "text">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input [(ngModel)] = "password" id = "password" matInput
+                               name = "password"
+                               placeholder = "*******"
+                               required
+                               type = "password">
+                    </mat-form-field>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <ion-button color = "success" size = "block"
+                                type = "submit">
+                        Signup
+                    </ion-button>
+                </form>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

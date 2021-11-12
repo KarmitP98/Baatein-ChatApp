@@ -25,34 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.loading-spinner {
-  width: 100px;
-  height: 100px;
-}
-
-mat-form-field {
-  width: 80%;
-}
-
-.cont {
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  overflow: hidden;
-  white-space: nowrap;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scroll {
-    margin: auto;
-    overflow: auto;
-  }
-}
-
-.chatClass {
-  //position: absolute;
-  width: 100vw;
-  height: 80vh;
-}
+@import 'theme/common';
+@import "theme/variables";
+@import "theme/typography";

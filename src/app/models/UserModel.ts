@@ -21,4 +21,10 @@ export class UserModel {
     public theme : Theme;
     public createdAt : Date;
     public updatedAt : Date;
+    
+    constructor( email : string, password : string, name : string ) {
+        this.password = password;
+        this.email = email;
+        this.name = name;
+    }
 }

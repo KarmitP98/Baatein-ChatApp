@@ -6,10 +6,11 @@ import { IonicModule } from "@ionic/angular";
 
 import { SignupPageComponent } from "./signup-page.component";
 import { SignupPageRoutingModule } from "./signup-page-routing.module";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule( {
-             imports : [ CommonModule, FormsModule, IonicModule, SignupPageRoutingModule ],
-             declarations : [ SignupPageComponent ],
-             exports : [ SignupPageComponent ]
+               imports : [ CommonModule, FormsModule, IonicModule, SignupPageRoutingModule, MatInputModule ],
+               declarations : [ SignupPageComponent ],
+               exports : [ SignupPageComponent ]
            } )
 export class SignupPageComponentModule {}
