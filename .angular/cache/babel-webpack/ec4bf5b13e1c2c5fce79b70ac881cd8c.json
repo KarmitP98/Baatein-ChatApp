@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const UID = \"ureqid\";\nexport const HOME_PAGE_URL = [\"/\", \"home\"];","map":null,"metadata":{},"sourceType":"module"}
