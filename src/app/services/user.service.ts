@@ -19,12 +19,13 @@ export class UserService {
      * Create a new user on signup and navigate to dashboard
      * @param user
      * @param userId
+     * @param successRedirectURL
      */
-    createNewUser = async ( user : UserModel, userId ) => {
+    createNewUser = async ( user : UserModel, userId : string, successRedirectURL : string[] ) => {
         await this.userCollection.doc( userId ).set( { ...user } )
                   .then( () => {
                       addToLocal( UID, userId );
-                      this.router.navigate( [ "/", "dashboard" ] );
+                      this.router.navigate( successRedirectURL );
                   } )
                   .catch( ( error ) => {
                       console.error( error );

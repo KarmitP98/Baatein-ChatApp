@@ -3,6 +3,9 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import firebase from "firebase/compat";
 import { BehaviorSubject } from "rxjs";
 import { UserModel } from "../models/UserModel";
+import { UserService } from "./user.service";
+import { HOME_PAGE_URL } from "../shared/constants";
+import { Router } from "@angular/router";
 import UserCredential = firebase.auth.UserCredential;
 
 @Injectable( {
@@ -12,16 +15,17 @@ export class AuthService {
     
     private currentAuthUser : BehaviorSubject<UserCredential>;
     
-    constructor( private afa : AngularFireAuth ) { }
+    constructor( private afa : AngularFireAuth, private us : UserService, private router : Router ) { }
     
     signUpWithEmailAndPassword = async ( user : UserModel ) => {
         return new Promise( async ( resolve, reject ) => {
             await this.afa
                       .createUserWithEmailAndPassword( user.email, user.password )
-                      .then( ( user ) => {
-                          if ( user ) {
-                              this.currentAuthUser.next( user );
-                              resolve( user );
+                      .then( ( value ) => {
+                          if ( value ) {
+                              this.currentAuthUser.next( value );
+                              resolve( value );
+                              this.us.createNewUser( user, value.user.uid, HOME_PAGE_URL );
                           }
                       } )
                       .catch( error => {
@@ -38,6 +42,7 @@ export class AuthService {
                           if ( user ) {
                               this.currentAuthUser.next( user );
                               resolve( user );
+                              this.router.navigate( HOME_PAGE_URL );
                           }
                       } )
                       .catch( error => {
