@@ -5,11 +5,12 @@
 </ion-header>
 <ion-content>
     <ion-slides #slides
-                [options] = "{initialSlide:1}"
-                pager = "true">
+                [options] = "slideOptions"
+                [pager]="showPager()">
         <ion-slide
                 class = "ion-padding ion-align-items-center ion-justify-content-center">
             <div class = "page signup">
+                <img src = "assets/logo-light.png" alt = "Logo">
                 <form #emailForm = "ngForm" (submit) = "handleEmailSubmit()">
                     <mat-form-field>
                         <mat-label>Email</mat-label>
@@ -33,6 +34,7 @@
         <ion-slide
                 class = "ion-padding ion-align-items-center ion-justify-content-center">
             <div class = "page signup">
+                <img src = "assets/logo-light.png" alt = "Logo">
                 <form #userNameForm = "ngForm"
                       (submit) = "handleUserNameSubmit()">
                     <mat-form-field>
