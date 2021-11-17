@@ -1,0 +1,43 @@
+ion-tab-button {
+}
+
+ion-tab-bar {
+  --border: none !important;
+  --background: linear-gradient(180deg, #F5F4F4 0%, rgba(236, 230, 230, 0.83) 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+.selected-button {
+  ion-icon {
+    padding: 0.25em;
+    border-radius: 50%;
+    //box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    //background: white;
+  }
+}
+
+.selected-indicator {
+  width: 23px;
+  height: 6px;
+  position: fixed;
+  bottom: 0;
+
+  background: var(--ion-color-primary);
+  border-radius: 10px 10px 0 0;
+  animation: riseUp 0.75s ease-in;
+}
+
+@keyframes riseUp {
+  0% {
+    transform: translateY(400%);
+  }
+  50% {
+    transform: translateY(0);
+    height: 12px;
+    width: 11px;
+    border-radius: 50% 50% 0 0;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

@@ -6,17 +6,20 @@ import { TabsPage } from "./tabs.page";
 const routes : Routes = [
     {
         path : "",
-        component : TabsPage
-    },
-    {
-        path : "home",
+        component : TabsPage,
         children : [
             {
-                path : "",
-                loadChildren : () => import("./home/home.module").then( m => m.HomePageModule )
+                path : "home",
+                children : [
+                    {
+                        path : "",
+                        loadChildren : () => import("./home/home.module").then( m => m.HomePageModule )
+                    }
+                ]
             }
         ]
     }
+
 ];
 
 @NgModule( {

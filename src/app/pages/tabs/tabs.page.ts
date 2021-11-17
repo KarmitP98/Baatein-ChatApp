@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { IonTabs } from "@ionic/angular";
 
 @Component( {
                 selector : "app-tabs",
@@ -7,9 +8,11 @@ import { Component, OnInit } from "@angular/core";
             } )
 export class TabsPage implements OnInit {
     
+    @ViewChild( "tabBar", { static : false } ) tabBar : IonTabs;
+    selectedTab = "";
     tabs : { tab : string, icon : string, text : string }[] = [
-        { tab : "chats", icon : "home", text : "Home" },
-        { tab : "contacts", icon : "contacts", text : "Contacts" },
+        { tab : "home", icon : "home", text : "Home" },
+        { tab : "contacts", icon : "people", text : "Contacts" },
         { tab : "settings", icon : "settings", text : "Settings" }
     ];
     
@@ -18,4 +21,7 @@ export class TabsPage implements OnInit {
     ngOnInit() {
     }
     
+    setSelected = () => {
+        this.selectedTab = this.tabBar.getSelected();
+    };
 }
