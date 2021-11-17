@@ -23,6 +23,7 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
     allowSlideBack : boolean = false;
     allowSlideForward : boolean = false;
     slideOptions = { initialSlide : 0 };
+    showEmailError = undefined;
     
     constructor( private authService : AuthService, private userService : UserService ) { }
     
@@ -53,23 +54,30 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
     
     async handleEmailSubmit() : Promise<void> {
         this.processing = true;
-        
-        // TODO: Implement checking if a registered email exists.
-        const userExists = await this.userService.checkIfUserEmailExists( this.email );
-    
-        if ( userExists ) {
-            this.step = 0;
-            this.allowSlideForward = false;
+        if ( this.email ) {
+            // TODO: Implement checking if a registered email exists.
+            const userExists = await this.userService.checkIfUserEmailExists( this.email );
+            if ( userExists ) {
+                this.step = 0;
+                this.setEmailError("This email already has a registered account!")
+            } else {
+                this.step = 1;
+                await this.slides.slideNext();
+            }
         } else {
-            this.step = 1;
-            this.allowSlideForward = true;
-            await this.slides.slideNext();
+            this.setEmailError( "Please enter a valid email address!" );
         }
-        await this.slides.lockSwipeToNext( this.allowSlideForward );
         this.processing = false;
     }
     
     showPager() : boolean {
         return this.allowSlideForward;
     }
+    
+    setEmailError = ( error : string, duration : number = 5000 ) => {
+        this.showEmailError = error;
+        setTimeout( () => {
+            this.showEmailError = undefined;
+        }, duration );
+    };
 }

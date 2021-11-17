@@ -6,26 +6,31 @@
 <ion-content>
     <ion-slides #slides
                 [options] = "slideOptions"
-                [pager]="showPager()">
+                [pager] = "showPager()">
         <ion-slide
                 class = "ion-padding ion-align-items-center ion-justify-content-center">
             <div class = "page signup">
-                <img src = "assets/logo-light.png" alt = "Logo">
+                <img alt = "Logo" src = "assets/logo-light.png">
                 <form #emailForm = "ngForm" (submit) = "handleEmailSubmit()">
                     <mat-form-field>
                         <mat-label>Email</mat-label>
                         <input [(ngModel)] = "email" id = "email" matInput
                                name = "email"
-                               placeholder = "Please enter your email"
+                               placeholder = "jack.doe@email.com"
                                required
                                type = "email">
+                        <mat-error *ngIf = "showEmailError">
+                            {{showEmailError}}
+                        </mat-error>
                     </mat-form-field>
                     <br>
                     <br>
                     <br>
                     <br>
-                    <ion-button color = "success" size = "block"
+                    <ion-button [disabled] = "processing" color = "success"
+                                size = "block"
                                 type = "submit">
+                        <app-loader *ngIf = "processing"></app-loader>
                         Signup
                     </ion-button>
                 </form>
@@ -34,14 +39,14 @@
         <ion-slide
                 class = "ion-padding ion-align-items-center ion-justify-content-center">
             <div class = "page signup">
-                <img src = "assets/logo-light.png" alt = "Logo">
+                <img alt = "Logo" src = "assets/logo-light.png">
                 <form #userNameForm = "ngForm"
                       (submit) = "handleUserNameSubmit()">
                     <mat-form-field>
                         <mat-label>Name</mat-label>
                         <input [(ngModel)] = "name" id = "name" matInput
                                name = "name"
-                               placeholder = "Please enter your name"
+                               placeholder = "Jack Doe"
                                required
                                type = "text">
                     </mat-form-field>
@@ -57,12 +62,18 @@
                     <br>
                     <br>
                     <br>
-                    <ion-button color = "success" size = "block"
-                                type = "submit">
+                    <ion-button [disabled] = "processing" color = "success"
+                                size = "block" type = "submit">
+                        <app-loader *ngIf="processing"></app-loader>
                         Signup
                     </ion-button>
                 </form>
             </div>
+            <ion-fab vertical="bottom" horizontal="start">
+                <ion-fab-button color="warning" (click)="slides.slidePrev()">
+                    <ion-icon name="chevron-back"></ion-icon>
+                </ion-fab-button>
+            </ion-fab>
         </ion-slide>
     </ion-slides>
 </ion-content>

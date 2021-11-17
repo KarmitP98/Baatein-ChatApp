@@ -107,14 +107,8 @@ export class UserService {
      * @param email
      */
     checkIfUserEmailExists = async ( email : string ) => {
-        let userExists = false;
-        const sub = await this.emailCollection.doc( email ).get().subscribe( value => {
-            if ( value?.exists ) {
-                userExists = true;
-            }
-            sub.unsubscribe();
-        } );
-        return userExists;
+        const user = await this.emailCollection.doc( email ).get().toPromise();
+        return user.exists;
     };
     
 }
