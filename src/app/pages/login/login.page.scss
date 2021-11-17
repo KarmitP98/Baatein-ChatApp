@@ -1,0 +1,25 @@
+ion-content{
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+
+  .login {
+    flex-flow: column;
+  }
+
+  form{
+    width: 80%;
+
+    .message{
+      text-align: center;
+    }
+  }
+  img {
+    width: auto;
+    height: 20%;
+    aspect-ratio: 1 / 1.6;
+    margin-bottom: 30%;
+  }
+
+
+}

@@ -12,6 +12,6 @@ import { LoaderComponent } from "../../components/loader/loader.component";
 @NgModule( {
                imports : [ CommonModule, FormsModule, IonicModule, SignupPageRoutingModule, MatInputModule ],
                declarations : [ SignupPageComponent, LoaderComponent ],
-               exports : [ SignupPageComponent ]
+               exports : [ SignupPageComponent, LoaderComponent ]
            } )
 export class SignupPageComponentModule {}
