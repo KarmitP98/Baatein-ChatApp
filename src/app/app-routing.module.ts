@@ -2,7 +2,13 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes : Routes = [
-    { path : "signup", loadChildren : () => import("./pages/signup-page/signup-page.module").then( m => m.SignupPageComponentModule ) }
+    { path : "", pathMatch : "full", redirectTo : "login" },
+    { path : "signup", loadChildren : () => import("./pages/signup-page/signup-page.module").then( m => m.SignupPageComponentModule ) },
+    {
+        path : "login",
+        loadChildren : () => import("./pages/login/login.module").then( m => m.LoginPageModule )
+    }
+
 
 ];
 
