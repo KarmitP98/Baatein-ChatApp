@@ -13,7 +13,7 @@ import UserCredential = firebase.auth.UserCredential;
              } )
 export class AuthService {
     
-    private currentAuthUser : BehaviorSubject<UserCredential>;
+    private currentAuthUser : BehaviorSubject<UserCredential> = new BehaviorSubject<firebase.auth.UserCredential>(undefined);
     
     constructor( private afa : AngularFireAuth, private us : UserService, private router : Router ) { }
     

@@ -12,6 +12,7 @@ import firebase from "firebase/compat";
 export class UserService {
     
     userCollection : AngularFirestoreCollection<UserModel> = this.afs.collection<UserModel>( "users" );
+    emailCollection : AngularFirestoreCollection<{ email : string }> = this.afs.collection<{ email : string }>( "emails" );
     
     constructor( private afs : AngularFirestore, private router : Router ) { }
     
@@ -23,9 +24,10 @@ export class UserService {
      */
     createNewUser = async ( user : UserModel, userId : string, successRedirectURL : string[] ) => {
         await this.userCollection.doc( userId ).set( { ...user } )
-                  .then( () => {
-                      addToLocal( UID, userId );
-                      this.router.navigate( successRedirectURL );
+                  .then( async () => {
+                      await this.addNewUserEmail( user.email );
+                      await addToLocal( UID, userId );
+                      await this.router.navigate( successRedirectURL );
                   } )
                   .catch( ( error ) => {
                       console.error( error );
@@ -92,5 +94,21 @@ export class UserService {
         } );
     };
     
+    /**
+     * Add a new User email to the system
+     * @param email
+     */
+    addNewUserEmail = async ( email : string ) => {
+        await this.emailCollection.doc( email ).set( { email } );
+    };
+    
+    /**
+     * Check if the user email already exists in the system during signup
+     * @param email
+     */
+    checkIfUserEmailExists = async ( email : string ) => {
+        const user = await this.emailCollection.doc( email ).get().toPromise();
+        return user.exists;
+    };
     
 }
