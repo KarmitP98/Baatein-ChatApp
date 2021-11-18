@@ -1,0 +1,29 @@
+<div class = "chat-item">
+    <div class = "user-avatar">
+        <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
+             class = "avatar"></div>
+    <div class = "data">
+        <div class = "top">
+            <div class = "user-name">
+                {{user.name}}
+            </div>
+            <div class = "time">
+                {{message.lastUpdatedAt}}
+            </div>
+        </div>
+        <div class = "middle">
+            <div *ngIf = "chat.type === 1" class = "user">
+                {{message.from}}
+            </div>
+            <div class = "message">
+                {{message.text}}
+            </div>
+            <div class = "unread">
+                <div class = "unread-counter">
+                    {{getUnreadMessages()}}
+                </div>
+            </div>
+        </div>
+        <div class = "bottom"></div>
+    </div>
+</div>
