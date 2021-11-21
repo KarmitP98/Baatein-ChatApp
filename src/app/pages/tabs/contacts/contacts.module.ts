@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ContactsPageRoutingModule } from './contacts-routing.module';
 
-import { HomePage } from './home.page';
-import { ChatItemComponent } from "../../../components/chat-item/chat-item.component";
+import { ContactsPage } from './contacts.page';
+import { ContactIconComponent } from "../../../components/contact-icon/contact-icon.component";
+import { MatInputModule } from "@angular/material/input";
 import { SignupPageComponentModule } from "../../signup-page/signup-page.module";
 
 @NgModule({
@@ -15,9 +16,10 @@ import { SignupPageComponentModule } from "../../signup-page/signup-page.module"
                   CommonModule,
                   FormsModule,
                   IonicModule,
-                  HomePageRoutingModule,
+                  ContactsPageRoutingModule,
+                  MatInputModule,
                   SignupPageComponentModule
               ],
-              declarations : [ HomePage, ChatItemComponent ]
+              declarations : [ ContactsPage, ContactIconComponent ]
           })
-export class HomePageModule {}
+export class ContactsPageModule {}

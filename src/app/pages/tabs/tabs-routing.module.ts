@@ -16,10 +16,16 @@ const routes : Routes = [
                         loadChildren : () => import("./home/home.module").then( m => m.HomePageModule )
                     }
                 ]
+            }, {
+                path : "contacts",
+                loadChildren : () => import("./contacts/contacts.module").then( m => m.ContactsPageModule )
+            },
+            {
+                path : "settings",
+                loadChildren : () => import("./settings/settings.module").then( m => m.SettingsPageModule )
             }
         ]
     }
-
 ];
 
 @NgModule( {

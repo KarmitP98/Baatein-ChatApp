@@ -44,7 +44,7 @@ export class MessageModel {
 
 export default class ChatModel {
     public cId : string;
-    public between : Reference<UserModel>[];
+    public between : {}[];
     public betweenIds : string[];
     public messages : MessageModel[];
     public name : string;

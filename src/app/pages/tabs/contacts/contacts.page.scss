@@ -1,0 +1,6 @@
+.contact-grid{
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5em;
+}
