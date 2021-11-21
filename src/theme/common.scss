@@ -23,3 +23,24 @@ ion-header{
   --padding-top: 20px;
   --padding-bottom: 20px;
 }
+
+.input-area {
+  display: flex;
+  padding: 1em;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+
+  input {
+    flex-grow: 1;
+    outline: none;
+    border: none;
+    font-weight: 600;
+
+    &::placeholder{
+      color: rgba(87, 87, 87, 0.75);
+    }
+  }
+}

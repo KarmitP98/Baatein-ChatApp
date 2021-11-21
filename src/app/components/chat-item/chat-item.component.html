@@ -1,4 +1,7 @@
-<div class = "chat-item">
+<div class="loading-area" *ngIf="loading">
+    <app-loader></app-loader>
+</div>
+<div class = "chat-item" *ngIf="!loading">
     <div class = "user-avatar">
         <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
              class = "avatar"></div>
@@ -8,15 +11,15 @@
                 {{user.name}}
             </div>
             <div class = "time">
-                {{message.lastUpdatedAt}}
+                {{getLastMessage().lastUpdatedAt}}
             </div>
         </div>
         <div class = "middle">
             <div *ngIf = "chat.type === 1" class = "user">
-                {{message.from}}
+                {{getLastMessage().from}}
             </div>
             <div class = "message">
-                {{message.text}}
+                {{getLastMessage().text}}
             </div>
             <div class = "unread">
                 <div class = "unread-counter">

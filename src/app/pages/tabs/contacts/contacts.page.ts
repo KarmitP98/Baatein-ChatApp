@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UserModel } from "../../../models/UserModel";
 import { Subscription } from "rxjs";
-import firebase from "firebase/compat";
 import { UserService } from "../../../services/user.service";
-import { user } from "@angular/fire/auth";
+import { includes } from "../../../shared/constants";
 
 @Component( {
                 selector : "app-contacts",
@@ -13,6 +12,7 @@ import { user } from "@angular/fire/auth";
 export class ContactsPage implements OnInit, OnDestroy {
     contacts : UserModel[] = [];
     userSub : Subscription = new Subscription();
+    contantName : string;
     
     constructor( private userService : UserService ) { }
     
@@ -29,4 +29,10 @@ export class ContactsPage implements OnInit, OnDestroy {
     }
     
     
+    filteredContacts() : UserModel[] {
+        const contactName = this.contantName || "";
+        return this.contacts.slice().filter(
+            contact => includes( contact.name, contactName ) || includes( contact.email, contactName ) );
+        
+    }
 }

@@ -10,6 +10,7 @@ import { ContactsPage } from './contacts.page';
 import { ContactIconComponent } from "../../../components/contact-icon/contact-icon.component";
 import { MatInputModule } from "@angular/material/input";
 import { SignupPageComponentModule } from "../../signup-page/signup-page.module";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
               imports : [
@@ -18,7 +19,8 @@ import { SignupPageComponentModule } from "../../signup-page/signup-page.module"
                   IonicModule,
                   ContactsPageRoutingModule,
                   MatInputModule,
-                  SignupPageComponentModule
+                  SignupPageComponentModule,
+                  MatIconModule
               ],
               declarations : [ ContactsPage, ContactIconComponent ]
           })
