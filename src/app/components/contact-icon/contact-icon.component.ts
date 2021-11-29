@@ -14,10 +14,10 @@ export class ContactIconComponent implements OnInit, AfterViewInit {
     constructor() { }
     
     ngOnInit() {
+        this.loading = !this.contact;
     }
     
     ngAfterViewInit() : void {
-        this.loading = !this.contact;
     }
     
     

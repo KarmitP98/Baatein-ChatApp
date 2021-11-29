@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { addToLocal } from "../shared/functions";
 import { UID } from "../shared/constants";
 import firebase from "firebase/compat";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable( {
                  providedIn : "root"
@@ -13,6 +14,7 @@ export class UserService {
     
     userCollection : AngularFirestoreCollection<UserModel> = this.afs.collection<UserModel>( "users" );
     emailCollection : AngularFirestoreCollection<{ email : string }> = this.afs.collection<{ email : string }>( "emails" );
+    currentUser : BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>( undefined );
     
     constructor( private afs : AngularFirestore, private router : Router ) { }
     
@@ -28,6 +30,7 @@ export class UserService {
                       await this.addNewUserEmail( user.email );
                       await addToLocal( UID, userId );
                       await this.router.navigate( successRedirectURL );
+                      this.currentUser.next( user );
                   } )
                   .catch( ( error ) => {
                       console.error( error );
@@ -70,6 +73,7 @@ export class UserService {
             await this.userCollection.doc( user.uId ).update( { ...user } )
                       .then( () => {
                           resolve( true );
+                          this.currentUser.next( user );
                       } )
                       .catch( ( error ) => {
                           reject( error );
@@ -87,6 +91,7 @@ export class UserService {
             await this.userCollection.doc( uId ).delete()
                       .then( () => {
                           resolve( true );
+                          this.currentUser.next( undefined );
                       } )
                       .catch( ( error ) => {
                           reject( error );

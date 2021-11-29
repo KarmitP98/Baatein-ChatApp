@@ -15,7 +15,7 @@ const routes : Routes = [
         loadChildren : () => import("./pages/tabs/tabs.module").then( m => m.TabsPageModule )
     },
     {
-        path : "chat",
+        path : ":cId",
         loadChildren : () => import("./pages/chat/chat.module").then( m => m.ChatPageModule )
     }
 
