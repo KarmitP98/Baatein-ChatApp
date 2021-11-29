@@ -52,4 +52,13 @@ export default class ChatModel {
     public createdAt : Date;
     public updatedAt : Date;
     public type: ChatType
+    
+    
+    constructor( between : {}[], betweenIds : string[], messages : MessageModel[], createdAt : Date, type : ChatType ) {
+        this.between = between;
+        this.betweenIds = betweenIds;
+        this.messages = messages;
+        this.createdAt = createdAt;
+        this.type = type;
+    }
 }

@@ -19,9 +19,10 @@ ion-content{
   --background:linear-gradient(167.95deg, #D9E6FE 0%, rgba(251, 218, 248, 0.1) 150%);
 }
 
-ion-header{
-  --padding-top: 20px;
-  --padding-bottom: 20px;
+ion-toolbar{
+  --min-height: 10vh;
+  
+
 }
 
 .input-area {
