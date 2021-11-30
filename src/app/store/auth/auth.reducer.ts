@@ -1,6 +1,6 @@
 import { AuthActions, SET_AUTH, REMOVE_AUTH } from './auth.actions';
 const defaultState = {
-    auth: undefined
+    auth: null
 }
 
 export const authReducer = (state = defaultState, { type, payload }: AuthActions) => {
@@ -8,7 +8,7 @@ export const authReducer = (state = defaultState, { type, payload }: AuthActions
         case SET_AUTH:
             return { ...state, auth: payload }
         case REMOVE_AUTH:
-            return { ...state, auth: undefined }
+            return { ...state, auth: null }
         default:
             return { ...state }
     }
