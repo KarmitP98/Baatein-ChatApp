@@ -1,3 +1,4 @@
+import { rootReducer } from './../../.history/src/app/store/root_20211129195236';
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
@@ -11,6 +12,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
+import {StoreModule} from '@ngrx/store';
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -30,7 +32,8 @@ const firebaseConfig = {
                            IonicModule.forRoot(),
                            AppRoutingModule,
                            AngularFireModule.initializeApp( firebaseConfig ),
-                           BrowserAnimationsModule ],
+                           BrowserAnimationsModule ,
+                           StoreModule.forRoot({root: rootReducer})],
                providers : [
                    StatusBar,
                    SplashScreen,

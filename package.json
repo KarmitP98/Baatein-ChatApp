@@ -30,6 +30,7 @@
     "@ionic-native/status-bar": "^5.36.0",
     "@ionic/angular": "^5.8.5",
     "@ngneat/until-destroy": "^8.1.4",
+    "@ngrx/store": "^13.0.1",
     "firebase": "^9.4.0",
     "rxjs": "~7.4.0",
     "svg-loaders": "^0.2.0",
