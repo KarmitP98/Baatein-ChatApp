@@ -6,7 +6,7 @@ export const REMOVE_AUTH = 'REMOVE_AUTH'
 
 export class SetAuthAction implements Action {
     readonly type: string = SET_AUTH
-    constructor(public payload: firebase.User) { }
+    constructor(public payload: any) { }
 }
 
 export class RemoveAuthAction implements Action {

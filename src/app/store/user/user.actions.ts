@@ -8,9 +8,9 @@ export class setUserAction implements Action {
     readonly type: string = SET_USER
     constructor(public payload: UserModel | undefined) { }
 }
-export class removeUserAction implements Action {
+export class RemoveUserAction implements Action {
     readonly type: string = REMOVE_USER
     constructor(public payload?: UserModel | undefined) { }
 }
 
-export type userActions = setUserAction | removeUserAction;
+export type userActions = setUserAction | RemoveUserAction;

@@ -25,7 +25,7 @@ export class AuthService {
                           if ( value ) {
                               this.currentAuthUser.next( value );
                               resolve( value );
-                              this.us.createNewUser( user, value.user.uid, HOME_PAGE_URL );
+                              this.us.createNewUser( { ...user, uId : value.user.uid }, value.user.uid, HOME_PAGE_URL );
                           }
                       } )
                       .catch( error => {

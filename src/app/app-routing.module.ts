@@ -18,8 +18,6 @@ const routes : Routes = [
         path : ":cId",
         loadChildren : () => import("./pages/chat/chat.module").then( m => m.ChatPageModule )
     }
-
-
 ];
 
 @NgModule( {

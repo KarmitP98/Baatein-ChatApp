@@ -3,6 +3,8 @@ import { UserModel } from "../../../models/UserModel";
 import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { includes } from "../../../shared/constants";
+import { Store } from "@ngrx/store";
+import firebase from "firebase/compat";
 
 @Component( {
                 selector : "app-contacts",
@@ -14,7 +16,7 @@ export class ContactsPage implements OnInit, OnDestroy {
     userSub : Subscription = new Subscription();
     contantName : string;
     
-    constructor( private userService : UserService ) { }
+    constructor( private userService : UserService) { }
     
     ngOnInit() {
         this.userSub = this.userService.fetchAllUsers().valueChanges().subscribe( value => {
