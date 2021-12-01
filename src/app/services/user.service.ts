@@ -6,6 +6,7 @@ import { addToLocal } from "../shared/functions";
 import { UID } from "../shared/constants";
 import firebase from "firebase/compat";
 import { BehaviorSubject } from "rxjs";
+import WhereFilterOp = firebase.firestore.WhereFilterOp;
 
 @Injectable( {
                  providedIn : "root"
@@ -49,17 +50,18 @@ export class UserService {
      * @param uId
      */
     fetchUserByUId = ( uId : string ) => {
-        return this.fetchUserByAttribute( "uId", uId );
+        return this.fetchUserByAttribute( "uId", "==", uId );
     };
     
     /**
      * Fetch users that have values matching the attributes.
      * @param attribute
+     * @param condition
      * @param value
      */
-    fetchUserByAttribute = ( attribute : string | firebase.firestore.FieldPath, value : any ) => {
-        if ( attribute && value ) {
-            return this.userCollection.ref.where( attribute, "==", value );
+    fetchUserByAttribute = ( attribute : string | firebase.firestore.FieldPath, condition : WhereFilterOp, value : any ) => {
+        if ( attribute && value && condition ) {
+            return this.userCollection.ref.where( attribute, condition, value );
         }
         return undefined;
     };

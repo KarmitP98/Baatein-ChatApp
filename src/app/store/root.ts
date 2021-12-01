@@ -1,5 +1,10 @@
-import { authReducer } from './auth/auth.reducer';
-import { userReducer } from './user/user.reducer'
-import { combineReducers } from '@ngrx/store';
+import { authReducer, AuthState } from "./auth/auth.reducer";
+import { userReducer, UserState } from "./user/user.reducer";
+import { ActionReducerMap } from "@ngrx/store";
 
-export const rootReducer = combineReducers({ user: userReducer, auth: authReducer })
+export interface RootState {
+    auth : AuthState,
+    user : UserState
+}
+
+export const rootReducer : ActionReducerMap<RootState> = { user : userReducer, auth : authReducer };

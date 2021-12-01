@@ -19,6 +19,7 @@ import User = firebase.User;
 export class AppComponent implements OnInit, OnDestroy {
     
     authSub : Subscription = new Subscription( undefined );
+    loading : boolean = true;
     
     constructor(
         private platform : Platform,
@@ -28,8 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
         private store : Store<any>,
         private userService : UserService
     ) {
-        this.initializeApp();
         this.fetchAuthState();
+        this.initializeApp();
     }
     
     initializeApp() {
@@ -47,12 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     
     fetchAuthState = () => {
-        this.authSub = this.afa.authState.subscribe( ( next : User ) => {
+        this.authSub = this.afa.authState.subscribe( async ( next : User ) => {
             if ( next ) {
                 const clone = Object.freeze( next );
                 this.store.dispatch( new SetAuthAction( clone ) );
-                console.log({clone});
-                this.userService.fetchUserByUId( next.uid ).get().then( ( snapShot ) => {
+                await this.userService.fetchUserByUId( next.uid ).get().then( ( snapShot ) => {
                     if ( !snapShot.empty ) {
                         this.store.dispatch( new setUserAction( snapShot.docs[0].data() ) );
                     }
@@ -61,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.store.dispatch( new RemoveAuthAction( undefined ) );
                 this.store.dispatch( new RemoveUserAction( undefined ) );
             }
+            this.loading = false;
         } );
     };
     

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UserModel } from "../../../models/UserModel";
-import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { includes } from "../../../shared/constants";
 import { Store } from "@ngrx/store";
-import firebase from "firebase/compat";
+import { RootState } from "../../../store/root";
+import { firstValueFrom } from "rxjs";
 
 @Component( {
                 selector : "app-contacts",
@@ -12,27 +12,33 @@ import firebase from "firebase/compat";
                 styleUrls : [ "./contacts.page.scss" ]
             } )
 export class ContactsPage implements OnInit, OnDestroy {
+    
     contacts : UserModel[] = [];
-    userSub : Subscription = new Subscription();
-    contantName : string;
+    contactName : string;
+    currentUserId : string = undefined;
     
-    constructor( private userService : UserService) { }
+    constructor( private userService : UserService, private store : Store<RootState> ) { }
     
-    ngOnInit() {
-        this.userSub = this.userService.fetchAllUsers().valueChanges().subscribe( value => {
-            if ( value?.length ) {
-                this.contacts = value;
+    async ngOnInit() {
+        // Get current user id
+        const data = await firstValueFrom( this.store.select( "user" ) );
+        this.currentUserId = data?.user?.uId;
+        
+        // Load all the user
+        this.userService.fetchUserByAttribute( "uId", "!=", this.currentUserId ).get().then( value => {
+            if ( !value?.empty ) {
+                this.contacts = value.docs.map( doc => doc.data() );
             }
         } );
+        
     }
     
     ngOnDestroy() : void {
-        this.userSub.unsubscribe();
     }
     
     
     filteredContacts() : UserModel[] {
-        const contactName = this.contantName || "";
+        const contactName = this.contactName || "";
         return this.contacts.slice().filter(
             contact => includes( contact.name, contactName ) || includes( contact.email, contactName ) );
         

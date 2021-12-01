@@ -12,8 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { StoreModule } from "@ngrx/store";
-import { userReducer } from "./store/user/user.reducer";
-import { authReducer } from "./store/auth/auth.reducer";
+import { rootReducer } from "./store/root";
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -34,7 +33,7 @@ const firebaseConfig = {
                            AppRoutingModule,
                            AngularFireModule.initializeApp( firebaseConfig ),
                            BrowserAnimationsModule,
-                           StoreModule.forRoot( { user : userReducer, auth : authReducer } ) ],
+                           StoreModule.forRoot( rootReducer ) ],
                providers : [
                    StatusBar,
                    SplashScreen,
