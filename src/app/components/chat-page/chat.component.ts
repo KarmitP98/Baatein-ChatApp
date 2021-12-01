@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import ChatModel from "../../models/ChatModel";
-import { ChatService } from "../../services/chat.service";
+import { UserModel } from "../../models/UserModel";
+import { Store } from "@ngrx/store";
+import { RootState } from "../../store/root";
 
 @Component( {
                 selector : "app-chat",
@@ -10,11 +12,14 @@ import { ChatService } from "../../services/chat.service";
 export class ChatComponent implements OnInit, AfterViewInit {
     
     @Input() chat : ChatModel;
+    @Input( "current" ) currentUser : UserModel = undefined;
+    @Input( "other" ) otherUser : UserModel = undefined;
     loading = true;
     currentText : string = "";
+    typing : boolean = false;
     
     
-    constructor( private chatService : ChatService ) { }
+    constructor( private store : Store<RootState> ) { }
     
     ngOnInit() {}
     

@@ -1,9 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>chat</ion-title>
-  </ion-toolbar>
+<ion-header *ngIf = "!loading">
+    <ion-toolbar>
+        <ion-title>{{otherUser.name}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <app-loader *ngIf = "loading"></app-loader>
+    <div *ngIf = "!loading">
+        <app-chat [chat] = "chat" [current] = "currentUser"
+                  [other] = "otherUser"></app-chat>
+    </div>
 </ion-content>
