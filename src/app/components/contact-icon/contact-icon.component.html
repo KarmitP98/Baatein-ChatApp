@@ -2,7 +2,8 @@
 <div *ngIf = "!loading" class = "contact">
     <div class = "profile-picture">
         <img [alt] = "contact.name +
-        '\'s Profile Picture'" [src] = "contact.profilePic"
+        '\'s Profile Picture'" [src] = "contact.profilePic ||
+        'assets/Avatars/user-default.jpg'" src = ""
              class = "profile">
     </div>
     <div class = "name">
