@@ -9,6 +9,7 @@ import { IonTabs } from "@ionic/angular";
 export class TabsPage implements OnInit {
     
     @ViewChild( "tabBar", { static : false } ) tabBar : IonTabs;
+    @ViewChild( "indicator", { static : false } ) indicator : HTMLElement;
     selectedTab = "";
     tabs : { tab : string, icon : string, text : string }[] = [
         { tab : "home", icon : "home", text : "Home" },
