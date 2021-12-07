@@ -1,5 +1,7 @@
 import { UserModel } from "../models/UserModel";
-import ChatModel, { ChatType } from "../models/ChatModel";
+import ChatModel, { ChatType, MessageStatus } from "../models/ChatModel";
+import firebase from "firebase/compat";
+import Timestamp = firebase.firestore.Timestamp;
 
 export const addToLocal = async ( key, value ) => {
     return new Promise( async resolve => {
@@ -16,4 +18,24 @@ export const startANewConversation = ( currentUser : UserModel, otherUser : User
 
 export const getUserReference = ( uId : string ) => {
     return `users/${ uId }`;
+};
+
+
+export const TimeStampToDate = ( stamp : Timestamp ) => {
+    if ( stamp ) {
+        return stamp.toDate();
+    }
+    return undefined;
+};
+
+
+export const getStatusIcon = ( status ) => {
+    switch ( status ) {
+        case MessageStatus.sent:
+            return "assets/sent-light.svg";
+        case MessageStatus.seen:
+            return "assets/read-light.svg";
+        default:
+            return undefined;
+    }
 };

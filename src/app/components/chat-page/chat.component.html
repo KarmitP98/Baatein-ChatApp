@@ -5,7 +5,12 @@
     <div *ngIf = "isChatEmpty()" class = "emptyChat">
         <img alt = "Chat" src = "assets/chat.svg">
     </div>
-    <div *ngIf = "!isChatEmpty()">
-        {{getMessages()|json}}
+    <div *ngIf = "!isChatEmpty()" class = "messages">
+        <app-message *ngFor = "let message of getMessages()"
+                     [current] = "message.fromId === this.currentUser.uId"
+                     [message] = "message"
+                     [user] = "getUser(message.fromId)"
+        ></app-message>
+        <div id = "bottom"></div>
     </div>
 </div>

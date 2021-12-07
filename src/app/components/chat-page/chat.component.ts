@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
-import ChatModel from "../../models/ChatModel";
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import ChatModel, { MessageModel } from "../../models/ChatModel";
 import { UserModel } from "../../models/UserModel";
 import { Store } from "@ngrx/store";
 import { RootState } from "../../store/root";
@@ -9,7 +9,7 @@ import { RootState } from "../../store/root";
                 templateUrl : "./chat.component.html",
                 styleUrls : [ "./chat.component.scss" ]
             } )
-export class ChatComponent implements OnInit, AfterViewInit {
+export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
     
     @Input() chat : ChatModel;
     @Input( "current" ) currentUser : UserModel = undefined;
@@ -21,19 +21,39 @@ export class ChatComponent implements OnInit, AfterViewInit {
     
     constructor( private store : Store<RootState> ) { }
     
-    ngOnInit() {}
-    
-    ngAfterViewInit() {
+    ngOnInit() {
         if ( this.chat ) {
             this.loading = false;
         }
     }
     
+    ngAfterViewInit() {
+    }
+    
+    ngOnChanges( changes : SimpleChanges ) : void {
+        if ( changes.chat.isFirstChange() || changes.chat.currentValue.messages.length !== changes.chat.previousValue.messages.length ) {
+            setTimeout( () => {this.scrollToBottom();}, 200 );
+        }
+    }
+    
+    
     isChatEmpty = () => {
         return this.chat?.messages?.length <= 0;
     };
     
-    getMessages = () => {
-        return this.chat?.messages.slice().map( message => message.text );
+    getMessages() : MessageModel[] {
+        return this.chat?.messages.slice().map( message => message );
+    };
+    
+    getUser( fromId : string ) : any {
+        if ( fromId ) {
+            return [ this.currentUser, this.otherUser ].slice().filter( user => user.uId === fromId )[0];
+        }
+        return undefined;
+    }
+    
+    scrollToBottom = () => {
+        const bottom = document.getElementById( "bottom" );
+        bottom?.scrollIntoView( { behavior : "smooth" } );
     };
 }

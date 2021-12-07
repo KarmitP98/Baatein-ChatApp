@@ -83,22 +83,19 @@ export class ChatPage implements OnInit, OnDestroy {
                 type : MessageType.text,
                 lastUpdatedAt : new Date()
             };
+            const clone = {
+                ...this.chat,
+                messages : this.chat.messages?.length ? [ ...this.chat.messages,
+                                                          message ] : [ message ]
+            };
             if ( this.newChat ) {
-                await this.chatService.createNewChat( {
-                                                          ...this.chat,
-                                                          messages : this.chat.messages?.length ? [ ...this.chat.messages,
-                                                                                                    message ] : [ message ]
-                                                      } )
+                await this.chatService.createNewChat( clone )
                           .then( () => {
                               this.text = "";
                               this.newChat = false;
                           } );
             } else {
-                await this.chatService.updateChat( {
-                                                       ...this.chat,
-                                                       messages : this.chat.messages?.length ? [ ...this.chat.messages,
-                                                                                                 message ] : [ message ]
-                                                   } )
+                await this.chatService.updateChat( clone )
                           .then( () => {
                               this.text = "";
                           } );

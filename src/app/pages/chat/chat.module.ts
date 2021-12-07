@@ -11,6 +11,7 @@ import { SignupPageComponentModule } from "../signup-page/signup-page.module";
 import { ChatComponent } from "../../components/chat-page/chat.component";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { MessageComponent } from "../../components/message/message.component";
 
 @NgModule( {
                imports : [
@@ -22,6 +23,6 @@ import { MatButtonModule } from "@angular/material/button";
                    MatInputModule,
                    MatButtonModule
                ],
-               declarations : [ ChatPage, ChatComponent ]
+               declarations : [ ChatPage, ChatComponent, MessageComponent ]
            } )
 export class ChatPageModule {}
