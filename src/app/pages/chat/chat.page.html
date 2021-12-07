@@ -1,6 +1,11 @@
-<ion-header *ngIf = "!loading">
+<ion-header>
     <ion-toolbar>
-        <ion-title>{{otherUser.name}}</ion-title>
+        <ion-buttons slot = "start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title *ngIf = "!loading">
+            {{otherUser.name}}
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
