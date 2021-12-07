@@ -9,6 +9,8 @@ import { ChatPageRoutingModule } from "./chat-routing.module";
 import { ChatPage } from "./chat.page";
 import { SignupPageComponentModule } from "../signup-page/signup-page.module";
 import { ChatComponent } from "../../components/chat-page/chat.component";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule( {
                imports : [
@@ -16,7 +18,9 @@ import { ChatComponent } from "../../components/chat-page/chat.component";
                    FormsModule,
                    IonicModule,
                    ChatPageRoutingModule,
-                   SignupPageComponentModule
+                   SignupPageComponentModule,
+                   MatInputModule,
+                   MatButtonModule
                ],
                declarations : [ ChatPage, ChatComponent ]
            } )
