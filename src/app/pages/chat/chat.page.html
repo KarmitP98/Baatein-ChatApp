@@ -1,6 +1,11 @@
-<ion-header *ngIf = "!loading">
+<ion-header>
     <ion-toolbar>
-        <ion-title>{{otherUser.name}}</ion-title>
+        <ion-buttons slot = "start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title *ngIf = "!loading">
+            {{otherUser.name}}
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -9,5 +14,21 @@
     <div *ngIf = "!loading">
         <app-chat [chat] = "chat" [current] = "currentUser"
                   [other] = "otherUser"></app-chat>
+        <div class = "inputArea">
+            <form #inputForm = "ngForm" (ngSubmit) = "handleSubmit()">
+                <div class = "inputField">
+                    <input (keypress) = "$event.code === 'enter' ?
+                           handleSubmit(): undefined" [(ngModel)] = "text"
+                           class = "textInput"
+                           id = "text"
+                           name = "text"
+                           placeholder = "Start chatting..."
+                           type = "text">
+                    <button mat-icon-button type = "submit">
+                        <ion-icon color = "primary" name = "send"></ion-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </ion-content>

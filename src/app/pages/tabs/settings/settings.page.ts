@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../../services/auth.service";
 
-@Component({
-  selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss'],
-})
+@Component( {
+                selector : "app-settings",
+                templateUrl : "./settings.page.html",
+                styleUrls : [ "./settings.page.scss" ]
+            } )
 export class SettingsPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    
+    constructor( private authService : AuthService ) { }
+    
+    ngOnInit() {
+    }
+    
+    async logout() {
+        await this.authService.logOut();
+    }
 }

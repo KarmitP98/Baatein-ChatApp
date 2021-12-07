@@ -4,7 +4,6 @@ import { UserService } from "../../../services/user.service";
 import { includes } from "../../../shared/constants";
 import { Store } from "@ngrx/store";
 import { RootState } from "../../../store/root";
-import { firstValueFrom } from "rxjs";
 
 @Component( {
                 selector : "app-contacts",
@@ -16,24 +15,27 @@ export class ContactsPage implements OnInit, OnDestroy {
     contacts : UserModel[] = [];
     contactName : string;
     currentUserId : string = undefined;
+    sub;
     
     constructor( private userService : UserService, private store : Store<RootState> ) { }
     
     async ngOnInit() {
         // Get current user id
-        const data = await firstValueFrom( this.store.select( "user" ) );
-        this.currentUserId = data?.user?.uId;
-        
-        // Load all the user
-        this.userService.fetchUserByAttribute( "uId", "!=", this.currentUserId ).get().then( value => {
-            if ( !value?.empty ) {
-                this.contacts = value.docs.map( doc => doc.data() );
+        this.sub = this.store.select( "user" ).subscribe( data => {
+            if ( data?.user ) {
+                this.currentUserId = data?.user?.uId;
+                // Load all the user
+                this.userService.fetchUserByAttribute( "uId", "!=", this.currentUserId ).get().then( value => {
+                    if ( !value?.empty ) {
+                        this.contacts = value.docs.map( doc => doc.data() );
+                    }
+                } );
             }
         } );
-        
     }
     
     ngOnDestroy() : void {
+        this.sub.unsubscribe();
     }
     
     

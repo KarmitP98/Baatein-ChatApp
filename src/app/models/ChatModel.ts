@@ -29,7 +29,7 @@ export enum ChatType {
 
 export class MessageModel {
     public time : Date;
-    public lastUpdatedAt : Date;
+    public lastUpdatedAt? : Date;
     public to : Reference<UserModel>;
     public from : Reference<UserModel>;
     public toId : string;
@@ -38,8 +38,8 @@ export class MessageModel {
     public cId : string;
     public status : MessageStatus;
     public createdAt : Date;
-    public updatedAt : Date;
-    public text: string;
+    public updatedAt? : Date;
+    public text : string;
 }
 
 export default class ChatModel {
@@ -51,7 +51,7 @@ export default class ChatModel {
     public status : ChatStatus;
     public createdAt : Date;
     public updatedAt : Date;
-    public type: ChatType
+    public type : ChatType;
     
     
     constructor( between : {}[], betweenIds : string[], messages : MessageModel[], createdAt : Date, type : ChatType ) {
