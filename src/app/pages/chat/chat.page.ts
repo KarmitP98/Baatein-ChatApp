@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { RootState } from "../../store/root";
 import { UserModel } from "../../models/UserModel";
-import ChatModel from "../../models/ChatModel";
+import ChatModel, { MessageModel, MessageStatus, MessageType } from "../../models/ChatModel";
 import { ChatService } from "../../services/chat.service";
 import { Subscription } from "rxjs";
 import { startANewConversation } from "../../shared/functions";
 import { Router } from "@angular/router";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 
 @Component( {
                 selector : "app-chat-page",
@@ -21,8 +22,9 @@ export class ChatPage implements OnInit, OnDestroy {
     newChat : boolean = true;
     loading : boolean = true;
     storeSub : Subscription = new Subscription();
+    text : string = "";
     
-    constructor( private store : Store<RootState>, private chatService : ChatService, private router : Router ) { }
+    constructor( private store : Store<RootState>, private chatService : ChatService, private router : Router, private afs : AngularFirestore ) { }
     
     ngOnInit() {
         this.store.subscribe( ( state : RootState ) => {
@@ -33,8 +35,14 @@ export class ChatPage implements OnInit, OnDestroy {
                 if ( this.currentUser && this.otherUser ) {
                     this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).get().then( snap => {
                         if ( !snap.empty ) {
-                            this.chat = snap.docs[0].data();
-                            this.newChat = false;
+                            const withCurrent = snap.docs.filter( value => value.data().betweenIds.includes( this.otherUser.uId ) );
+                            if ( withCurrent?.length ) {
+                                this.chat = withCurrent[0]?.data();
+                                this.newChat = false;
+                            } else {
+                                this.newChat = true;
+                                this.chat = startANewConversation( this.currentUser, this.otherUser );
+                            }
                         } else {
                             this.newChat = true;
                             this.chat = startANewConversation( this.currentUser, this.otherUser );
@@ -46,8 +54,8 @@ export class ChatPage implements OnInit, OnDestroy {
                 }
             }
         } );
-        
-        
+    
+    
     }
     
     ngOnDestroy() : void {
@@ -56,5 +64,42 @@ export class ChatPage implements OnInit, OnDestroy {
         }
     }
     
+    handleSubmit = async () => {
+        if ( this.text ) {
+            if ( this.newChat ) {
+                this.chat.cId = this.afs.createId();
+            }
+            
+            const message : MessageModel = {
+                text : this.text,
+                cId : this.chat.cId,
+                toId : this.otherUser.uId,
+                fromId : this.currentUser.uId,
+                from : this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
+                to : this.afs.collection( "users" ).doc( this.otherUser.uId ).ref,
+                createdAt : new Date(),
+                status : MessageStatus.sent,
+                time : new Date(),
+                type : MessageType.text,
+                lastUpdatedAt : new Date()
+            };
+            this.chat = {
+                ...this.chat,
+                messages : this.chat.messages?.length ? [ ...this.chat.messages, message ] : [ message ]
+            };
+            if ( this.newChat ) {
+                await this.chatService.createNewChat( this.chat )
+                          .then( () => {
+                              this.text = "";
+                              this.newChat = false;
+                          } );
+            } else {
+                await this.chatService.updateChat( this.chat )
+                          .then( () => {
+                              this.text = "";
+                          } );
+            }
+        }
+    };
     
 }

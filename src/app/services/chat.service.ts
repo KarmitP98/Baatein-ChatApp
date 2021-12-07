@@ -54,7 +54,7 @@ export class ChatService {
     };
     
     fetchChatBetween = ( currentUser : string, otherUser : string ) => {
-        return this.chatCollection.ref.where( "betweenIds", "array-contains", [ currentUser, otherUser ] ).limit( 1 );
+        return this.chatCollection.ref.where( "betweenIds", "array-contains-any", [ currentUser, otherUser ] ).limit( 1 );
     };
     
 }

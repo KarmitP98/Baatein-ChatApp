@@ -29,8 +29,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
     }
     
-    sendText() {
+    isChatEmpty = () => {
+        return this.chat?.messages?.length <= 0;
+    };
     
-    }
-    
+    getMessages = () => {
+        return this.chat?.messages.slice().map( message => message.text );
+    };
 }

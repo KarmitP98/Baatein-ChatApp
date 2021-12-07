@@ -1,6 +1,11 @@
-<div *ngIf="loading">
-  Loading chat...
+<div *ngIf = "loading">
+    <app-loader></app-loader>
 </div>
-<div class="chat-page">
-
+<div class = "chat-page">
+    <div *ngIf = "isChatEmpty()" class = "emptyChat">
+        <img alt = "Chat" src = "assets/chat.svg">
+    </div>
+    <div *ngIf = "!isChatEmpty()">
+        {{getMessages()|json}}
+    </div>
 </div>

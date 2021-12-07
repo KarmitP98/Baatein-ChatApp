@@ -10,9 +10,13 @@
         <app-chat [chat] = "chat" [current] = "currentUser"
                   [other] = "otherUser"></app-chat>
         <div class = "inputArea">
-            <form #inputForm = "ngForm">
+            <form #inputForm = "ngForm" (ngSubmit) = "handleSubmit()">
                 <div class = "inputField">
-                    <input class = "textInput" id = "text" name = "text"
+                    <input (keypress) = "$event.code === 'enter' ?
+                           handleSubmit(): undefined" [(ngModel)] = "text"
+                           class = "textInput"
+                           id = "text"
+                           name = "text"
                            placeholder = "Start chatting..."
                            type = "text">
                     <button mat-icon-button type = "submit">
