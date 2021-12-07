@@ -33,7 +33,7 @@ export class ChatPage implements OnInit, OnDestroy {
                 this.otherUser = state.chat.with;
                 
                 if ( this.currentUser && this.otherUser ) {
-                    this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).get().then( snap => {
+                    this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).onSnapshot( snap => {
                         if ( !snap.empty ) {
                             const withCurrent = snap.docs.filter( value => value.data().betweenIds.includes( this.otherUser.uId ) );
                             if ( withCurrent?.length ) {
@@ -83,18 +83,22 @@ export class ChatPage implements OnInit, OnDestroy {
                 type : MessageType.text,
                 lastUpdatedAt : new Date()
             };
-            this.chat = {
-                ...this.chat,
-                messages : this.chat.messages?.length ? [ ...this.chat.messages, message ] : [ message ]
-            };
             if ( this.newChat ) {
-                await this.chatService.createNewChat( this.chat )
+                await this.chatService.createNewChat( {
+                                                          ...this.chat,
+                                                          messages : this.chat.messages?.length ? [ ...this.chat.messages,
+                                                                                                    message ] : [ message ]
+                                                      } )
                           .then( () => {
                               this.text = "";
                               this.newChat = false;
                           } );
             } else {
-                await this.chatService.updateChat( this.chat )
+                await this.chatService.updateChat( {
+                                                       ...this.chat,
+                                                       messages : this.chat.messages?.length ? [ ...this.chat.messages,
+                                                                                                 message ] : [ message ]
+                                                   } )
                           .then( () => {
                               this.text = "";
                           } );
