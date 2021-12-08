@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Contacts</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class = "ion-padding">
+    <div class = "search-area">
+        <div class = "input-area">
+            <input [(ngModel)] = "contactName" id = "contact-name" name = "text"
+                   placeholder = "Search your friend..."
+                   type = "text">
+            <ion-icon class = "search-icon" name = "search"></ion-icon>
+        </div>
+    </div>
+    <div class = "contact-grid">
+        <app-contact-icon *ngFor = "let contact of filteredContacts()"
+                          [contact] = "contact"
+        ></app-contact-icon>
+    </div>
+</ion-content>

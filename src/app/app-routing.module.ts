@@ -1,37 +1,29 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { LoginGuard } from "./guards/login.guard";
-import { AuthGuard } from "./guards/auth.guard";
 
-const routes: Routes = [
+const routes : Routes = [
+    { path : "", pathMatch : "full", redirectTo : "login" },
+    { path : "signup", loadChildren : () => import("./pages/signup-page/signup-page.module").then( m => m.SignupPageComponentModule ) },
     {
-        path: "",
-        redirectTo: "login",
-        pathMatch: "full"
-    },
-    {
-        path: "login",
-        loadChildren: () => import("./pages/login/login.module").then( m => m.LoginPageModule ),
-        canActivate: [ LoginGuard ]
-    },
-    {
-        path : "signup",
-        loadChildren : () => import("./pages/signup/signup.module").then( m => m.SignupPageModule ),
+        path : "login",
+        loadChildren : () => import("./pages/login/login.module").then( m => m.LoginPageModule ),
         canActivate : [ LoginGuard ]
     },
     {
-        path : ":uId",
-        loadChildren : () => import("./pages/dashboard/dashboard.module").then( m => m.DashboardPageModule ),
-        canActivate : [ AuthGuard ],
-        canDeactivate : [ AuthGuard ]
+        path : "tabs",
+        loadChildren : () => import("./pages/tabs/tabs.module").then( m => m.TabsPageModule )
+    },
+    {
+        path : "chat",
+        loadChildren : () => import("./pages/chat/chat.module").then( m => m.ChatPageModule )
     }
-
 ];
 
 @NgModule( {
-               imports: [
-                   RouterModule.forRoot( routes, { preloadingStrategy: PreloadAllModules } )
+               imports : [
+                   RouterModule.forRoot( routes, { preloadingStrategy : PreloadAllModules } )
                ],
-               exports: [ RouterModule ]
+               exports : [ RouterModule ]
            } )
 export class AppRoutingModule {}

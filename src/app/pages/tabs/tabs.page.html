@@ -1,0 +1,12 @@
+<ion-tabs #tabBar (ionTabsDidChange) = "setSelected()">
+    <ion-tab-bar slot = "bottom">
+        <ion-tab-button *ngFor = "let tab of tabs"
+                        [class.selected-button] = "tab.tab === selectedTab"
+                        [tab] = "tab.tab"
+        >
+            <ion-icon [name] = "tab.icon"></ion-icon>
+        </ion-tab-button>
+        <!--        <div #indicator-->
+        <!--             class = "selected-indicator"></div>-->
+    </ion-tab-bar>
+</ion-tabs>

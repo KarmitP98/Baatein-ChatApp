@@ -1,44 +1,43 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { DataService } from "../../services/data.service";
-import { Platform } from "@ionic/angular";
-import { NgForm } from "@angular/forms";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { NotificationService } from "../../services/notification.service";
 
 @Component( {
-                selector: "app-login",
-                templateUrl: "./login.page.html",
-                styleUrls: [ "./login.page.scss" ]
+                selector : "app-login",
+                templateUrl : "./login.page.html",
+                styleUrls : [ "./login.page.scss" ]
             } )
 export class LoginPage implements OnInit {
-
-    userEmail: string;
-    userPassword : string;
-    @ViewChild( "loginForm", { static : false } ) loginForm : NgForm;
     
-    constructor( public ds : DataService,
-                 private afa : AngularFireAuth,
-                 public platform : Platform ) { }
+    email : string = "";
+    password : string = "";
+    showError : string = undefined;
+    processing : boolean = false;
+    
+    constructor( private authService : AuthService, private ns : NotificationService ) { }
     
     ngOnInit() {
     }
     
-    loginTest() {
-        this.ds.loginWithEmail( "karmit1998@yahoo.com", "open1234" );
-        this.loginForm.resetForm();
-    }
+    /**
+     * Login with provided email and password
+     */
+    handleSubmit = async () => {
+        this.processing = true;
+        await this.authService.loginWithEmailAndPassword( this.email, this.password ).catch( error => {
+            this.showErrorMessage( error.message );
+        } );
+        this.processing = false;
+    };
     
-    login() : void {
-        this.ds.loginWithEmail( this.userEmail, this.userPassword );
-        this.loginForm.resetForm();
-    }
     
-    loginWithProvider( provider : string ) {
-        if ( this.platform.is( "cordova" ) ) {
-        
-        } else {
-            this.ds.loginOAuth( provider );
-            this.loginForm.resetForm();
-        }
-    }
-
+    /**
+     * Show error toast in case of any error occur
+     * @param error
+     * @param duration
+     */
+    showErrorMessage = async ( error : string, duration : number = 5000 ) => {
+        await this.ns.showToast( { message : error, duration, color : "danger" } );
+    };
+    
 }

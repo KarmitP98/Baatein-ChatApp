@@ -8,17 +8,17 @@ import { LoginPageRoutingModule } from "./login-routing.module";
 
 import { LoginPage } from "./login.page";
 import { MatInputModule } from "@angular/material/input";
-import { MatIconModule } from "@angular/material/icon";
+import { SignupPageComponentModule } from "../signup-page/signup-page.module";
 
 @NgModule( {
-               imports: [
+               imports : [
                    CommonModule,
                    FormsModule,
                    IonicModule,
                    LoginPageRoutingModule,
                    MatInputModule,
-                   MatIconModule
+                   SignupPageComponentModule
                ],
-               declarations: [ LoginPage ]
+               declarations : [ LoginPage ]
            } )
 export class LoginPageModule {}

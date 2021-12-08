@@ -1,0 +1,53 @@
+.inputArea {
+  position: fixed;
+  bottom: 2%;
+  left: 2.5%;
+  width: 95%;
+  height: 10vh;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+
+  .inputField {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5em 1em;
+    gap: 1em;
+
+    input {
+      border: none;
+      border-bottom: 2px solid rgba(99, 99, 99, 0.5);
+      outline: none;
+      padding: 1em 0.25em;
+      font-weight: 600;
+      position: relative;
+
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: #636363;
+      }
+
+      &::placeholder {
+        color: #636363;
+        font-weight: 600;
+      }
+    }
+
+    button {
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}

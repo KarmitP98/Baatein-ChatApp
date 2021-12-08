@@ -1,0 +1,15 @@
+.contact-grid {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5em;
+}
+
+.search-area {
+  margin-bottom: 3vh;
+
+  .search-icon {
+    color: rgba(87, 87, 87, 0.75);
+    font-size: 24px;
+  }
+}

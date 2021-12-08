@@ -8,13 +8,11 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestore } from "@angular/fire/firestore";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MenuComponent } from "./components/menu/menu.component";
-import { ProSelectComponent } from "./components/pro-select/pro-select.component";
-import { UserInfoComponent } from "./components/user/user-info/user-info.component";
-import { UsersListComponent } from "./components/user/users-list/users-list.component";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { StoreModule } from "@ngrx/store";
+import { rootReducer } from "./store/root";
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -28,17 +26,14 @@ const firebaseConfig = {
 };
 
 @NgModule( {
-               declarations : [ AppComponent,
-                                MenuComponent,
-                                ProSelectComponent,
-                                UserInfoComponent,
-                                UsersListComponent ],
+               declarations : [ AppComponent ],
                entryComponents : [],
                imports : [ BrowserModule,
                            IonicModule.forRoot(),
                            AppRoutingModule,
                            AngularFireModule.initializeApp( firebaseConfig ),
-                           BrowserAnimationsModule ],
+                           BrowserAnimationsModule,
+                           StoreModule.forRoot( rootReducer ) ],
                providers : [
                    StatusBar,
                    SplashScreen,

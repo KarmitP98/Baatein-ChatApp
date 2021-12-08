@@ -1,31 +1,34 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 @Injectable( {
-                 providedIn: "root"
+                 providedIn : "root"
              } )
 export class LoginGuard implements CanActivate {
-
-    constructor( private router: Router,
-                 private afa: AngularFireAuth ) {}
-
+    
+    constructor( private afa : AngularFireAuth, private router : Router ) {}
+    
+    /**
+     * Can Activate guard for login page.
+     * Navigate to home page if user already logged in else, navigate to login.
+     * @param route
+     * @param state
+     */
     canActivate(
-        next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-        return new Promise( resolve => {
+        route : ActivatedRouteSnapshot,
+        state : RouterStateSnapshot ) : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return new Promise( ( resolve, reject ) => {
             const sub = this.afa.authState.subscribe( value => {
                 if ( value ) {
-                    sub.unsubscribe();
-                    resolve( this.router.navigate( [ "/", value.uid ] ) );
+                    resolve( this.router.navigate( [ "/", "tabs", "home" ] ) );
                 } else {
-                    sub.unsubscribe();
                     resolve( true );
                 }
+                sub.unsubscribe();
             } );
         } );
     }
-
+    
 }

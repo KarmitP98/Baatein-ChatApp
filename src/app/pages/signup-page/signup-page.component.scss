@@ -1,0 +1,17 @@
+.signup {
+  width: 80%;
+  display: flex;
+  flex-flow: column nowrap;
+
+  img {
+    width: auto;
+    height: 20%;
+    aspect-ratio: 1 / 1.6;
+    margin-bottom: 40%;
+  }
+
+  .message {
+    text-align: center;
+    font-size: 14px;
+  }
+}

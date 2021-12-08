@@ -1,0 +1,38 @@
+<div *ngIf = "loading" class = "loading-area">
+    <app-loader></app-loader>
+</div>
+<div (click) = "startChatWith()" *ngIf = "!loading" class = "chat-item">
+    <div class = "chat">
+        <div class = "user-avatar">
+            <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
+                 class = "avatar"></div>
+        <div class = "data">
+            <div class = "top">
+                <div class = "user-name">
+                    {{user.name}}
+                </div>
+                <div class = "time">
+                    {{ (getDate(getLastMessage().lastUpdatedAt)) | date:
+                    'shortTime' }}
+                </div>
+            </div>
+            <div class = "middle">
+                <div class = "message">
+                    <span *ngIf = "chat.type === 1" class = "user">
+                        {{getLastMessage().from}}
+                    </span>
+                    {{limitTo(getLastMessage().text, 35)}}
+                </div>
+                <div class = "status">
+                    <img [src] = "getStatusIcon(getLastMessage()?.status)"
+                         alt = "Status Icon">
+                </div>
+            </div>
+            <div class = "unread">
+                <div class = "unread-counter">
+                    {{getUnreadMessages() || ''}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
