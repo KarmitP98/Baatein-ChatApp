@@ -18,10 +18,18 @@ export class MessageComponent implements OnInit {
     
     ngOnInit() {}
     
+    
+    /**
+     * Get date of the message
+     * @param stamp
+     */
     getDate = ( stamp ) => {
         return TimeStampToDate( stamp );
     };
     
+    /**
+     * Get status icon of the message status
+     */
     getStatusIcon = () => {
         return getStatusIcon( this.message.status );
     };

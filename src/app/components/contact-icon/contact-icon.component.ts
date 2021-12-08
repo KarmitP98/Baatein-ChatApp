@@ -21,6 +21,9 @@ export class ContactIconComponent implements OnInit {
         this.loading = !this.contact;
     }
     
+    /**
+     * Start a new chat with the contact
+     */
     startChatWith = async () => {
         await this.store.dispatch( new StartChatAction( { with : { ...this.contact } } ) );
         await this.router.navigate( [ "/", "chat" ] );

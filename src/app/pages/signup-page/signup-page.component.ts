@@ -37,7 +37,10 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
         await this.slides.lockSwipeToPrev( this.allowSlideBack );
     }
     
-    
+    /**
+     * Handle creating a new user using the email and password provided.
+     * Pass the user object to create a new entry in the users collection.
+     */
     async handleUserNameSubmit() {
         this.processing = true;
         const user : UserModel = new UserModel( this.email, this.password, this.name );
@@ -45,14 +48,26 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
         this.processing = false;
     }
     
+    /**
+     * Reset email form
+     */
     handleEmailReset() {
         this.emailForm.resetForm();
     }
     
+    /**
+     * Reset the username form
+     */
     handleUsernameReset() {
         this.userNameForm.resetForm();
     }
     
+    /**
+     * Handle email form submit.
+     * Check if the email already exists in the system.
+     * If yes, show an error.
+     * Else, move forward with the next step of entering username and password
+     */
     async handleEmailSubmit() : Promise<void> {
         this.processing = true;
         if ( this.email ) {
@@ -71,10 +86,18 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
         this.processing = false;
     }
     
+    /**
+     * Show Pager
+     */
     showPager() : boolean {
         return this.allowSlideForward;
     }
     
+    /**
+     * Show error
+     * @param error
+     * @param duration
+     */
     setEmailError = async ( error : string, duration : number = 5000 ) => {
         await this.ns.showToast( { message : error, duration, color : "danger" } );
     };

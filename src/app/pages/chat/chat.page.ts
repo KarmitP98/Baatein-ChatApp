@@ -27,10 +27,12 @@ export class ChatPage implements OnInit, OnDestroy {
     constructor( private store : Store<RootState>, private chatService : ChatService, private router : Router, private afs : AngularFirestore ) { }
     
     ngOnInit() {
+        // Fetch the Current User and Other user from state.
         this.store.subscribe( ( state : RootState ) => {
             if ( state ) {
                 this.currentUser = state.user.user;
                 this.otherUser = state.chat.with;
+                // If both users exists, fetch the chat between these 2 users.
                 if ( this.currentUser && this.otherUser ) {
                     this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).onSnapshot( snap => {
                         if ( !snap.empty ) {
@@ -53,6 +55,7 @@ export class ChatPage implements OnInit, OnDestroy {
                         this.loading = false;
                     } );
                 } else {
+                    // If both users do not exist, navigate back to contacts page.
                     this.router.navigate( [ "/", "tabs", "contacts" ] );
                 }
             }
