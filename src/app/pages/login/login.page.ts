@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
+import { NotificationService } from "../../services/notification.service";
 
 @Component( {
                 selector : "app-login",
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
     showError : string = undefined;
     processing : boolean = false;
     
-    constructor( private authService : AuthService ) { }
+    constructor( private authService : AuthService, private ns : NotificationService ) { }
     
     ngOnInit() {
     }
@@ -26,11 +27,8 @@ export class LoginPage implements OnInit {
         this.processing = false;
     };
     
-    showErrorMessage = ( error : string, duration : number = 50000 ) => {
-        this.showError = error;
-        setTimeout( () => {
-            this.showError = undefined;
-        }, duration );
+    showErrorMessage = async ( error : string, duration : number = 5000 ) => {
+        await this.ns.showToast( { message : error, duration, color : "danger" } );
     };
     
 }

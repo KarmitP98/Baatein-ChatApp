@@ -3,6 +3,8 @@ import ChatModel, { ChatType, MessageStatus } from "../models/ChatModel";
 import firebase from "firebase/compat";
 import Timestamp = firebase.firestore.Timestamp;
 
+let toast;
+
 export const addToLocal = async ( key, value ) => {
     return new Promise( async resolve => {
         await localStorage.setItem( key, JSON.stringify( value ) );
