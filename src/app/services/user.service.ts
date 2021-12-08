@@ -6,6 +6,9 @@ import { addToLocal } from "../shared/functions";
 import { UID } from "../shared/constants";
 import firebase from "firebase/compat";
 import { BehaviorSubject } from "rxjs";
+import { Store } from "@ngrx/store";
+import { RootState } from "../store/root";
+import { setUserAction } from "../store/user/user.actions";
 import WhereFilterOp = firebase.firestore.WhereFilterOp;
 
 @Injectable( {
@@ -17,7 +20,7 @@ export class UserService {
     emailCollection : AngularFirestoreCollection<{ email : string }> = this.afs.collection<{ email : string }>( "emails" );
     currentUser : BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>( undefined );
     
-    constructor( private afs : AngularFirestore, private router : Router ) { }
+    constructor( private afs : AngularFirestore, private router : Router, private store : Store<RootState> ) { }
     
     /**
      * Create a new user on signup and navigate to dashboard
@@ -76,6 +79,7 @@ export class UserService {
                       .then( () => {
                           resolve( true );
                           this.currentUser.next( user );
+                          this.store.dispatch( new setUserAction( user ) );
                       } )
                       .catch( ( error ) => {
                           reject( error );
