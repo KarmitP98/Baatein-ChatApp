@@ -1,32 +1,34 @@
-<div class="loading-area" *ngIf="loading">
+<div *ngIf = "loading" class = "loading-area">
     <app-loader></app-loader>
 </div>
-<div class = "chat-item" *ngIf="!loading">
-    <div class = "user-avatar">
-        <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
-             class = "avatar"></div>
-    <div class = "data">
-        <div class = "top">
-            <div class = "user-name">
-                {{user.name}}
+<div *ngIf = "!loading" class = "chat-item">
+    <div class = "chat">
+        <div class = "user-avatar">
+            <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
+                 class = "avatar"></div>
+        <div class = "data">
+            <div class = "top">
+                <div class = "user-name">
+                    {{user.name}}
+                </div>
+                <div class = "time">
+                    {{ (getDate(getLastMessage().lastUpdatedAt)) | date:
+                    'shortTime' }}
+                </div>
             </div>
-            <div class = "time">
-                {{getLastMessage().lastUpdatedAt}}
-            </div>
-        </div>
-        <div class = "middle">
-            <div *ngIf = "chat.type === 1" class = "user">
-                {{getLastMessage().from}}
-            </div>
-            <div class = "message">
-                {{getLastMessage().text}}
-            </div>
-            <div class = "unread">
-                <div class = "unread-counter">
-                    {{getUnreadMessages()}}
+            <div class = "middle">
+                <div *ngIf = "chat.type === 1" class = "user">
+                    {{getLastMessage().from}}
+                </div>
+                <div class = "message">
+                    {{getLastMessage().text}}
+                </div>
+                <div class = "unread">
+                    <div class = "unread-counter">
+                        {{getUnreadMessages() || ''}}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class = "bottom"></div>
     </div>
 </div>

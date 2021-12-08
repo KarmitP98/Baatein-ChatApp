@@ -1,14 +1,16 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { UserModel } from "../../models/UserModel";
 import ChatModel, { MessageModel, MessageStatus } from "../../models/ChatModel";
 import { Subscription } from "rxjs";
+import { UserService } from "../../services/user.service";
+import { TimeStampToDate } from "../../shared/functions";
 
 @Component( {
                 selector : "app-chat-item",
                 templateUrl : "./chat-item.component.html",
                 styleUrls : [ "./chat-item.component.scss" ]
             } )
-export class ChatItemComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ChatItemComponent implements OnInit, OnDestroy {
     
     @Input() currentUser : UserModel;
     @Input() chat : ChatModel;
@@ -17,19 +19,17 @@ export class ChatItemComponent implements OnInit, AfterViewInit, OnDestroy {
     userSub : Subscription;
     loading = true;
     
-    constructor() { }
+    constructor( private userService : UserService ) { }
     
-    ngOnInit() {}
-    
-    async ngAfterViewInit() {
-        const otherUserId = this.chat?.betweenIds?.filter( value => value !== this.currentUser?.uId )[0];
-        this.userSub = await this.chat?.between[otherUserId].get().then( value => {
-            this.loading = true;
-            if ( value.exists ) {
-                this.user = value.data();
+    async ngOnInit() {
+        if ( this.chat ) {
+            const otherUserId = this.chat?.betweenIds?.filter( value => value !== this.currentUser?.uId )[0];
+            const docs = await this.userService.fetchUserByUId( otherUserId ).get();
+            if ( !docs.empty ) {
+                this.user = await docs.docs[0].data();
             }
             this.loading = false;
-        } );
+        }
     }
     
     ngOnDestroy() : void {
@@ -41,7 +41,7 @@ export class ChatItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     
     getAltImageName() : string {
-        return this.user?.profilePic.toString() || "Default Profile Picture";
+        return this.user?.profilePic?.toString() || "Default Profile Picture";
     }
     
     getUserAvatar() : string {
@@ -50,6 +50,10 @@ export class ChatItemComponent implements OnInit, AfterViewInit, OnDestroy {
     
     getUnreadMessages() : number {
         return this.chat?.messages.filter(
-            ( message : MessageModel ) => message.toId === this.currentUser.uId && message.status === MessageStatus.sent ).length;
+            ( message : MessageModel ) => message?.toId === this.currentUser?.uId && message?.status === MessageStatus?.sent ).length;
+    }
+    
+    getDate( stamp ) {
+        return TimeStampToDate( stamp );
     }
 }

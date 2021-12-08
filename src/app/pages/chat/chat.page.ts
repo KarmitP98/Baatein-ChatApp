@@ -41,11 +41,15 @@ export class ChatPage implements OnInit, OnDestroy {
                                 this.newChat = false;
                             } else {
                                 this.newChat = true;
-                                this.chat = startANewConversation( this.currentUser, this.otherUser );
+                                this.chat = startANewConversation( this.currentUser, this.otherUser,
+                                                                   this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
+                                                                   this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
                             }
                         } else {
                             this.newChat = true;
-                            this.chat = startANewConversation( this.currentUser, this.otherUser );
+                            this.chat = startANewConversation( this.currentUser, this.otherUser,
+                                                               this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
+                                                               this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
                         }
                         this.loading = false;
                     } );
