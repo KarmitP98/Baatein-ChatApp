@@ -20,6 +20,7 @@ export class SettingsPage implements OnInit, OnDestroy {
     constructor( private authService : AuthService, private store : Store<RootState>, private userService : UserService ) { }
     
     ngOnInit() {
+        // Fetch the value of current user from the store.
         this.userSub = this.store.select( "user" ).subscribe( value => {
             if ( value?.user ) {
                 this.currentUser = { ...value.user };
@@ -34,11 +35,16 @@ export class SettingsPage implements OnInit, OnDestroy {
         }
     }
     
-    
+    /**
+     * Logout the user and perform the necessary steps to navigate the login.
+     */
     async logout() {
         await this.authService.logOut();
     }
     
+    /**
+     * Update user in the system.
+     */
     updateUser = async () => {
         await this.userService.updateUser( this.currentUser );
     };

@@ -10,6 +10,12 @@ export class LoginGuard implements CanActivate {
     
     constructor( private afa : AngularFireAuth, private router : Router ) {}
     
+    /**
+     * Can Activate guard for login page.
+     * Navigate to home page if user already logged in else, navigate to login.
+     * @param route
+     * @param state
+     */
     canActivate(
         route : ActivatedRouteSnapshot,
         state : RouterStateSnapshot ) : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

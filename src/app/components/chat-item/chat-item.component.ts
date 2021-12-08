@@ -42,27 +42,48 @@ export class ChatItemComponent implements OnInit, OnDestroy {
         }
     }
     
+    /**
+     * Get the last message in the chat
+     */
     getLastMessage() : MessageModel {
         return this.chat?.messages?.slice().pop();
     }
     
+    /**
+     * Get Image Alt for user profile Picture
+     */
     getAltImageName() : string {
         return this.user?.profilePic?.toString() || "Default Profile Picture";
     }
     
+    /**
+     * Get User Avatar
+     */
     getUserAvatar() : string {
         return this.user?.profilePic || "assets/Avatars/user-default.jpg";
     }
     
+    /**
+     * Get unread message length
+     */
     getUnreadMessages() : number {
         return this.chat?.messages.filter(
             ( message : MessageModel ) => message?.toId === this.currentUser?.uId && message?.status === MessageStatus?.sent ).length;
     }
     
+    /**
+     * Get Date
+     * @param stamp
+     */
     getDate( stamp ) {
         return TimeStampToDate( stamp );
     }
     
+    /**
+     * Limit Text to specified length.
+     * @param text
+     * @param number
+     */
     limitTo( text : string, number : number ) : any {
         const fullLength = text.length;
         if ( fullLength > number ) {
@@ -71,10 +92,17 @@ export class ChatItemComponent implements OnInit, OnDestroy {
         return text;
     }
     
+    /**
+     * Get Status Icon for the status
+     * @param status
+     */
     getStatusIcon( status ) : any {
         return getStatusIcon( status );
     }
     
+    /**
+     * Start and new chat with other user
+     */
     startChatWith = async () => {
         await this.store.dispatch( new StartChatAction( { with : { ...this.user } } ) );
         await this.router.navigate( [ "/", "chat" ] );

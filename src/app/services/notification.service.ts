@@ -10,12 +10,18 @@ export class NotificationService {
     
     constructor( private tc : ToastController ) { }
     
-    
+    /**
+     * Show a toast message with provided options
+     * @param toastOptions
+     */
     showToast = async ( toastOptions : ToastOptions ) => {
         this.toast = await this.tc.create( { ...toastOptions, position : "bottom" } );
         await this.toast.present();
     };
     
+    /**
+     * Dismiss the currently active toast.
+     */
     hideToast = () => {
         this.toast.dismiss();
     };

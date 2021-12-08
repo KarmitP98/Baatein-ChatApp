@@ -20,11 +20,11 @@ export class ContactsPage implements OnInit, OnDestroy {
     constructor( private userService : UserService, private store : Store<RootState> ) { }
     
     async ngOnInit() {
-        // Get current user id
+        // Get current user id from the store.
         this.sub = this.store.select( "user" ).subscribe( data => {
             if ( data?.user ) {
                 this.currentUserId = data?.user?.uId;
-                // Load all the user
+                // Load users that do not match current user's id
                 this.userService.fetchUserByAttribute( "uId", "!=", this.currentUserId ).get().then( value => {
                     if ( !value?.empty ) {
                         this.contacts = value.docs.map( doc => doc.data() );

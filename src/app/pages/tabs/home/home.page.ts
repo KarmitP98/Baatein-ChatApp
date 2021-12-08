@@ -22,9 +22,11 @@ export class HomePage implements OnInit, OnDestroy {
     constructor( private store : Store<RootState>, private chatService : ChatService ) { }
     
     ngOnInit() {
+        // Fetch the value of current user from the store.
         this.userSub = this.store.select( "user" ).subscribe( user => {
             if ( user?.user ) {
                 this.currentUser = user.user;
+                // Fetch all the chats that have current user's uid in the betweenIds array
                 this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", this.currentUser.uId )
                     .onSnapshot( snap => {
                         if ( !snap.empty ) {
