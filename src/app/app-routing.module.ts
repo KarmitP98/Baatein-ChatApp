@@ -17,7 +17,12 @@ const routes : Routes = [
     {
         path : "chat",
         loadChildren : () => import("./pages/chat/chat.module").then( m => m.ChatPageModule )
+    },
+    {
+        path : "**",
+        loadChildren : () => import("./pages/page-not-found/page-not-found.module").then( m => m.PageNotFoundPageModule )
     }
+
 ];
 
 @NgModule( {
