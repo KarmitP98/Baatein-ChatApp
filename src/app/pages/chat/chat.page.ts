@@ -31,7 +31,6 @@ export class ChatPage implements OnInit, OnDestroy {
             if ( state ) {
                 this.currentUser = state.user.user;
                 this.otherUser = state.chat.with;
-                
                 if ( this.currentUser && this.otherUser ) {
                     this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).onSnapshot( snap => {
                         if ( !snap.empty ) {
