@@ -26,7 +26,7 @@
                     <br>
                     <br>
                     <div class = "message">
-                       Already have an account?
+                        Already have an account?
                         <strong routerLink = "/login">Login!</strong>
                     </div>
                     <br>
@@ -72,14 +72,15 @@
                     <br>
                     <ion-button [disabled] = "processing" color = "success"
                                 size = "block" type = "submit">
-                        <app-loader *ngIf="processing"></app-loader>
+                        <app-loader *ngIf = "processing"></app-loader>
                         Signup
                     </ion-button>
                 </form>
             </div>
-            <ion-fab vertical="bottom" horizontal="start">
-                <ion-fab-button color="warning" (click)="slides.slidePrev()">
-                    <ion-icon name="chevron-back"></ion-icon>
+            <ion-fab horizontal = "start" vertical = "bottom">
+                <ion-fab-button (click) = "slides.slidePrev()"
+                                color = "warning">
+                    <ion-icon name = "chevron-back"></ion-icon>
                 </ion-fab-button>
             </ion-fab>
         </ion-slide>

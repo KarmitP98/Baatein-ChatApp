@@ -1,4 +1,4 @@
-ion-content{
+ion-content {
   height: 100%;
   display: flex;
   flex-flow: column;
@@ -7,13 +7,14 @@ ion-content{
     flex-flow: column;
   }
 
-  form{
+  form {
     width: 80%;
 
-    .message{
+    .message {
       text-align: center;
     }
   }
+
   img {
     width: auto;
     height: 20%;

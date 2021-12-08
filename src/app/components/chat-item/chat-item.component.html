@@ -1,7 +1,7 @@
 <div *ngIf = "loading" class = "loading-area">
     <app-loader></app-loader>
 </div>
-<div *ngIf = "!loading" class = "chat-item">
+<div (click) = "startChatWith()" *ngIf = "!loading" class = "chat-item">
     <div class = "chat">
         <div class = "user-avatar">
             <img [alt] = "getAltImageName()" [src] = "getUserAvatar()"
@@ -17,16 +17,20 @@
                 </div>
             </div>
             <div class = "middle">
-                <div *ngIf = "chat.type === 1" class = "user">
-                    {{getLastMessage().from}}
-                </div>
                 <div class = "message">
-                    {{getLastMessage().text}}
+                    <span *ngIf = "chat.type === 1" class = "user">
+                        {{getLastMessage().from}}
+                    </span>
+                    {{limitTo(getLastMessage().text, 35)}}
                 </div>
-                <div class = "unread">
-                    <div class = "unread-counter">
-                        {{getUnreadMessages() || ''}}
-                    </div>
+                <div class = "status">
+                    <img [src] = "getStatusIcon(getLastMessage()?.status)"
+                         alt = "Status Icon">
+                </div>
+            </div>
+            <div class = "unread">
+                <div class = "unread-counter">
+                    {{getUnreadMessages() || ''}}
                 </div>
             </div>
         </div>

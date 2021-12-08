@@ -60,7 +60,7 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
             const userExists = await this.userService.checkIfUserEmailExists( this.email );
             if ( userExists ) {
                 this.step = 0;
-                this.setEmailError("This email already has a registered account!")
+                this.setEmailError( "This email already has a registered account!" );
             } else {
                 this.step = 1;
                 await this.slides.slideNext();
