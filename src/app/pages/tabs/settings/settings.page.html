@@ -1,10 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Settings</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Settings</ion-title>
+        <ion-buttons slot = "end">
+            <button (click) = "logout()" color = "warn" mat-icon-button>
+                <mat-icon>logout</mat-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button (click) = "logout()" color = "danger" size = "block">Logout
-  </ion-button>
+<ion-content *ngIf = "!loading" class = "ion-padding ion-text-center">
+    <form #userForm = "ngForm" (ngSubmit) = "updateUser()">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input [(ngModel)] = "currentUser.name" id = "name" matInput
+                   name = "name"
+                   type = "text">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input [(ngModel)] = "currentUser.dob" id = "date" matInput
+                   name = "dob" type = "date">
+        </mat-form-field>
+        <ion-button size = "block" type = "submit">Save</ion-button>
+    </form>
 </ion-content>

@@ -6,6 +6,10 @@ import { UserModel } from "../models/UserModel";
 import { UserService } from "./user.service";
 import { HOME_PAGE_URL } from "../shared/constants";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { RootState } from "../store/root";
+import { setUserAction } from "../store/user/user.actions";
+import { SetAuthAction } from "../store/auth/auth.actions";
 import UserCredential = firebase.auth.UserCredential;
 
 @Injectable( {
@@ -15,7 +19,7 @@ export class AuthService {
     
     currentAuthUser : BehaviorSubject<UserCredential> = new BehaviorSubject<firebase.auth.UserCredential>( undefined );
     
-    constructor( private afa : AngularFireAuth, private us : UserService, private router : Router ) { }
+    constructor( private afa : AngularFireAuth, private us : UserService, private router : Router, private store : Store<RootState> ) { }
     
     signUpWithEmailAndPassword = async ( user : UserModel ) => {
         return new Promise( async ( resolve, reject ) => {
@@ -56,7 +60,9 @@ export class AuthService {
         return new Promise( async ( resolve, reject ) => {
             await this.afa.signOut()
                       .then( () => {
-                          resolve( true );
+                          resolve( this.router.navigate( [ "/" ] ) );
+                          this.store.dispatch( new setUserAction( undefined ) );
+                          this.store.dispatch( new SetAuthAction( undefined ) );
                       } )
                       .catch( error => {
                           reject( error );
