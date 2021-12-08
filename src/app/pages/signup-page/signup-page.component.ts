@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { UserModel } from "../../models/UserModel";
 import { IonSlides } from "@ionic/angular";
 import { UserService } from "../../services/user.service";
+import { NotificationService } from "../../services/notification.service";
 
 @Component( {
                 selector : "app-signup-page",
@@ -25,7 +26,7 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
     slideOptions = { initialSlide : 0 };
     showEmailError = undefined;
     
-    constructor( private authService : AuthService, private userService : UserService ) { }
+    constructor( private authService : AuthService, private userService : UserService, private ns : NotificationService ) { }
     
     async ngOnInit() {
     }
@@ -74,10 +75,7 @@ export class SignupPageComponent implements OnInit, AfterViewInit {
         return this.allowSlideForward;
     }
     
-    setEmailError = ( error : string, duration : number = 5000 ) => {
-        this.showEmailError = error;
-        setTimeout( () => {
-            this.showEmailError = undefined;
-        }, duration );
+    setEmailError = async ( error : string, duration : number = 5000 ) => {
+        await this.ns.showToast( { message : error, duration, color : "danger" } );
     };
 }

@@ -9,6 +9,7 @@ import { BehaviorSubject } from "rxjs";
 import { Store } from "@ngrx/store";
 import { RootState } from "../store/root";
 import { setUserAction } from "../store/user/user.actions";
+import { NotificationService } from "./notification.service";
 import WhereFilterOp = firebase.firestore.WhereFilterOp;
 
 @Injectable( {
@@ -20,7 +21,7 @@ export class UserService {
     emailCollection : AngularFirestoreCollection<{ email : string }> = this.afs.collection<{ email : string }>( "emails" );
     currentUser : BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>( undefined );
     
-    constructor( private afs : AngularFirestore, private router : Router, private store : Store<RootState> ) { }
+    constructor( private afs : AngularFirestore, private router : Router, private store : Store<RootState>, private ns : NotificationService ) { }
     
     /**
      * Create a new user on signup and navigate to dashboard
@@ -80,6 +81,7 @@ export class UserService {
                           resolve( true );
                           this.currentUser.next( user );
                           this.store.dispatch( new setUserAction( user ) );
+                          this.ns.showToast( { message : "User has been updated!", duration : 5000, color : "success" } );
                       } )
                       .catch( ( error ) => {
                           reject( error );
