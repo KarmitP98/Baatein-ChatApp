@@ -1,7 +1,9 @@
 import { UserModel } from "../models/UserModel";
 import ChatModel, { ChatType, MessageStatus } from "../models/ChatModel";
 import firebase from "firebase/compat";
+import { Reference } from "@angular/fire/compat/firestore";
 import Timestamp = firebase.firestore.Timestamp;
+import User = firebase.User;
 
 let toast;
 
@@ -13,9 +15,8 @@ export const addToLocal = async ( key, value ) => {
 };
 
 
-export const startANewConversation = ( currentUser : UserModel, otherUser : UserModel ) => {
-    return new ChatModel( [ getUserReference( currentUser.uId ), getUserReference( otherUser.uId ) ],
-                          [ currentUser.uId, otherUser.uId ], [], new Date(), ChatType.user );
+export const startANewConversation = ( currentUser : UserModel, otherUser : UserModel, currentUserRef : Reference<User>, otherUserRef : Reference<UserModel> ) => {
+    return new ChatModel( [ currentUserRef, otherUserRef ], [ currentUser.uId, otherUser.uId ], [], new Date(), ChatType.user );
 };
 
 export const getUserReference = ( uId : string ) => {

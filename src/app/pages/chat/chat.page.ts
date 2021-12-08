@@ -31,7 +31,6 @@ export class ChatPage implements OnInit, OnDestroy {
             if ( state ) {
                 this.currentUser = state.user.user;
                 this.otherUser = state.chat.with;
-                
                 if ( this.currentUser && this.otherUser ) {
                     this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).onSnapshot( snap => {
                         if ( !snap.empty ) {
@@ -41,11 +40,15 @@ export class ChatPage implements OnInit, OnDestroy {
                                 this.newChat = false;
                             } else {
                                 this.newChat = true;
-                                this.chat = startANewConversation( this.currentUser, this.otherUser );
+                                this.chat = startANewConversation( this.currentUser, this.otherUser,
+                                                                   this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
+                                                                   this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
                             }
                         } else {
                             this.newChat = true;
-                            this.chat = startANewConversation( this.currentUser, this.otherUser );
+                            this.chat = startANewConversation( this.currentUser, this.otherUser,
+                                                               this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
+                                                               this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
                         }
                         this.loading = false;
                     } );

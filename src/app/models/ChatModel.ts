@@ -44,7 +44,7 @@ export class MessageModel {
 
 export default class ChatModel {
     public cId : string;
-    public between : {}[];
+    public between : Reference<UserModel>[];
     public betweenIds : string[];
     public messages : MessageModel[];
     public name : string;
@@ -54,7 +54,7 @@ export default class ChatModel {
     public type : ChatType;
     
     
-    constructor( between : {}[], betweenIds : string[], messages : MessageModel[], createdAt : Date, type : ChatType ) {
+    constructor( between : Reference<UserModel>[], betweenIds : string[], messages : MessageModel[], createdAt : Date, type : ChatType ) {
         this.between = between;
         this.betweenIds = betweenIds;
         this.messages = messages;

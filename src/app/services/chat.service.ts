@@ -53,8 +53,15 @@ export class ChatService {
         return this.chatCollection;
     };
     
+    fetchChatByAttribute = ( attribute, condition : "<" | "<=" | "==" | "!=" | ">=" | ">" | "array-contains" | "in" | "array-contains-any" | "not-in", value : any ) => {
+        if ( attribute && condition && value ) {
+            return this.chatCollection.ref.where( attribute, condition, value );
+        }
+        return undefined;
+    };
+    
     fetchChatBetween = ( currentUser : string, otherUser : string ) => {
-        return this.chatCollection.ref.where( "betweenIds", "array-contains-any", [ currentUser, otherUser ] ).limit( 1 );
+        return this.chatCollection.ref.where( "betweenIds", "array-contains-any", [ currentUser, otherUser ] );
     };
     
 }

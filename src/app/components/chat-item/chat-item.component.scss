@@ -1,0 +1,64 @@
+.chat-item {
+  display: grid;
+  place-items: center;
+  padding: 1em;
+  width: 100%;
+
+  .chat {
+    display: grid;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    grid-template-rows: auto;
+    grid-template-columns: 20% auto;
+    width: 100%;
+
+    .user-avatar {
+      display: grid;
+      place-items: center;
+      padding: 1em;
+
+      img {
+        border-radius: 10px;
+      }
+    }
+
+    .data {
+      padding: 1em 1em 0 0;
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .user-name {
+          font-weight: 600;
+        }
+
+        .time {
+          font-weight: 600;
+          font-size: 0.75em;
+          color: #636363;
+        }
+      }
+
+      .middle {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        .message {
+          width: 90%;
+        }
+
+        .status {
+          text-align: right;
+
+          img {
+            height: 10px;
+          }
+        }
+      }
+    }
+  }
+}

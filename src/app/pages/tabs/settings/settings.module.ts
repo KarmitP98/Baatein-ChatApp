@@ -24,5 +24,5 @@ import { MatInputModule } from "@angular/material/input";
                    MatInputModule
                ],
                declarations : [ SettingsPage ]
-           })
+           } )
 export class SettingsPageModule {}

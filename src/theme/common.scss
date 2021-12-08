@@ -15,11 +15,11 @@ form, mat-form-field, input {
   width: 100%;
 }
 
-ion-content{
-  --background:linear-gradient(167.95deg, #D9E6FE 0%, rgba(251, 218, 248, 0.1) 150%);
+ion-content {
+  --background: linear-gradient(167.95deg, #D9E6FE 0%, rgba(251, 218, 248, 0.1) 150%);
 }
 
-ion-toolbar{
+ion-toolbar {
   --min-height: 10vh;
 }
 
@@ -38,7 +38,7 @@ ion-toolbar{
     border: none;
     font-weight: 600;
 
-    &::placeholder{
+    &::placeholder {
       color: rgba(87, 87, 87, 0.75);
     }
   }

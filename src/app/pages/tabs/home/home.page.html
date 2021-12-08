@@ -1,9 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-chat-item></app-chat-item>
+<ion-content *ngIf = "!loading">
+    <app-chat-item *ngFor = "let chat of chats" [chat] = "chat"
+                   [currentUser] = "currentUser"
+    ></app-chat-item>
 </ion-content>
