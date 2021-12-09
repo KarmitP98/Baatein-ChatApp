@@ -52,6 +52,9 @@ export class AppComponent implements OnInit, OnDestroy {
         if ( this.authSub ) {
             this.authSub.unsubscribe();
         }
+        if ( this.chatSub ) {
+            this.chatSub.unsubscribe();
+        }
     }
     
     fetchAuthState = () => {

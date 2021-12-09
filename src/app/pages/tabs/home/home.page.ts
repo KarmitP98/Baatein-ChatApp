@@ -27,14 +27,15 @@ export class HomePage implements OnInit, OnDestroy {
             if ( user?.user ) {
                 this.currentUser = user.user;
                 // Fetch all the chats that have current user's uid in the betweenIds array
-                this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", this.currentUser.uId )
-                    .onSnapshot( snap => {
-                        if ( !snap.empty ) {
-                            this.chats = snap.docs.map( doc => doc.data() );
-                        }
-                    } );
+                this.chatSub = this.store.select( "chat" ).subscribe( value => {
+                    if ( value?.allChats ) {
+                        this.chats = value.allChats;
+                    } else {
+                        this.chats = [];
+                    }
+                    this.loading = false;
+                } );
             }
-            this.loading = false;
         } );
     }
     
