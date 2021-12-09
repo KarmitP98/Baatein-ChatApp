@@ -9,7 +9,7 @@ export interface ChatState {
     allChats : ChatModel[];
 }
 
-const initialState : ChatState = {
+export const initialState : ChatState = {
     with : undefined,
     typing : undefined,
     currentChat : undefined,

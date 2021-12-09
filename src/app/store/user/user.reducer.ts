@@ -5,7 +5,7 @@ export interface UserState {
     user : UserModel;
 }
 
-const defaultState = {
+export const defaultState : UserState = {
     user : undefined
 };
 
