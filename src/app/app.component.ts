@@ -9,6 +9,9 @@ import { Subscription } from "rxjs";
 import { RemoveAuthAction, SetAuthAction } from "./store/auth/auth.actions";
 import firebase from "firebase/compat";
 import { RemoveUserAction, setUserAction } from "./store/user/user.actions";
+import { ChatService } from "./services/chat.service";
+import { RootState } from "./store/root";
+import { SetAllChatsAction } from "./store/chat/chat.actions";
 import User = firebase.User;
 
 @Component( {
@@ -19,6 +22,7 @@ import User = firebase.User;
 export class AppComponent implements OnInit, OnDestroy {
     
     authSub : Subscription = new Subscription( undefined );
+    chatSub : Subscription = new Subscription( undefined );
     loading : boolean = true;
     
     constructor(
@@ -26,8 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
         private splashScreen : SplashScreen,
         private statusBar : StatusBar,
         private afa : AngularFireAuth,
-        private store : Store<any>,
-        private userService : UserService
+        private store : Store<RootState>,
+        private userService : UserService,
+        private chatService : ChatService
     ) {
         this.fetchAuthState();
         this.initializeApp();
@@ -63,7 +68,14 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.store.dispatch( new RemoveAuthAction( undefined ) );
                 this.store.dispatch( new RemoveUserAction( undefined ) );
             }
-            this.loading = false;
+            this.chatSub = this.chatService.fetchAllChats().valueChanges().subscribe( ( chats ) => {
+                if ( chats?.length ) {
+                    this.store.dispatch( new SetAllChatsAction( [ ...chats ] ) );
+                } else {
+                    this.store.dispatch( new SetAllChatsAction( undefined ) );
+                }
+                this.loading = false;
+            } );
         } );
     };
     
