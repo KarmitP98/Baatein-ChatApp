@@ -1,6 +1,5 @@
 import { Action } from "@ngrx/store";
 import { UserModel } from "../../models/UserModel";
-import ChatModel from "../../models/ChatModel";
 
 export const START_CHAT = "START_CHAT";
 export const END_CHAT = "END_CHAT";
@@ -14,31 +13,31 @@ export const GET_CHAT = "GET_CHAT";
 export class StartChatAction implements Action {
     readonly type : string = START_CHAT;
     
-    constructor( public payload? : { with : UserModel } ) {}
+    constructor( public payload : { with : UserModel } ) {}
 }
 
 export class EndChatAction implements Action {
     readonly type : string = START_CHAT;
     
-    constructor( public payload? : any ) {}
+    constructor( public payload : any ) {}
 }
 
 export class SetAllChatsAction implements Action {
     readonly type : string = SET_ALL_CHATS;
     
-    constructor( public payload? : ChatModel[] ) {}
+    constructor( public payload : any ) {}
 }
 
 export class SetCurrentChatAction implements Action {
     readonly type : string = SET_CURRENT_CHAT;
     
-    constructor( public payload? : ChatModel ) {}
+    constructor( public payload : any ) {}
 }
 
 export class SetTypingAction implements Action {
     readonly type : string = SET_TYPING;
     
-    constructor( public payload? : UserModel ) {}
+    constructor( public payload : UserModel ) {}
 }
 
 export class GetChatAction implements Action {

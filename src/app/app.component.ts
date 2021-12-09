@@ -12,6 +12,7 @@ import { RemoveUserAction, setUserAction } from "./store/user/user.actions";
 import { ChatService } from "./services/chat.service";
 import { RootState } from "./store/root";
 import { SetAllChatsAction } from "./store/chat/chat.actions";
+import { UserModel } from "./models/UserModel";
 import User = firebase.User;
 
 @Component( {
@@ -58,12 +59,14 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     
     fetchAuthState = () => {
+        let user : UserModel = undefined;
         this.authSub = this.afa.authState.subscribe( async ( next : User ) => {
             if ( next ) {
                 const clone = Object.freeze( next );
                 this.store.dispatch( new SetAuthAction( clone ) );
                 await this.userService.fetchUserByUId( next.uid ).get().then( ( snapShot ) => {
                     if ( !snapShot.empty ) {
+                        user = snapShot.docs[0].data();
                         this.store.dispatch( new setUserAction( snapShot.docs[0].data() ) );
                     }
                 } );
@@ -71,14 +74,15 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.store.dispatch( new RemoveAuthAction( undefined ) );
                 this.store.dispatch( new RemoveUserAction( undefined ) );
             }
-            this.chatSub = this.chatService.fetchAllChats().valueChanges().subscribe( ( chats ) => {
-                if ( chats?.length ) {
-                    this.store.dispatch( new SetAllChatsAction( [ ...chats ] ) );
-                } else {
-                    this.store.dispatch( new SetAllChatsAction( undefined ) );
-                }
-                this.loading = false;
-            } );
+            this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", user.uId ).onSnapshot(
+                ( snap ) => {
+                    if ( !snap.empty ) {
+                        this.store.dispatch( new SetAllChatsAction( Object.freeze( [ ...snap.docs.map( doc => doc.data() ) ] ) ) );
+                    } else {
+                        this.store.dispatch( new SetAllChatsAction( undefined ) );
+                    }
+                    this.loading = false;
+                } );
         } );
     };
     
