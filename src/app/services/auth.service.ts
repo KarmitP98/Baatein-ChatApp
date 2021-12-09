@@ -8,8 +8,7 @@ import { HOME_PAGE_URL } from "../shared/constants";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { RootState } from "../store/root";
-import { setUserAction } from "../store/user/user.actions";
-import { SetAuthAction } from "../store/auth/auth.actions";
+import { ResetStoreAction } from "../store/root.actions";
 import UserCredential = firebase.auth.UserCredential;
 
 @Injectable( {
@@ -61,8 +60,7 @@ export class AuthService {
             await this.afa.signOut()
                       .then( () => {
                           resolve( this.router.navigate( [ "/" ] ) );
-                          this.store.dispatch( new setUserAction( undefined ) );
-                          this.store.dispatch( new SetAuthAction( undefined ) );
+                          this.store.dispatch( new ResetStoreAction() );
                       } )
                       .catch( error => {
                           reject( error );
