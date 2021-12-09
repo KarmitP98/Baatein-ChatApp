@@ -9,6 +9,7 @@ export const GET_CURRENT_CHAT = "GET_CURRENT_CHAT";
 export const SET_ALL_CHATS = "SET_ALL_CHATS";
 export const GET_ALL_CHATS = "GET_ALL_CHATS";
 export const SET_TYPING = "SET_TYPING";
+export const GET_CHAT = "GET_CHAT";
 
 export class StartChatAction implements Action {
     readonly type : string = START_CHAT;
@@ -40,9 +41,16 @@ export class SetTypingAction implements Action {
     constructor( public payload? : UserModel ) {}
 }
 
+export class GetChatAction implements Action {
+    readonly type : string = GET_CHAT;
+    
+    constructor( public payload : { with? : string, cId? : string } ) {}
+}
+
 export type ChatActions =
     StartChatAction
     | EndChatAction
     | SetTypingAction
     | SetAllChatsAction
     | SetCurrentChatAction
+    | GetChatAction
