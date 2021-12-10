@@ -28,11 +28,9 @@
                          alt = "Status Icon">
                 </div>
             </div>
-            <div class = "unread">
-                <div class = "unread-counter">
-                    {{getUnreadMessages() || ''}}
-                </div>
-            </div>
+            <span *ngIf = "getUnreadMessages()" class = "unread">
+                {{getUnreadMessages() || ''}}
+            </span>
         </div>
     </div>
 </div>
