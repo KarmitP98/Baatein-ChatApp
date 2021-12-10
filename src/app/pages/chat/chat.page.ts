@@ -135,6 +135,8 @@ export class ChatPage implements OnInit, OnDestroy {
                 value => {
                     if ( value.fromId === this.otherUser.uId && value.status === MessageStatus.sent ) {
                         value.status = MessageStatus.seen;
+                        value.updatedAt = new Date();
+                        value.lastUpdatedAt = new Date();
                     }
                     return value;
                 } );
