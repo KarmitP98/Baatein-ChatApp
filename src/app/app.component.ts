@@ -78,7 +78,8 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", user.uId ).onSnapshot(
                     ( snap ) => {
                         if ( !snap.empty ) {
-                            this.store.dispatch( new SetAllChatsAction( Object.freeze( [ ...snap.docs.map( doc => doc.data() ) ] ) ) );
+                            this.store.dispatch( new SetAllChatsAction( Object.freeze(
+                                [ ...snap.docs.map( doc => doc.data() ).sort( ( a, b ) => a.updatedAt > b.updatedAt ? -1 : 1 ) ] ) ) );
                         } else {
                             this.store.dispatch( new SetAllChatsAction( undefined ) );
                         }
