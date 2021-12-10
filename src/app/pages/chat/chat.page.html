@@ -19,6 +19,11 @@
         <div class = "inputArea">
             <form #inputForm = "ngForm" (ngSubmit) = "handleSubmit()">
                 <div class = "inputField">
+                    <button (click) = "text = ''" mat-icon-button
+                            type = "button">
+                        <img alt = "Cancel Icon"
+                             src = "assets/clear.svg">
+                    </button>
                     <input (keypress) = "$event.code === 'enter' ?
                            handleSubmit(): undefined" [(ngModel)] = "text"
                            class = "textInput"
@@ -27,7 +32,8 @@
                            placeholder = "Start chatting..."
                            type = "text">
                     <button mat-icon-button type = "submit">
-                        <ion-icon color = "primary" name = "send"></ion-icon>
+                        <img alt = "Send Icon" src = "assets/send-light.svg">
+                        <!--                        <ion-icon color = "primary" name = "send"></ion-icon>-->
                     </button>
                 </div>
             </form>

@@ -21,7 +21,7 @@
                     <span *ngIf = "chat.type === 1" class = "user">
                         {{getLastMessage().from}}
                     </span>
-                    {{limitTo(getLastMessage().text, 35)}}
+                    {{limitTo(getLastMessage().text, 30)}}
                 </div>
                 <div class = "status">
                     <img [src] = "getStatusIcon(getLastMessage()?.status)"
