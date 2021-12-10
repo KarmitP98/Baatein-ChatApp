@@ -33,7 +33,7 @@ export class ChatService {
      */
     updateChat = ( chat : ChatModel ) => {
         return new Promise( async ( resolve, reject ) => {
-            await this.chatCollection.doc( chat.cId ).update( { ...chat } )
+            await this.chatCollection.doc( chat.cId ).update( { ...chat, updatedAt : new Date() } )
                       .then( () => {
                           resolve( true );
                       } )
@@ -65,7 +65,7 @@ export class ChatService {
      * Fetch all chats in the database
      */
     fetchAllChats = () => {
-        return this.chatCollection;
+        return this.chatCollection.ref.orderBy( "updatedAt" );
     };
     
     /**
@@ -76,7 +76,7 @@ export class ChatService {
      */
     fetchChatByAttribute = ( attribute, condition : "<" | "<=" | "==" | "!=" | ">=" | ">" | "array-contains" | "in" | "array-contains-any" | "not-in", value : any ) => {
         if ( attribute && condition && value ) {
-            return this.chatCollection.ref.where( attribute, condition, value );
+            return this.chatCollection.ref.where( attribute, condition, value ).orderBy( "updatedAt" );
         }
         return undefined;
     };
@@ -88,7 +88,7 @@ export class ChatService {
      * @param otherUser
      */
     fetchChatBetween = ( currentUser : string, otherUser : string ) => {
-        return this.chatCollection.ref.where( "betweenIds", "array-contains-any", [ currentUser, otherUser ] );
+        return this.chatCollection.ref.where( "betweenIds", "array-contains-any", [ currentUser, otherUser ] ).orderBy( "updatedAt" );
     };
     
 }
