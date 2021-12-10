@@ -53,6 +53,7 @@ export class ChatPage implements OnInit, OnDestroy {
                     
                     if ( allChatsWithCurrentUser?.length === 1 ) {
                         this.chat = allChatsWithCurrentUser[0];
+                        this.updateMessageStatus();
                         this.newChat = false;
                     } else {
                         this.newChat = true;
@@ -125,6 +126,19 @@ export class ChatPage implements OnInit, OnDestroy {
                               this.text = "";
                           } );
             }
+        }
+    };
+    
+    updateMessageStatus = () => {
+        if ( this.chat.messages.some( value => value.fromId === this.otherUser.uId && value.status === MessageStatus.sent ) ) {
+            const messages = this.chat.messages.map(
+                value => {
+                    if ( value.fromId === this.otherUser.uId && value.status === MessageStatus.sent ) {
+                        value.status = MessageStatus.seen;
+                    }
+                    return value;
+                } );
+            this.chatService.updateChat( { ...this.chat, messages } );
         }
     };
     

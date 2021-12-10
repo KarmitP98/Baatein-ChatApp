@@ -74,15 +74,19 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.store.dispatch( new RemoveAuthAction( undefined ) );
                 this.store.dispatch( new RemoveUserAction( undefined ) );
             }
-            this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", user.uId ).onSnapshot(
-                ( snap ) => {
-                    if ( !snap.empty ) {
-                        this.store.dispatch( new SetAllChatsAction( Object.freeze( [ ...snap.docs.map( doc => doc.data() ) ] ) ) );
-                    } else {
-                        this.store.dispatch( new SetAllChatsAction( undefined ) );
-                    }
-                    this.loading = false;
-                } );
+            if ( user ) {
+                this.chatService.fetchChatByAttribute( "betweenIds", "array-contains", user.uId ).onSnapshot(
+                    ( snap ) => {
+                        if ( !snap.empty ) {
+                            this.store.dispatch( new SetAllChatsAction( Object.freeze( [ ...snap.docs.map( doc => doc.data() ) ] ) ) );
+                        } else {
+                            this.store.dispatch( new SetAllChatsAction( undefined ) );
+                        }
+                        this.loading = false;
+                    } );
+            } else {
+                this.loading = false;
+            }
         } );
     };
     
