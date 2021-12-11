@@ -3,25 +3,96 @@
   align-items: center;
   padding: 1em;
   justify-content: flex-start;
+  gap: 0.5em;
 
-  &.current {
-    justify-content: flex-end;
-
-    //.message{
-    //  transform-origin: right bottom !important;
-    //}
+  .dot {
+    padding: 0.5em;
+    background: #DFFDE7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    align-self: flex-end;
+    border-radius: 50%;
+    opacity: 0;
   }
 
+  &.first {
+    padding-bottom: 0.2em;
+
+    .message {
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+  }
+
+  &.middle {
+    padding: 0.2em 1em;
+
+    .message {
+      border-radius: 10px;
+    }
+  }
+
+  &.moreLast {
+    padding-top: 0.2em;
+
+    .message {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+  }
+
+  &.last, &.moreLast {
+    .dot {
+      opacity: 1;
+    }
+  }
+
+  &.moreLast, &.middle {
+    .message {
+      .upper {
+        display: none;
+      }
+    }
+  }
+
+  &.first, &.middle {
+    .message {
+      .bottom {
+        display: none;
+      }
+    }
+  }
+
+  &.current {
+    flex-flow: row-reverse;
+
+    .message, .dot {
+      background: #E8ECFF;
+    }
+
+    .message {
+      .upper {
+        flex-flow: row-reverse;
+      }
+
+      .content {
+        text-align: right;
+      }
+
+      .bottom {
+        flex-flow: row;
+      }
+    }
+  }
+
+
   .message {
-    background: white;
+    background: #DFFDE7;
     padding: 1em;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     min-width: 40%;
     position: relative;
     max-width: 90%;
-    //animation: load 0.25s cubic-bezier(.41,.03,.21,1.01);
-    //transform-origin: left bottom !important;
 
     .upper {
       display: flex;
@@ -32,6 +103,18 @@
         font-weight: 600;
         color: rgba(0, 0, 0, 1);
       }
+    }
+
+    .content {
+      padding: 0.5em 0;
+      word-break: break-word;
+      text-overflow: ellipsis;
+    }
+
+    .bottom {
+      display: flex;
+      flex-flow: row-reverse;
+      align-items: center;
 
       .sent {
         font-size: 0.75em;
@@ -45,23 +128,5 @@
         }
       }
     }
-
-    .content {
-      padding: 0.5em 0;
-      word-break: break-word;
-      text-overflow: ellipsis;
-    }
   }
 }
-
-//@keyframes load {
-//  0%{
-//    transform: scale(0);
-//  }
-//  80%{
-//    transform: scale(1.2);
-//  }
-//  100%{
-//    transform: scale(1);
-//  }
-//}

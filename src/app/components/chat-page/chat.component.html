@@ -6,9 +6,11 @@
         <img alt = "Chat" src = "assets/chat.svg">
     </div>
     <div *ngIf = "!isChatEmpty()" class = "messages">
-        <app-message *ngFor = "let message of getMessages()"
+        <app-message *ngFor = "let message of getMessages(); let i = index;
+        let c = count"
                      [current] = "message.fromId === this.currentUser.uId"
                      [message] = "message"
+                     [pos] = "getMessagePosition(message, i, c)"
                      [user] = "getUser(message.fromId)"
         ></app-message>
         <div id = "bottom"></div>
