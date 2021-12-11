@@ -13,6 +13,7 @@ export class MessageComponent implements OnInit {
     @Input() message : MessageModel;
     @Input() user : UserModel;
     @Input() current : boolean = false;
+    @Input( "pos" ) messagePosition : string = "last";
     
     constructor() { }
     
@@ -34,4 +35,7 @@ export class MessageComponent implements OnInit {
         return getStatusIcon( this.message.status );
     };
     
+    isLastMessage() : boolean {
+        return this.messagePosition === "last";
+    }
 }

@@ -1,16 +1,20 @@
-<div [ngClass] = "{'current':current}" class = "messageArea">
+<div [className] = "messagePosition" [ngClass] = "{'current':current}"
+     class = "messageArea">
+    <div class = "dot"></div>
     <div class = "message">
         <div class = "upper">
             <div class = "user-name">{{user.name}}</div>
+        </div>
+        <div class = "content">
+            {{message.text}}
+        </div>
+        <div class = "bottom">
             <div class = "sent">
                 {{getDate(message.lastUpdatedAt) | date:'shortTime'}}
                 <span class = "status">
                     <img [src] = "getStatusIcon()" alt = "Status Icon">
                 </span>
             </div>
-        </div>
-        <div class = "content">
-            {{message.text}}
         </div>
     </div>
 </div>

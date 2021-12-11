@@ -69,4 +69,17 @@ export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
         const bottom = document.getElementById( "bottom" );
         bottom?.scrollIntoView( { behavior : "smooth" } );
     };
+    
+    getMessagePosition( message : MessageModel, i : number, c : number ) : any {
+        const senderIds = this.chat.messages?.map( message => message.fromId );
+        if ( senderIds[i] === senderIds[i - 1] && senderIds[i] === senderIds[i + 1] ) {
+            return "middle";
+        } else if ( senderIds[i] !== senderIds[i - 1] && senderIds[i] === senderIds[i + 1] ) {
+            return "first";
+        } else if ( senderIds[i] === senderIds[i - 1] && senderIds[i] !== senderIds[i + 1] ) {
+            return "moreLast";
+        } else {
+            return "last";
+        }
+    }
 }
