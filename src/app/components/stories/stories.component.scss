@@ -1,0 +1,30 @@
+.stories {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  height: fit-content;
+  padding: 2em;
+  gap: 2em;
+  overflow-x: scroll;
+  position: relative;
+
+  .addStory {
+    position: relative;
+    width: 100px;
+    height: 160px;
+    background: black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    display: flex;
+
+    button {
+      bottom: 2%;
+      left: 2%;
+      background: #2dd36f;
+
+      ion-icon {
+        color: white;
+      }
+    }
+  }
+}

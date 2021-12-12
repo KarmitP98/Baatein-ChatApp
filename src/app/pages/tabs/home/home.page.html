@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content *ngIf = "!loading">
+    <app-stories></app-stories>
     <app-chat-item *ngFor = "let chat of chats" [chat] = "chat"
                    [currentUser] = "currentUser"
     ></app-chat-item>
