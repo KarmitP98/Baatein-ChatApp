@@ -1,6 +1,8 @@
 <div *ngIf = "!loading" class = "story">
-    <div class = "storyArea" matRipple>
-        <div class = "profilePic">
+    <div [class.add] = "type === 'add'" class = "storyArea"
+         matRipple>
+        <div [style] = "{background: 'url('+getUserProfilePic()}"
+             class = "profilePic">
         </div>
         <button *ngIf = "type==='add'" class = "addButton" mat-icon-button>
             <ion-icon name = "add" size = "large"></ion-icon>
