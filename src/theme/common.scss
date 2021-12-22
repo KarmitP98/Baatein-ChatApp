@@ -15,12 +15,28 @@ form, mat-form-field, input {
   width: 100%;
 }
 
+ion-header {
+  background: linear-gradient(167.95deg, #D9E6FE 0%, rgba(251, 218, 248, 0.1) 150%);
+
+  ion-toolbar, ion-title {
+    background: transparent !important;
+  }
+}
+
+
 ion-content {
   --background: linear-gradient(167.95deg, #D9E6FE 0%, rgba(251, 218, 248, 0.1) 150%);
 }
 
+ion-header::after {
+  background-image: none;
+  //--box-shadow: none;
+  //--border: none
+}
+
 ion-toolbar {
   --min-height: 10vh;
+  --border: none;
 }
 
 .input-area {

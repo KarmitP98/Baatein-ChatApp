@@ -49,4 +49,7 @@ export class HomePage implements OnInit, OnDestroy {
     }
     
     
+    getCurrentUserAvatar() : string {
+        return this.currentUser.profilePic || "assets/Avatars/user-default.jpg";
+    }
 }
