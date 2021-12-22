@@ -20,11 +20,10 @@ ion-content {
   }
 
   .form {
-    flex: 1 0 100%;
     background: white;
-    padding: 2em;
     opacity: 1;
     animation: load-bottom 0.25s ease-in-out;
+    padding: 2em 2em 12vh;
   }
 }
 

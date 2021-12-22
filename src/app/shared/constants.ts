@@ -14,19 +14,19 @@ export const sanitize = ( value : string ) => {
 
 
 export const ALL_AVATARS = [
-    getAvatarLocation( "andy.jpg" ),
-    getAvatarLocation( "angela.jpg" ),
-    getAvatarLocation( "creed.jpg" ),
+    getAvatarLocation( "andy.png" ),
+    getAvatarLocation( "angela.png" ),
+    getAvatarLocation( "creed.png" ),
     getAvatarLocation( "darryl.png" ),
-    getAvatarLocation( "dwight.jpg" ),
+    getAvatarLocation( "dwight.png" ),
     getAvatarLocation( "jim.png" ),
-    getAvatarLocation( "kelly.jpg" ),
+    getAvatarLocation( "kelly.png" ),
     getAvatarLocation( "kevin.png" ),
     getAvatarLocation( "micheal.png" ),
-    getAvatarLocation( "oscar.jpg" ),
-    getAvatarLocation( "pam.jpg" ),
-    getAvatarLocation( "phyllis.jpg" ),
+    getAvatarLocation( "oscar.png" ),
+    getAvatarLocation( "pam.png" ),
+    getAvatarLocation( "phyllis.png" ),
     getAvatarLocation( "ryan.png" ),
-    getAvatarLocation( "stanley.jpg" ),
-    getAvatarLocation( "toby.jpg" )
+    getAvatarLocation( "stanley.png" ),
+    getAvatarLocation( "toby.png" )
 ];
