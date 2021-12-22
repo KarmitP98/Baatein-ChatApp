@@ -12,10 +12,10 @@
              *ngFor = "let avatar of allAvatars;" [class.selected] = "avatar
              === selectedProfilePicture"
              class = "avatar">
-            <!--            <div class = "selector">-->
-            <!--                <ion-icon name = "checkmark-circle" color="success"-->
-            <!--                          size="large"></ion-icon>-->
-            <!--            </div>-->
+            <div class = "selector">
+                <ion-icon color = "success" name = "checkmark-circle"
+                          size = "large"></ion-icon>
+            </div>
             <img [src] = "avatar" alt = "Avatar">
         </div>
     </div>
