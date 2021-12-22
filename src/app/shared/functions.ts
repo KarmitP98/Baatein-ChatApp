@@ -42,3 +42,8 @@ export const getStatusIcon = ( status ) => {
             return undefined;
     }
 };
+
+
+export const getAvatarLocation = ( fileName : string ) => {
+    return `assets/Avatars/${ fileName }`;
+};

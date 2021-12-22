@@ -1,9 +1,8 @@
-<svg fill = "none" height = "33" viewBox = "0 0 33 33" width = "33"
+<svg fill = "none" height = "24" viewBox = "0 0 24 24" width = "24"
      xmlns = "http://www.w3.org/2000/svg">
-    <circle cx = "16.5" cy = "16.5" fill = "#E93C3C" fill-opacity = "0.5"
-            r = "15.5" stroke = "#FF0000" stroke-linecap = "round"/>
-    <line stroke = "#FF0000" stroke-linecap = "round" stroke-width = "1.5"
-          x1 = "8.49462" x2 = "24.3962" y1 = "8.01886" y2 = "23.9205"/>
-    <line stroke = "#FF0000" stroke-linecap = "round" stroke-width = "1.5"
-          x1 = "8.60376" x2 = "24.5054" y1 = "23.9205" y2 = "8.01886"/>
+    <circle cx = "12" cy = "12" fill = "#EB445A" r = "12"/>
+    <line stroke = "white" stroke-linecap = "round" stroke-width = "1.5"
+          x1 = "6.0418" x2 = "18.1132" y1 = "5.43396" y2 = "17.5054"/>
+    <line stroke = "white" stroke-linecap = "round" stroke-width = "1.5"
+          x1 = "5.88678" x2 = "17.9582" y1 = "17.5054" y2 = "5.43397"/>
 </svg>

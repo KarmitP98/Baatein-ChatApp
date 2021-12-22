@@ -9,8 +9,17 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf = "!loading" class = "ion-padding ion-text-center">
-    <form #userForm = "ngForm" (ngSubmit) = "updateUser()">
+<ion-content *ngIf = "!loading" class = "ion-text-center">
+    <div class = "profilePic">
+        <ion-fab [edge] = "true" horizontal = "end" vertical = "bottom">
+            <ion-fab-button (click) = "selectAvatar()">
+                <ion-icon name = "image"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <img [src] = "currentAvatar || currentUser.profilePic || 'assets/Avatars/user-default.jpg'"
+             alt = "Avatar" class = "profile">
+    </div>
+    <form #userForm = "ngForm" (ngSubmit) = "updateUser()" class = "form">
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input [(ngModel)] = "currentUser.name" id = "name" matInput

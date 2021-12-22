@@ -11,6 +11,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import { AvatarSelectorComponent } from "../../../components/avatar-selector/avatar-selector.component";
 
 @NgModule( {
                imports : [
@@ -23,6 +24,6 @@ import { MatInputModule } from "@angular/material/input";
                    MatIconModule,
                    MatInputModule
                ],
-               declarations : [ SettingsPage ]
+               declarations : [ SettingsPage, AvatarSelectorComponent ]
            } )
 export class SettingsPageModule {}

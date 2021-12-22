@@ -1,25 +1,30 @@
+$current-background: var(--ion-color-warning);
+$other-background: var(--ion-color-success);
+$current-color: white;
+
+
 .messageArea {
   display: flex;
   align-items: center;
   padding: 1em;
   justify-content: flex-start;
-  gap: 0.5em;
 
   .dot {
     padding: 0.5em;
-    background: #DFFDE7;
+    background: $other-background;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    align-self: flex-end;
+    align-self: flex-start;
     border-radius: 50%;
     opacity: 0;
+    margin: 0 0.5em;
   }
 
   &.first {
     padding-bottom: 0.2em;
 
     .message {
-      border-bottom-right-radius: 10px;
-      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: var(--border-radius-xsmall);
+      border-bottom-left-radius: var(--border-radius-xsmall);
     }
   }
 
@@ -27,7 +32,7 @@
     padding: 0.2em 1em;
 
     .message {
-      border-radius: 10px;
+      border-radius: var(--border-radius-xsmall);
     }
   }
 
@@ -35,12 +40,12 @@
     padding-top: 0.2em;
 
     .message {
-      border-top-right-radius: 10px;
-      border-top-left-radius: 10px;
+      border-top-right-radius: var(--border-radius-xsmall);
+      border-top-left-radius: var(--border-radius-xsmall);
     }
   }
 
-  &.last, &.moreLast {
+  &.last, &.first {
     .dot {
       opacity: 1;
     }
@@ -66,10 +71,8 @@
     flex-flow: row-reverse;
 
     .message, .dot {
-      background: #E8ECFF;
-    }
+      background: $current-background;
 
-    .message {
       .upper {
         flex-flow: row-reverse;
       }
@@ -77,19 +80,15 @@
       .content {
         text-align: right;
       }
-
-      .bottom {
-        flex-flow: row;
-      }
     }
   }
 
 
   .message {
-    background: #DFFDE7;
-    padding: 1em;
+    background: $other-background;
+    padding: 1em 1em 0.5em 1em;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: var(--border-radius-small);
     min-width: 40%;
     position: relative;
     max-width: 90%;
@@ -101,7 +100,7 @@
 
       .user-name {
         font-weight: 600;
-        color: rgba(0, 0, 0, 1);
+        color: black;
       }
     }
 
@@ -119,7 +118,7 @@
       .sent {
         font-size: 0.75em;
         font-weight: 600;
-        color: #636363;
+        color: rgba(#1e2023, 0.75);
 
         .status {
           img {
