@@ -1,3 +1,7 @@
+$story-width: 5rem;
+$story-height: $story-width * 1.6;
+$story-font: $story-width / 6;
+
 .story {
   display: grid;
   place-items: center;
@@ -6,11 +10,10 @@
 
   .storyArea {
     position: relative;
-    width: 100px;
-    aspect-ratio: 1 / 1.6;
+    width: $story-width;
+    height: $story-height;
     background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: var(--border-radius-small);
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -29,6 +32,7 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         color: #1e2023;
+        font-size: $story-font;
         text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
       }
     }
@@ -45,7 +49,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(to bottom, transparent 25%, rgba(0, 0, 0, 0.95) 100%);
+        background-image: var(--background-filter-fade-bottom);
       }
 
       img {

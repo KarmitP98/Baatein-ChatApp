@@ -7,8 +7,7 @@
   .chat {
     display: grid;
     background: linear-gradient(274.2deg, #DDDDDD 0%, rgba(255, 255, 255, 0.83) 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: var(--border-radius-small);
     grid-template-rows: auto;
     grid-template-columns: 20% auto;
     width: 100%;
@@ -20,7 +19,7 @@
       padding: 1em;
 
       img {
-        border-radius: 10px;
+        border-radius: var(--border-radius-xsmall);
       }
     }
 

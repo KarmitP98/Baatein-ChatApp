@@ -74,4 +74,18 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --border-radius-large: 2em;
+  --border-radius-medium: calc(var(--border-radius-large) * 0.5);
+  --border-radius-small: calc(var(--border-radius-large) * 0.25);
+  --border-radius-xsmall: calc(var(--border-radius-large) * 0.125);
+
+  --box-shadow-medium: 0 2px 8px;
+  --box-shadow-small: 0 1px 6px;
+  --black-box-shadow-medium: var(--box-shadow-medium) rgba(0, 0, 0, 0.1);
+  --black-box-shadow-small: var(--box-shadow-small) rgba(0, 0, 0, 0.1);
+
+  --background-filter-fade-bottom: linear-gradient(to bottom, transparent 25%, rgba(0, 0, 0, 0.95) 120%)
+
+
 }
