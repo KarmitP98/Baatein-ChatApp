@@ -1,6 +1,8 @@
 .story {
   display: grid;
   place-items: center;
+  height: 100%;
+  width: 100%;
 
   .storyArea {
     position: relative;
@@ -11,23 +13,45 @@
     border-radius: 20px;
     display: grid;
     place-items: center;
+    cursor: pointer;
 
     &.add {
-      background: white;
+      background-image: linear-gradient(to right bottom, #3880ff, #00a3ff, #00bbee, #00cab1, #2dd36f);
+      text-align: center;
 
       .profilePic {
         display: none;
+      }
+
+      .text {
+        font-weight: 700;
+        line-height: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #1e2023;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
       }
     }
 
     .profilePic {
       width: 100%;
-      min-height: 50%;
-      max-height: 100%;
-      height: fit-content;
-      background-size: cover !important;
-      background-position: center !important;
-      background-repeat: no-repeat !important;
+      height: 100%;
+      position: relative;
+      display: grid;
+      place-items: center;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, transparent 25%, rgba(0, 0, 0, 0.95) 100%);
+      }
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .addButton {

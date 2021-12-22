@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "ion4200": "ionic serve --port=4200",
     "ionic8100": "ionic serve --port=8100",
-    "build-production": "ng build --prod"
+    "build-production": "ng build --prod",
+    "android-build": "ionic cordova run android --verbose --status"
   },
   "private": true,
   "dependencies": {
