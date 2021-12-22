@@ -13,6 +13,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { StoreModule } from "@ngrx/store";
 import { rootReducer } from "./store/root";
+import { Camera } from "@awesome-cordova-plugins/camera/ngx";
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -24,6 +25,14 @@ const firebaseConfig = {
     appId : "1:1057128048906:web:f562c6fbeb318abfc872f3",
     measurementId : "G-L2KPQJ81JS"
 };
+
+// class CameraMock extends Camera {
+//     getPicture( options ) {
+//         return new Promise( ( resolve, reject ) => {
+//             resolve( "BASE_64_ENCODED_DATA_GOES_HERE" );
+//         } );
+//     }
+// }
 
 @NgModule( {
                declarations : [ AppComponent ],
@@ -38,6 +47,7 @@ const firebaseConfig = {
                    StatusBar,
                    SplashScreen,
                    { provide : RouteReuseStrategy, useClass : IonicRouteStrategy },
+                   Camera,
                    AngularFirestore
                ],
                bootstrap : [ AppComponent ]

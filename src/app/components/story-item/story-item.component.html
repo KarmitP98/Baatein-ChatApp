@@ -1,10 +1,12 @@
 <div *ngIf = "!loading" class = "story">
-    <div [class.add] = "type === 'add'" class = "storyArea" matRipple>
+    <div (click) = "addStory()" [class.add] = "type === 'add'"
+         class = "storyArea"
+         matRipple>
         <div class = "profilePic">
             <img [src] = "getUserProfilePic()" alt = "Avatar">
         </div>
-        <div *ngIf = "type === 'add'" class = "text">
-            Add<br>Story
-        </div>
+        <!--        <div *ngIf = "type === 'add' && !currentPhoto" class = "text">-->
+        <!--            Add<br>Story-->
+        <!--        </div>-->
     </div>
 </div>
