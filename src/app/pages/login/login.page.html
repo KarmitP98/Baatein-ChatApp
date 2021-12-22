@@ -1,42 +1,40 @@
-<ion-content class = "ion-padding">
+<ion-content class = "ion-padding ion-text-center">
     <div class = "page login">
-        <div class = "wrapper">
-            <img alt = "Logo Light" src = "assets/logo-light.png">
-            <form #loginForm = "ngForm" (submit) = "handleSubmit()">
-                <mat-form-field>
-                    <mat-label>
-                        Email
-                    </mat-label>
-                    <input [(ngModel)] = "email" id = "email" matInput
-                           name = "email" placeholder = "jack.doe@email.com"
-                           required
-                           type = "email">
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>
-                        Password
-                    </mat-label>
-                    <input [(ngModel)] = "password" id = "password"
-                           matInput
-                           minlength = "6" name = "password"
-                           placeholder = "******"
-                           required type = "password">
-                </mat-form-field>
-                <mat-error *ngIf = "showError">{{showError}}</mat-error>
-                <br>
-                <br>
-                <div class = "message">
-                    Do not have an account?
-                    <strong routerLink = "/signup">Signup!</strong>
-                </div>
-                <br>
-                <br>
-                <ion-button [disabled] = "processing" color = "success"
-                            shape = "block" type = "submit">
-                    <app-loader *ngIf = "processing"></app-loader>
-                    Login
-                </ion-button>
-            </form>
-        </div>
+        <img alt = "Logo Light" src = "assets/logo-light.png">
+        <form #loginForm = "ngForm" (submit) = "handleSubmit()">
+            <mat-form-field>
+                <mat-label>
+                    Email
+                </mat-label>
+                <input [(ngModel)] = "email" id = "email" matInput
+                       name = "email" placeholder = "jack.doe@email.com"
+                       required
+                       type = "email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Password
+                </mat-label>
+                <input [(ngModel)] = "password" id = "password"
+                       matInput
+                       minlength = "6" name = "password"
+                       placeholder = "******"
+                       required type = "password">
+            </mat-form-field>
+            <mat-error *ngIf = "showError">{{showError}}</mat-error>
+            <br>
+            <br>
+            <div class = "message">
+                Do not have an account?
+                <strong routerLink = "/signup">Signup!</strong>
+            </div>
+            <br>
+            <br>
+            <ion-button [disabled] = "processing" color = "success"
+                        shape = "block" type = "submit">
+                <app-loader *ngIf = "processing"></app-loader>
+                Login
+            </ion-button>
+        </form>
     </div>
 </ion-content>
