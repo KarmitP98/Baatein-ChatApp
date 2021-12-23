@@ -7,6 +7,9 @@ import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { ActionSheetController, ModalController } from "@ionic/angular";
 import { AvatarSelectorComponent } from "../../../components/avatar-selector/avatar-selector.component";
+import { PhotoService } from "../../../service/photo.service";
+import { encodeBase64 } from "../../../shared/functions";
+import { NotificationService } from "../../../services/notification.service";
 
 @Component( {
                 selector : "app-settings",
@@ -24,7 +27,9 @@ export class SettingsPage implements OnInit, OnDestroy {
                  private store : Store<RootState>,
                  private userService : UserService,
                  private modal : ModalController,
-                 private actionSheetController : ActionSheetController ) { }
+                 private actionSheetController : ActionSheetController,
+                 private photoService : PhotoService,
+                 private notificationService : NotificationService ) { }
     
     ngOnInit() {
         // Fetch the value of current user from the store.
@@ -68,14 +73,14 @@ export class SettingsPage implements OnInit, OnDestroy {
                                                            text : "Take a picture",
                                                            icon : "camera",
                                                            handler : () => {
-                                                               //TODO: Implement User camera to take a photo
+                                                               this.takePicture();
                                                            }
                                                        },
                                                        {
                                                            text : "Select from Gallery",
                                                            icon : "images",
                                                            handler : () => {
-                                                               //TODO: Implement Select from Gallery
+                                                               this.selectFromGallery();
                                                            }
                                                        },
                                                        {
@@ -106,11 +111,35 @@ export class SettingsPage implements OnInit, OnDestroy {
                                            componentProps : { "currentProfilePicture" : this.currentAvatar }
                                        } );
         await mod.present();
-        
+    
         const data = await mod.onWillDismiss();
         if ( data.data ) {
             this.currentAvatar = data.data.selected;
             this.currentUser.profilePic = this.currentAvatar;
         }
     }
+    
+    
+    takePicture = () => {
+        this.photoService.takePictureFromCamera()
+            .then( ( value ) => {
+                this.currentAvatar = encodeBase64( value.toString(), "jpeg" );
+                this.currentUser.profilePic = this.currentAvatar;
+            } )
+            .catch( async error => {
+                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error.message } );
+            } );
+    };
+    
+    
+    selectFromGallery = () => {
+        this.photoService.selectPhotoFromGallery()
+            .then( ( value ) => {
+                this.currentAvatar = encodeBase64( value.toString(), "jpeg" );
+                this.currentUser.profilePic = this.currentAvatar;
+            } )
+            .catch( async error => {
+                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error } );
+            } );
+    };
 }

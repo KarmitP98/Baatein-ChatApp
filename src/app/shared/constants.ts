@@ -30,3 +30,4 @@ export const ALL_AVATARS = [
     getAvatarLocation( "stanley.png" ),
     getAvatarLocation( "toby.png" )
 ];
+
