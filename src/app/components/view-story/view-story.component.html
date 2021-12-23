@@ -19,6 +19,11 @@
                 </ion-button>
             </ion-buttons>
         </ion-toolbar>
-        <img [src] = "story.fileURL" alt = "Story" class = "story">
+        <ion-slides #storySlides [options] = "slideOptions"
+                    [pager] = "stories?.length > 1">
+            <ion-slide *ngFor = "let story of stories; let i  = index">
+                <img [src] = "story.fileURL" alt = "Story" class = "story">
+            </ion-slide>
+        </ion-slides>
     </div>
 </ion-content>

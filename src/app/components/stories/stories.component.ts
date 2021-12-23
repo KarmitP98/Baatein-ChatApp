@@ -18,6 +18,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
     storySub : Subscription = new Subscription( undefined );
     userSub : Subscription = new Subscription( undefined );
     currentUser : UserModel = undefined;
+    users : {} = {};
     
     constructor( private ss : StoryService, private store : Store<RootState> ) { }
     
@@ -48,9 +49,29 @@ export class StoriesComponent implements OnInit, OnDestroy {
             this.loading = true;
             if ( !value.empty ) {
                 this.stories = value.docs.map( doc => doc.data() );
+                this.mapStoryToUser( this.stories );
             }
             this.loading = false;
         } );
+    };
+    
+    mapStoryToUser = ( stories : StoryModel[] ) => {
+        this.users = {};
+        for ( let story of stories ) {
+            if ( this.users[story.createdById] ) {
+                if ( this.users[story.createdById].stories ) {
+                    this.users[story.createdById].stories.push( story );
+                } else {
+                    this.users[story.createdById].stories = [ story ];
+                }
+            } else {
+                this.users[story.createdById] = { user : story.createdBy, stories : [ story ] };
+            }
+        }
+    };
+    
+    getKeys = ( object : object ) => {
+        return Object.keys( object );
     };
     
 }

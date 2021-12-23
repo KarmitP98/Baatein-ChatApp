@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { StoryModel } from "../../models/StoryModel";
 import { UserModel } from "../../models/UserModel";
-import { ModalController, PopoverController } from "@ionic/angular";
+import { IonSlides, ModalController, PopoverController } from "@ionic/angular";
 import { StoryMenuComponent } from "../story-menu/story-menu.component";
 import { StoryService } from "../../services/story.service";
 import { NotificationService } from "../../services/notification.service";
@@ -13,13 +13,16 @@ import { NotificationService } from "../../services/notification.service";
             } )
 export class ViewStoryComponent implements OnInit {
     
-    @Input() story : StoryModel = undefined;
+    @Input() stories : StoryModel[] = [];
     @Input() currentUser : UserModel = undefined;
     @Input() storyUser : UserModel = undefined;
     interval;
-    // TODO: Future functionality.
-    // currentProgress : number = 0;
-    // TIME_PER_STORY = 10_000;
+    currentIndex : number = 0;
+    slideOptions = {
+        initialSlide : this.currentIndex,
+        speed : 400
+    };
+    @ViewChild( "storySlides", { static : false } ) storySlides : IonSlides;
     
     constructor( private modalController : ModalController,
                  private popoverController : PopoverController,
@@ -27,9 +30,6 @@ export class ViewStoryComponent implements OnInit {
                  private notificationService : NotificationService ) { }
     
     ngOnInit() {
-        // this.interval = setInterval( async () => {
-        //     await this.close( false );
-        // }, this.TIME_PER_STORY );
     }
     
     close = async ( output : boolean = false ) => {
@@ -54,16 +54,22 @@ export class ViewStoryComponent implements OnInit {
         
         const { data } = await pop.onWillDismiss();
         if ( data?.selected === "delete" ) {
-            await this.deleteStory( this.story );
+            await this.deleteStory( this.stories[this.currentIndex] );
         }
     };
     
     deleteStory = ( story : StoryModel ) => {
-        this.storyService.deleteStory( this.story ).then( async () => {
+        this.storyService.deleteStory( story ).then( async () => {
             await this.close();
             await this.notificationService.showToast(
                 { message : "Your story has been deleted Successfully!", duration : 5000, color : "success" } );
         } );
+    };
+    
+    onSlideChange = async () => {
+        if ( this.storySlides ) {
+            this.currentIndex = await this.storySlides.getActiveIndex();
+        }
     };
     
 }

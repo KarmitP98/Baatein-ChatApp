@@ -18,6 +18,7 @@ import { ViewStoryComponent } from "../view-story/view-story.component";
 export class StoryItemComponent implements OnInit {
     
     @Input() story : StoryModel;
+    @Input() user;
     @Input() type : "story" | "add" = "story";
     @Input() currentUser : UserModel = undefined;
     loading = true;
@@ -34,8 +35,8 @@ export class StoryItemComponent implements OnInit {
                  private modalController : ModalController ) { }
     
     ngOnInit() {
-        if ( this.story || this.type ) {
-            this.story?.createdBy?.get()?.then( ( value ) => {
+        if ( this.user || this.type ) {
+            this.user?.user?.get()?.then( ( value ) => {
                 if ( value.exists ) {
                     this.storyUser = value.data();
                 }
@@ -59,7 +60,7 @@ export class StoryItemComponent implements OnInit {
                                 .create( {
                                              component : ViewStoryComponent,
                                              componentProps : {
-                                                 story : this.story,
+                                                 stories : this.user.stories,
                                                  currentUser : this.currentUser,
                                                  storyUser : this.storyUser
                                              },

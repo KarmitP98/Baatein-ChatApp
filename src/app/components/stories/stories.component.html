@@ -1,7 +1,7 @@
 <div *ngIf = "!loading" class = "stories">
     <app-story-item [currentUser] = "currentUser" type = "add"></app-story-item>
-    <app-story-item *ngFor = "let story of stories"
+    <app-story-item *ngFor = "let userId of getKeys(users)"
                     [currentUser] = "currentUser"
-                    [story] = "story"
+                    [user] = "users[userId]"
                     type = "story"></app-story-item>
 </div>
