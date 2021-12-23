@@ -1,6 +1,6 @@
-$selected-background: var(--ion-color-primary);
 $selected-color: white;
 $default-color: rgb(102, 102, 102);
+$selected-background: linear-gradient(to bottom right, var(--primary-to-success-gradient));
 
 ion-tabs {
   position: relative;

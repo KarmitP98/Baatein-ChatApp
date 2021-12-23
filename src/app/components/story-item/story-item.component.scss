@@ -20,12 +20,8 @@ $story-font: $story-width / 6;
     cursor: pointer;
 
     &.add {
-      background-image: linear-gradient(to right bottom, #3880ff, #00a3ff, #00bbee, #00cab1, #2dd36f);
+      background-image: linear-gradient(to right bottom, var(--primary-to-success-gradient));
       text-align: center;
-
-      //.profilePic {
-      //  display: none;
-      //}
 
       .text {
         font-weight: 700;
