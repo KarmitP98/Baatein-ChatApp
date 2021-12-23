@@ -2,16 +2,12 @@
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  flex-flow: column nowrap;
 
-  &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: var(--background-filter-fade-top);
-    top: 0;
-    left: 0;
-  }
 
   .header {
     display: flex;
@@ -26,6 +22,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 2em;
+    background-image: var(--background-filter-fade-top);
 
     .back-button {
       border-radius: var(--border-radius-full);
@@ -35,12 +32,46 @@
 
     .title {
       font-weight: 600;
+      font-size: 1.25em;
     }
   }
 
-  .story {
-    height: 100%;
-    width: auto;
-  }
+  .indicators {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 2em;
+    flex-flow: row nowrap;
+    position: sticky;
+    bottom: 0;
 
+    //.indicator {
+    //  position: relative;
+    //  width: 100%;
+    //  height: 5px;
+    //  background: rgba(255, 255, 255, 0.5);
+    //  border-radius: var(--border-radius-large);
+    //  overflow: hidden;
+    //
+    //  // TODO: Future Functionality
+    //  //&:after {
+    //  //  content: '';
+    //  //  position: absolute;
+    //  //  width: 100%;
+    //  //  height: 100%;
+    //  //  top: 0;
+    //  //  left: 0;
+    //  //  background: white;
+    //  //  animation: load-left 10s linear;
+    //  //}
+    //}
+  }
+}
+
+
+@keyframes load-left {
+  from {
+    left: -100%;
+  }
 }

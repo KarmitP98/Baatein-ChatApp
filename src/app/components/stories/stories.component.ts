@@ -44,7 +44,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
     };
     
     fetchAllStories = () => {
-        this.ss.fetchAllStories().ref.orderBy( "createdAt" ).onSnapshot( value => {
+        this.ss.fetchAllStories().ref.orderBy( "createdAt", "desc" ).onSnapshot( value => {
             this.loading = true;
             if ( !value.empty ) {
                 this.stories = value.docs.map( doc => doc.data() );

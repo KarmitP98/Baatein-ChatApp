@@ -13,10 +13,18 @@ export class ViewStoryComponent implements OnInit {
     @Input() story : StoryModel = undefined;
     @Input() currentUser : UserModel = undefined;
     @Input() storyUser : UserModel = undefined;
+    interval;
+    // TODO: Future functionality.
+    // currentProgress : number = 0;
+    // TIME_PER_STORY = 10_000;
     
     constructor( private modalController : ModalController ) { }
     
-    ngOnInit() {}
+    ngOnInit() {
+        // this.interval = setInterval( async () => {
+        //     await this.close( false );
+        // }, this.TIME_PER_STORY );
+    }
     
     close = async ( output : boolean = false ) => {
         if ( output ) {
