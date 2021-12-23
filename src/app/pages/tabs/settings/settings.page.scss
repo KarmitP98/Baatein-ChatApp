@@ -5,8 +5,14 @@ ion-content {
   height: 100%;
 
   .profilePic {
-    width: 100%;
+    //max-height: 50%;
+    //height: 50%;
     position: relative;
+
+    //img{
+    //  height: 100%;
+    //  position: relative;
+    //}
 
     &:after {
       content: '';
@@ -16,7 +22,9 @@ ion-content {
       background-image: var(--background-filter-fade-bottom);
       top: 0;
       left: 0;
+      z-index: 1;
     }
+
   }
 
   .form {

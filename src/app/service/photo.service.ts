@@ -17,13 +17,14 @@ export class PhotoService {
     
     takePictureFromCamera = async ( options : CameraOptions = {
         sourceType : this.camera.PictureSourceType.CAMERA,
-        mediaType : this.camera.MediaType.PICTURE
+        mediaType : this.camera.MediaType.PICTURE,
+        saveToPhotoAlbum : true
     } ) => {
         return this.handleCameraAction( options );
     };
     
     selectPhotoFromGallery = ( options : CameraOptions = {
-        sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
+        sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
         mediaType : this.camera.MediaType.PICTURE
     } ) => {
         return this.handleCameraAction( options );

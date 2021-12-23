@@ -127,7 +127,7 @@ export class SettingsPage implements OnInit, OnDestroy {
                 this.currentUser.profilePic = this.currentAvatar;
             } )
             .catch( async error => {
-                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error.message } );
+                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error } );
             } );
     };
     
