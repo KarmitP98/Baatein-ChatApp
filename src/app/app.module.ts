@@ -26,13 +26,6 @@ const firebaseConfig = {
     measurementId : "G-L2KPQJ81JS"
 };
 
-// class CameraMock extends Camera {
-//     getPicture( options ) {
-//         return new Promise( ( resolve, reject ) => {
-//             resolve( "BASE_64_ENCODED_DATA_GOES_HERE" );
-//         } );
-//     }
-// }
 
 @NgModule( {
                declarations : [ AppComponent ],

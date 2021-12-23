@@ -1,8 +1,14 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { UserModel } from "../../models/UserModel";
 import { StoryModel } from "../../models/StoryModel";
-import { Camera, CameraOptions } from "@awesome-cordova-plugins/camera/ngx";
-import { Platform } from "@ionic/angular";
+import { Camera } from "@awesome-cordova-plugins/camera/ngx";
+import { ActionSheetController, ModalController, Platform } from "@ionic/angular";
+import { PhotoService } from "../../service/photo.service";
+import { NotificationService } from "../../services/notification.service";
+import { encodeBase64 } from "../../shared/functions";
+import { StoryService } from "../../services/story.service";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { ViewStoryComponent } from "../view-story/view-story.component";
 
 @Component( {
                 selector : "app-story-item",
@@ -13,17 +19,25 @@ export class StoryItemComponent implements OnInit {
     
     @Input() story : StoryModel;
     @Input() type : "story" | "add" = "story";
+    @Input() currentUser : UserModel = undefined;
     loading = true;
     storyUser : UserModel;
     currentPhoto : string = "";
     
-    constructor( private camera : Camera, private platform : Platform ) { }
+    constructor( private camera : Camera,
+                 private platform : Platform,
+                 private actionSheetController : ActionSheetController,
+                 private photoService : PhotoService,
+                 private notificationService : NotificationService,
+                 private storyService : StoryService,
+                 private afs : AngularFirestore,
+                 private modalController : ModalController ) { }
     
     ngOnInit() {
         if ( this.story || this.type ) {
             this.story?.createdBy?.get()?.then( ( value ) => {
-                if ( value.exists() ) {
-                    this.storyUser = value.val();
+                if ( value.exists ) {
+                    this.storyUser = value.data();
                 }
                 this.loading = false;
             } );
@@ -31,43 +45,96 @@ export class StoryItemComponent implements OnInit {
         }
     }
     
-    addStory = () => {
+    addStory = async () => {
         if ( this.type === "add" ) {
             // Create new story logic goes here...
-            this.takePhoto();
+            await this.openActionSheet();
         } else {
-            this.viewStory();
+            await this.viewStory();
         }
     };
     
-    viewStory = () => {
-        // View Story logic goes here...
+    viewStory = async () => {
+        const modal = await this.modalController
+                                .create( {
+                                             component : ViewStoryComponent,
+                                             componentProps : {
+                                                 story : this.story,
+                                                 currentUser : this.currentUser,
+                                                 storyUser : this.storyUser
+                                             },
+                                             keyboardClose : true,
+                                             swipeToClose : true,
+                                             animated : true,
+                                             showBackdrop : false
+                                         } );
+        await modal.present();
     };
     
     getUserProfilePic = () => {
         return this.currentPhoto || this.storyUser?.profilePic || "assets/Avatars/user-default.jpg";
     };
     
-    takePhoto = () => {
-        this.platform.ready().then( () => {
-            if ( this.platform.is( "cordova" ) ) {
-                const options : CameraOptions = {
-                    quality : 100,
-                    destinationType : this.camera.DestinationType.FILE_URI,
-                    encodingType : this.camera.EncodingType.JPEG,
-                    mediaType : this.camera.MediaType.PICTURE,
-                    sourceType : this.camera.PictureSourceType.CAMERA,
-                    saveToPhotoAlbum : true
-                };
-                
-                this.camera.getPicture( options ).then( imageData => {
-                    let base64Image = `data:image/jpeg;charset=utf-8;base64, ${ imageData }`;
-                    console.log( base64Image, imageData );
-                    this.currentPhoto = base64Image;
-                } );
-            }
-        } );
+    openActionSheet = async () => {
+        const actionSheet = await this.actionSheetController
+                                      .create( {
+                                                   animated : true,
+                                                   keyboardClose : true,
+                                                   backdropDismiss : true,
+                                                   buttons : [
+                                                       {
+                                                           text : "Take a picture",
+                                                           icon : "camera",
+                                                           handler : () => {
+                                                               this.takePicture();
+                                                           }
+                                                       },
+                                                       {
+                                                           text : "Select from Gallery",
+                                                           icon : "images",
+                                                           handler : () => {
+                                                               this.selectFromGallery();
+                                                           }
+                                                       },
+                                                       {
+                                                           text : "Cancel",
+                                                           icon : "close",
+                                                           role : "cancel",
+                                                           cssClass : "action-item-danger"
+                                                       }
+                                                   ]
+                                               } );
         
+        await actionSheet.present();
     };
     
+    takePicture = () => {
+        this.photoService.takePictureFromCamera()
+            .then( async ( value ) => {
+                const base64ImageURI = encodeBase64( value.toString(), "jpeg" );
+                await this.uploadStory( base64ImageURI );
+            } )
+            .catch( async error => {
+                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error } );
+            } );
+    };
+    
+    
+    selectFromGallery = () => {
+        this.photoService.selectPhotoFromGallery()
+            .then( async ( value ) => {
+                const base64ImageURI = encodeBase64( value.toString(), "jpeg" );
+                await this.uploadStory( base64ImageURI );
+            } )
+            .catch( async error => {
+                await this.notificationService.showToast( { duration : 5000, color : "danger", message : error } );
+            } );
+    };
+    
+    uploadStory = async ( imageURI : string ) => {
+        const id = this.afs.createId();
+        const currentUserRef = this.afs.collection<UserModel>( "users" ).doc( this.currentUser.uId ).ref;
+        const story : StoryModel = new StoryModel( id, new Date(), currentUserRef, this.currentUser.uId, imageURI );
+        await this.storyService.createStory( story );
+    };
 }

@@ -1,12 +1,9 @@
-import firebase from "firebase/compat";
-import Reference = firebase.database.Reference;
-
 export class StoryModel {
     id : string;
     createdAt : Date;
     updatedAt : Date;
-    createdBy : Reference;
-    updateBy : Reference;
+    createdBy : any;
+    updateBy : any;
     createdById : string;
     updatedById : string;
     showUntil : Date;
@@ -14,11 +11,11 @@ export class StoryModel {
     fileURL : string;
     
     
-    constructor( id : string, createdAt : Date, createdBy : firebase.database.Reference, createdById : string, file : File ) {
+    constructor( id : string, createdAt : Date, createdBy : any, createdById : string, fileURL : string ) {
         this.id = id;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.createdById = createdById;
-        this.file = file;
+        this.fileURL = fileURL;
     }
 }

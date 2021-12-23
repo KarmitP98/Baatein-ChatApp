@@ -1,0 +1,46 @@
+.view-story {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: var(--background-filter-fade-top);
+    top: 0;
+    left: 0;
+  }
+
+  .header {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    min-height: 10vh;
+    color: white;
+    z-index: 1;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2em;
+
+    .back-button {
+      border-radius: var(--border-radius-full);
+      padding-right: 1em;
+      font-size: 1.5em;
+    }
+
+    .title {
+      font-weight: 600;
+    }
+  }
+
+  .story {
+    height: 100%;
+    width: auto;
+  }
+
+}

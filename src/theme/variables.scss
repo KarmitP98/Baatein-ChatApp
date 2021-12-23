@@ -86,7 +86,8 @@
   --black-box-shadow-medium: var(--box-shadow-medium) rgba(0, 0, 0, 0.1);
   --black-box-shadow-small: var(--box-shadow-small) rgba(0, 0, 0, 0.1);
 
-  --background-filter-fade-bottom: linear-gradient(to bottom, transparent 25%, rgba(0, 0, 0, 0.95) 120%)
+  --background-filter-fade-bottom: linear-gradient(to bottom, transparent 25%, rgba(0, 0, 0, 0.95) 120%);
+  --background-filter-fade-top: linear-gradient(to top, transparent 25%, rgba(0, 0, 0, 0.95) 100%);
 
 
 }

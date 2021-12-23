@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { StoryService } from "../../services/story.service";
 import { StoryModel } from "../../models/StoryModel";
 import { Subscription } from "rxjs";
+import { Store } from "@ngrx/store";
+import { RootState } from "../../store/root";
+import { UserModel } from "../../models/UserModel";
 
 @Component( {
                 selector : "app-stories",
@@ -13,10 +16,13 @@ export class StoriesComponent implements OnInit, OnDestroy {
     loading = true;
     stories : StoryModel[] = [];
     storySub : Subscription = new Subscription( undefined );
+    userSub : Subscription = new Subscription( undefined );
+    currentUser : UserModel = undefined;
     
-    constructor( private ss : StoryService ) { }
+    constructor( private ss : StoryService, private store : Store<RootState> ) { }
     
-    ngOnInit() {
+    async ngOnInit() {
+        await this.fetchCurrentUser();
         this.fetchAllStories();
     }
     
@@ -24,13 +30,24 @@ export class StoriesComponent implements OnInit, OnDestroy {
         if ( this.storySub ) {
             this.storySub.unsubscribe();
         }
+        if ( this.userSub ) {
+            this.userSub.unsubscribe();
+        }
     }
     
+    fetchCurrentUser = async () => {
+        this.userSub = this.store.select( "user" ).subscribe( value => {
+            if ( value?.user ) {
+                this.currentUser = { ...value.user };
+            }
+        } );
+    };
+    
     fetchAllStories = () => {
-        this.storySub = this.ss.fetchAllStories().valueChanges().subscribe( value => {
+        this.ss.fetchAllStories().ref.orderBy( "createdAt" ).onSnapshot( value => {
             this.loading = true;
-            if ( value?.length ) {
-                this.stories = value;
+            if ( !value.empty ) {
+                this.stories = value.docs.map( doc => doc.data() );
             }
             this.loading = false;
         } );

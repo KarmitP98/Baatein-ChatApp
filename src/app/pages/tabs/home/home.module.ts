@@ -13,6 +13,7 @@ import { StoriesComponent } from "../../../components/stories/stories.component"
 import { StoryItemComponent } from "../../../components/story-item/story-item.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from "@angular/material/core";
+import { ViewStoryComponent } from "../../../components/view-story/view-story.component";
 
 @NgModule( {
                imports : [
@@ -24,6 +25,6 @@ import { MatRippleModule } from "@angular/material/core";
                    MatButtonModule,
                    MatRippleModule
                ],
-               declarations : [ HomePage, ChatItemComponent, StoriesComponent, StoryItemComponent ]
+               declarations : [ HomePage, ChatItemComponent, StoriesComponent, StoryItemComponent, ViewStoryComponent ]
            } )
 export class HomePageModule {}

@@ -1,0 +1,13 @@
+<ion-content fullscreen>
+    <div class = "view-story">
+        <div class = "header">
+            <div (click) = "close(false)" class = "back-button" matRipple>
+                <ion-icon name = "chevron-back"></ion-icon>
+            </div>
+            <div *ngIf = "storyUser" class = "title">
+                {{storyUser.name}}'s Story
+            </div>
+        </div>
+        <img [src] = "story.fileURL" alt = "Story" class = "story">
+    </div>
+</ion-content>
