@@ -5,6 +5,9 @@
         <div *ngIf = "type !== 'add'" class = "profilePic">
             <img [src] = "getUserProfilePic()"
                  alt = "Avatar">
+            <div class = "user-name">
+                {{storyUser.name}}
+            </div>
         </div>
         <div *ngIf = "type === 'add'" class = "text">
             Add<br>Story

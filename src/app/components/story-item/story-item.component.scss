@@ -54,6 +54,14 @@ $story-font: $story-width / 6;
         height: 100%;
         object-fit: cover;
       }
+
+      .user-name {
+        color: white;
+        position: absolute;
+        z-index: 1;
+        bottom: $story-font * 0.5;
+        left: $story-font * 0.5;
+      }
     }
 
     .addButton {
