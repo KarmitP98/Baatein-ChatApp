@@ -17,12 +17,12 @@
     width: 100%;
     height: fit-content;
     min-height: 10vh;
-    color: white;
+    --color: white;
     z-index: 1;
     align-items: center;
     justify-content: flex-start;
-    padding: 2em;
-    background-image: var(--background-filter-fade-top);
+    //padding: 2em;
+    --background: transparent;
 
     .back-button {
       border-radius: var(--border-radius-full);

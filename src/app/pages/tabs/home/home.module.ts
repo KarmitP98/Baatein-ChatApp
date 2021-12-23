@@ -14,6 +14,7 @@ import { StoryItemComponent } from "../../../components/story-item/story-item.co
 import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from "@angular/material/core";
 import { ViewStoryComponent } from "../../../components/view-story/view-story.component";
+import { StoryMenuComponent } from "../../../components/story-menu/story-menu.component";
 
 @NgModule( {
                imports : [
@@ -25,6 +26,6 @@ import { ViewStoryComponent } from "../../../components/view-story/view-story.co
                    MatButtonModule,
                    MatRippleModule
                ],
-               declarations : [ HomePage, ChatItemComponent, StoriesComponent, StoryItemComponent, ViewStoryComponent ]
+               declarations : [ HomePage, ChatItemComponent, StoriesComponent, StoryItemComponent, ViewStoryComponent, StoryMenuComponent ]
            } )
 export class HomePageModule {}
