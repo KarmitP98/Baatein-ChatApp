@@ -19,7 +19,11 @@
       padding: 1em;
 
       img {
+        width: 3.2em;
+        height: 3.2em;
+        object-fit: cover;
         border-radius: var(--border-radius-full);
+        box-shadow: var(--black-box-shadow-small);
       }
     }
 

@@ -15,7 +15,7 @@ ion-tabs {
     box-shadow: var(--black-box-shadow-medium);
     border-radius: var(--border-radius-small);
     height: 10vh;
-    overflow: hidden;
+    overflow: visible;
 
     ion-tab-button {
       background: $selected-color;
@@ -33,6 +33,7 @@ ion-tabs {
         color: $default-color;
         transform: translateY(100px);
         transition: all 0.25s ease-in-out;
+        font-weight: 600;
       }
 
       .indicator {

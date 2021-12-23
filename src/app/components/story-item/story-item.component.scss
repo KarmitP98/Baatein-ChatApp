@@ -18,6 +18,7 @@ $story-font: $story-width / 6;
     display: grid;
     place-items: center;
     cursor: pointer;
+    box-shadow: var(--black-box-shadow-small);
 
     &.add {
       background-image: linear-gradient(to right bottom, var(--primary-to-success-gradient));
