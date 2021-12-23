@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "android-run": "ionic cordova run android -l"
+    "android-run-live": "ionic cordova run android -l"
   },
   "private": true,
   "dependencies": {

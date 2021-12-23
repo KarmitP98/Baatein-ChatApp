@@ -12,7 +12,7 @@
 <ion-content *ngIf = "!loading" class = "ion-text-center">
     <div class = "profilePic">
         <ion-fab [edge] = "true" horizontal = "end" vertical = "bottom">
-            <ion-fab-button (click) = "selectAvatar()">
+            <ion-fab-button (click) = "openActionSheet()">
                 <ion-icon name = "image"></ion-icon>
             </ion-fab-button>
         </ion-fab>

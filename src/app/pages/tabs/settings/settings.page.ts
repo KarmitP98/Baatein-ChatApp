@@ -5,7 +5,7 @@ import { RootState } from "../../../store/root";
 import { UserModel } from "../../../models/UserModel";
 import { Subscription } from "rxjs";
 import { UserService } from "../../../services/user.service";
-import { ModalController } from "@ionic/angular";
+import { ActionSheetController, ModalController } from "@ionic/angular";
 import { AvatarSelectorComponent } from "../../../components/avatar-selector/avatar-selector.component";
 
 @Component( {
@@ -20,7 +20,11 @@ export class SettingsPage implements OnInit, OnDestroy {
     loading = true;
     currentAvatar : string = "";
     
-    constructor( private authService : AuthService, private store : Store<RootState>, private userService : UserService, private modal : ModalController ) { }
+    constructor( private authService : AuthService,
+                 private store : Store<RootState>,
+                 private userService : UserService,
+                 private modal : ModalController,
+                 private actionSheetController : ActionSheetController ) { }
     
     ngOnInit() {
         // Fetch the value of current user from the store.
@@ -51,6 +55,46 @@ export class SettingsPage implements OnInit, OnDestroy {
      */
     updateUser = async () => {
         await this.userService.updateUser( this.currentUser );
+    };
+    
+    openActionSheet = async () => {
+        const actionSheet = await this.actionSheetController
+                                      .create( {
+                                                   animated : true,
+                                                   keyboardClose : true,
+                                                   backdropDismiss : true,
+                                                   buttons : [
+                                                       {
+                                                           text : "Take a picture",
+                                                           icon : "camera",
+                                                           handler : () => {
+                                                               //TODO: Implement User camera to take a photo
+                                                           }
+                                                       },
+                                                       {
+                                                           text : "Select from Gallery",
+                                                           icon : "images",
+                                                           handler : () => {
+                                                               //TODO: Implement Select from Gallery
+                                                           }
+                                                       },
+                                                       {
+                                                           text : "Select a default Avatar",
+                                                           icon : "person",
+                                                           handler : async () => {
+                                                               await this.selectAvatar();
+                                                           }
+                                                       },
+                                                       {
+                                                           text : "Cancel",
+                                                           icon : "close",
+                                                           role : "cancel",
+                                                           cssClass : "action-item-danger"
+                                                       }
+                                                   ]
+                                               } );
+        
+        await actionSheet.present();
     };
     
     async selectAvatar() : Promise<void> {
