@@ -12,9 +12,6 @@
 </ion-header>
 
 <ion-content>
-    <!--    <div *ngIf = "loading" class="loading">-->
-    <!--        <img alt = "Chat" src = "assets/chat.svg">-->
-    <!--    </div>-->
     <div *ngIf = "!loading">
         <app-chat [chat] = "chat" [current] = "currentUser"
                   [other] = "otherUser"></app-chat>

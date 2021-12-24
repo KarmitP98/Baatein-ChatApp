@@ -6,11 +6,10 @@
         <div *ngFor = "let message of getMessages(); let i = index;
         let c = count">
             <div *ngIf = "showMessageDate(i)" class = "showDate">
-                <!--                <div class = "line"></div>-->
                 <div class = "text">
-                    {{getDate(message.createdAt) | date:'fullDate'}}
+                    {{isToday(getDate(message.createdAt)) ? 'Today' :
+                    (getDate(message.createdAt) |date:'fullDate')}}
                 </div>
-                <!--                <div class = "line"></div>-->
             </div>
             <app-message
                     [current] = "message.fromId === this.currentUser.uId"

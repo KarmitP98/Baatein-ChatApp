@@ -94,12 +94,17 @@ export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
         if ( previousIndex < 0 ) {
             return true;
         }
-        
+    
         currentMessageDate = this.getDate( this.getMessages()[index].createdAt );
         previousMessageDate = this.getDate( this.getMessages()[previousIndex].createdAt );
-        
+    
         if ( currentMessageDate && previousMessageDate ) {
             return currentMessageDate.getDate() !== previousMessageDate.getDate();
         }
+    };
+    
+    isToday = ( date : Date ) : boolean => {
+        const today = new Date();
+        return today.getDate() === date.getDate() && today.getMonth() === date.getMonth() && today.getFullYear() === date.getFullYear();
     };
 }
