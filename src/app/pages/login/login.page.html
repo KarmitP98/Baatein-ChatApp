@@ -6,8 +6,11 @@
                 <mat-label>
                     Email
                 </mat-label>
-                <input [(ngModel)] = "email" id = "email" matInput
-                       name = "email" placeholder = "jack.doe@email.com"
+                <input #emailField (keyup.enter) = "passwordField.focus()"
+                       [(ngModel)] = "email"
+                       id = "email" matInput
+                       name = "email"
+                       placeholder = "jack.doe@email.com"
                        required
                        type = "email">
             </mat-form-field>
@@ -15,11 +18,13 @@
                 <mat-label>
                     Password
                 </mat-label>
-                <input [(ngModel)] = "password" id = "password"
-                       matInput
-                       minlength = "6" name = "password"
-                       placeholder = "******"
-                       required type = "password">
+                <input #passwordField (keyup.enter) = "handleSubmit()"
+                       [(ngModel)] = "password"
+                       id = "password"
+                       matInput minlength = "6"
+                       name = "password"
+                       placeholder = "******" required
+                       type = "password">
             </mat-form-field>
             <mat-error *ngIf = "showError">{{showError}}</mat-error>
             <br>

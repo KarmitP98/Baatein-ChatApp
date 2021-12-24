@@ -9,7 +9,9 @@
                 <form #emailForm = "ngForm" (submit) = "handleEmailSubmit()">
                     <mat-form-field>
                         <mat-label>Email</mat-label>
-                        <input [(ngModel)] = "email" id = "email" matInput
+                        <input (keyup.enter) = "handleEmailSubmit()"
+                               [(ngModel)] = "email" id = "email"
+                               matInput
                                name = "email"
                                placeholder = "jack.doe@email.com"
                                required
@@ -43,7 +45,9 @@
                       (submit) = "handleUserNameSubmit()">
                     <mat-form-field>
                         <mat-label>Name</mat-label>
-                        <input [(ngModel)] = "name" id = "name" matInput
+                        <input (keyup.enter) = "passwordField.focus()"
+                               [(ngModel)] = "name" id = "name"
+                               matInput
                                name = "name"
                                placeholder = "Jack Doe"
                                required
@@ -51,7 +55,11 @@
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Password</mat-label>
-                        <input [(ngModel)] = "password" id = "password" matInput
+                        <input #passwordField
+                               (keyup.enter) = "handleUsernameReset()"
+                               [(ngModel)] = "password"
+                               id = "password"
+                               matInput
                                name = "password"
                                placeholder = "*******"
                                required

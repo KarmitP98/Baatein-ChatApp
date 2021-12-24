@@ -10,7 +10,8 @@ export class PhotoService {
     DEFAULT_CAMERA_OPTIONS : CameraOptions = {
         quality : 100,
         destinationType : this.camera.DestinationType.DATA_URL,
-        encodingType : this.camera.EncodingType.JPEG
+        encodingType : this.camera.EncodingType.JPEG,
+        correctOrientation : true
     };
     
     constructor( private camera : Camera ) { }
