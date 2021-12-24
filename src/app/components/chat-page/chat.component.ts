@@ -87,4 +87,19 @@ export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
     getDate( stamp ) : any {
         return TimeStampToDate( stamp );
     }
+    
+    showMessageDate = ( index : any ) => {
+        let currentMessageDate : Date, previousMessageDate : Date;
+        const previousIndex = (index - 1);
+        if ( previousIndex < 0 ) {
+            return true;
+        }
+        
+        currentMessageDate = this.getDate( this.getMessages()[index].createdAt );
+        previousMessageDate = this.getDate( this.getMessages()[previousIndex].createdAt );
+        
+        if ( currentMessageDate && previousMessageDate ) {
+            return currentMessageDate.getDate() !== previousMessageDate.getDate();
+        }
+    };
 }
