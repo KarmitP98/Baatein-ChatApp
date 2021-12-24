@@ -43,6 +43,7 @@ export class ChatPage implements OnInit, OnDestroy {
         // Fetch the Current User and Other user from state.
         this.storeSub = this.store.subscribe( ( state : RootState ) => {
             if ( state ) {
+                this.loading = true;
                 this.currentUser = state.user.user;
                 this.otherUser = state.chat.with;
                 // If both users exists, fetch the chat between these 2 users.
@@ -62,26 +63,6 @@ export class ChatPage implements OnInit, OnDestroy {
                                                            this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
                     }
                     this.loading = false;
-                    // this.chatService.fetchChatBetween( this.currentUser.uId, this.otherUser.uId ).onSnapshot( snap => {
-                    //     if ( !snap.empty ) {
-                    //         const withCurrent = snap.docs.filter( value => value.data().betweenIds.includes( this.otherUser.uId ) );
-                    //         if ( withCurrent?.length ) {
-                    //             this.chat = withCurrent[0]?.data();
-                    //             this.newChat = false;
-                    //         } else {
-                    //             this.newChat = true;
-                    //             this.chat = startANewConversation( this.currentUser, this.otherUser,
-                    //                                                this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
-                    //                                                this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
-                    //         }
-                    //     } else {
-                    //         this.newChat = true;
-                    //         this.chat = startANewConversation( this.currentUser, this.otherUser,
-                    //                                            this.afs.collection( "users" ).doc( this.currentUser.uId ).ref,
-                    //                                            this.afs.collection( "users" ).doc( this.otherUser.uId ).ref );
-                    //     }
-                    //     this.loading = false;
-                    // } );
                 } else {
                     // If both users do not exist, navigate back to contacts page.
                     this.router.navigate( [ ".." ] );
@@ -112,7 +93,8 @@ export class ChatPage implements OnInit, OnDestroy {
             const clone = {
                 ...this.chat,
                 messages : this.chat.messages?.length ? [ ...this.chat.messages,
-                                                          message ] : [ message ]
+                                                          message ] : [ message ],
+                updatedAt : new Date()
             };
             if ( this.newChat ) {
                 await this.chatService.createNewChat( clone )

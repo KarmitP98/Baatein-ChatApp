@@ -14,10 +14,10 @@
   width: 95%;
   height: 10vh;
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--black-box-shadow-medium);
   display: grid;
   place-items: center;
-  border-radius: 20px;
+  border-radius: var(--border-radius-medium);
 
   .inputField {
     display: flex;

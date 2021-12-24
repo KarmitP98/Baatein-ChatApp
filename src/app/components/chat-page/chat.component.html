@@ -13,6 +13,13 @@
                      [pos] = "getMessagePosition(message, i, c)"
                      [user] = "getUser(message.fromId)"
         ></app-message>
+        <div class = "lastUpdated">
+            <div class = "line"></div>
+            <div class = "text">
+                {{getDate(chat?.updatedAt) | date: 'MMM d, y, hh:mm a'}}
+            </div>
+            <div class = "line"></div>
+        </div>
         <div id = "bottom"></div>
     </div>
 </div>

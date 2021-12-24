@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MessageModel } from "../../models/ChatModel";
 import { UserModel } from "../../models/UserModel";
-import { getStatusIcon, TimeStampToDate } from "../../shared/functions";
+import { getStatusIcon } from "../../shared/functions";
 
 @Component( {
                 selector : "app-message",
@@ -17,16 +17,8 @@ export class MessageComponent implements OnInit {
     
     constructor() { }
     
-    ngOnInit() {}
-    
-    
-    /**
-     * Get date of the message
-     * @param stamp
-     */
-    getDate = ( stamp ) => {
-        return TimeStampToDate( stamp );
-    };
+    ngOnInit() {
+    }
     
     /**
      * Get status icon of the message status

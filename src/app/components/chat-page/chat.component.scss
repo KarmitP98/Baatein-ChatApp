@@ -12,4 +12,27 @@
   .messages {
     padding-bottom: 2em;
   }
+
+  .lastUpdated {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #636363;
+    padding: 0.5em 2em;
+
+    .text {
+      padding: 0 1em;
+      font-size: 0.75em;
+      font-weight: 600;
+    }
+
+    .line {
+      flex: 1 0 auto;
+      height: 2px;
+      background: rgba(99, 99, 99, 0.5);
+      border: var(--border-radius-full);
+    }
+  }
 }

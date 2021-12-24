@@ -1,7 +1,9 @@
 <ion-header class = "ion-no-border">
     <ion-toolbar>
         <ion-buttons slot = "start">
-            <ion-back-button></ion-back-button>
+            <ion-button [routerLink] = "['..']" fill = "clear">
+                <ion-icon name = "arrow-back"></ion-icon>
+            </ion-button>
         </ion-buttons>
         <ion-title *ngIf = "!loading">
             {{otherUser.name}}

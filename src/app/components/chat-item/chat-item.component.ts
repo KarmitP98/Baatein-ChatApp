@@ -107,21 +107,8 @@ export class ChatItemComponent implements OnInit, OnDestroy {
     /**
      * Start and new chat with other user
      */
-    startChatWith = () => {
-        this.store.dispatch( new StartChatAction( { with : { ...this.user } } ) );
-        // this.chatSub = this.store.select( "chat" ).subscribe( async value => {
-        //     if ( value?.allChats ) {
-        //         const allChatsWithCurrentUser = value.allChats?.filter(
-        //             chat => chat.betweenIds.includes( this.user.uId ) && chat.betweenIds.includes( this.currentUser.uId ) );
-        //         if ( allChatsWithCurrentUser?.length === 1 ) {
-        //             await this.store.dispatch( new SetCurrentChatAction( allChatsWithCurrentUser[0] ) );
-        //         } else {
-        //             await this.store.dispatch( new SetCurrentChatAction( undefined ) );
-        //         }
-        //     }
-        //     console.log('Navigate');
-        //     await this.router.navigate( [ "/", "chat" ] );
-        // } );
-        this.router.navigate( [ "/", "chat" ] );
+    startChatWith = async () => {
+        await this.store.dispatch( new StartChatAction( { with : { ...this.user } } ) );
+        await this.router.navigate( [ "/", "chat" ] );
     };
 }

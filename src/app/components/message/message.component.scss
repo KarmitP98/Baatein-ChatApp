@@ -74,11 +74,11 @@ $current-color: white;
       background: $current-background;
 
       .upper {
-        flex-flow: row-reverse;
+        //flex-flow: row-reverse;
       }
 
       .content {
-        text-align: right;
+        //text-align: right;
       }
     }
   }

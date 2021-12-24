@@ -29,7 +29,7 @@ export enum ChatType {
 
 export class MessageModel {
     public time : Date;
-    public lastUpdatedAt? : Date;
+    public lastUpdatedAt?;
     public to : Reference<UserModel>;
     public from : Reference<UserModel>;
     public toId : string;

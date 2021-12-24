@@ -2,10 +2,7 @@ import { UserModel } from "../models/UserModel";
 import ChatModel, { ChatType, MessageStatus } from "../models/ChatModel";
 import firebase from "firebase/compat";
 import { Reference } from "@angular/fire/compat/firestore";
-import Timestamp = firebase.firestore.Timestamp;
 import User = firebase.User;
-
-let toast;
 
 export const addToLocal = async ( key, value ) => {
     return new Promise( async resolve => {
@@ -24,7 +21,7 @@ export const getUserReference = ( uId : string ) => {
 };
 
 
-export const TimeStampToDate = ( stamp : Timestamp ) => {
+export const TimeStampToDate = ( stamp ) => {
     if ( stamp ) {
         return stamp.toDate();
     }

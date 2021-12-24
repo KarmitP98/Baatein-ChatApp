@@ -3,6 +3,7 @@ import ChatModel, { MessageModel } from "../../models/ChatModel";
 import { UserModel } from "../../models/UserModel";
 import { Store } from "@ngrx/store";
 import { RootState } from "../../store/root";
+import { TimeStampToDate } from "../../shared/functions";
 
 @Component( {
                 selector : "app-chat",
@@ -48,7 +49,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
      * Get all the messages in the chat
      */
     getMessages() : MessageModel[] {
-        return this.chat?.messages.slice().map( message => message );
+        return this.chat?.messages.slice();
     };
     
     /**
@@ -81,5 +82,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnChanges {
         } else {
             return "last";
         }
+    }
+    
+    getDate( stamp ) : any {
+        return TimeStampToDate( stamp );
     }
 }
