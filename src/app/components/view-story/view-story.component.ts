@@ -20,7 +20,7 @@ export class ViewStoryComponent implements OnInit {
     currentIndex : number = 0;
     slideOptions = {
         initialSlide : this.currentIndex,
-        speed : 400
+        speed : 200
     };
     @ViewChild( "storySlides", { static : false } ) storySlides : IonSlides;
     
@@ -69,6 +69,14 @@ export class ViewStoryComponent implements OnInit {
     onSlideChange = async () => {
         if ( this.storySlides ) {
             this.currentIndex = await this.storySlides.getActiveIndex();
+        }
+    };
+    
+    slideTo = async ( direction : number ) => {
+        if ( direction === 1 ) {
+            await this.storySlides.slideNext( 200 );
+        } else {
+            await this.storySlides.slidePrev( 200 );
         }
     };
     

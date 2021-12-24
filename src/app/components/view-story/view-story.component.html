@@ -19,10 +19,16 @@
                 </ion-button>
             </ion-buttons>
         </ion-toolbar>
-        <ion-slides #storySlides [options] = "slideOptions"
+        <ion-slides #storySlides (ionSlideDidChange) = "onSlideChange()"
+                    [options] = "slideOptions"
                     [pager] = "stories?.length > 1">
             <ion-slide *ngFor = "let story of stories; let i  = index">
                 <img [src] = "story.fileURL" alt = "Story" class = "story">
+                <div (click) = "slideTo(-1)" *ngIf = "currentIndex >= 1"
+                     class = "slide slide-left" matRipple></div>
+                <div (click) = "slideTo(1)" *ngIf = "currentIndex
+                < (stories?.length - 1)" class = "slide slide-right"
+                     matRipple></div>
             </ion-slide>
         </ion-slides>
     </div>

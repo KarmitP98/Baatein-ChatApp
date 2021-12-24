@@ -70,6 +70,24 @@
 
   ion-slides, ion-slide {
     height: fit-content;
+
+    .slide {
+      height: 100%;
+      width: 20%;
+      background: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+
+      &-left {
+        left: 0;
+      }
+
+      &-right {
+        right: 0;
+      }
+    }
   }
 }
 
