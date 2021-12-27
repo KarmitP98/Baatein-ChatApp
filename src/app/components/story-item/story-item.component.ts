@@ -9,11 +9,13 @@ import { encodeBase64 } from "../../shared/functions";
 import { StoryService } from "../../services/story.service";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { ViewStoryComponent } from "../view-story/view-story.component";
+import { loadOpacity } from "../../shared/animations/triggers";
 
 @Component( {
                 selector : "app-story-item",
                 templateUrl : "./story-item.component.html",
-                styleUrls : [ "./story-item.component.scss" ]
+                styleUrls : [ "./story-item.component.scss" ],
+                animations : [ loadOpacity ]
             } )
 export class StoryItemComponent implements OnInit {
     

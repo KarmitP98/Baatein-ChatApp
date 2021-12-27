@@ -5,11 +5,13 @@ import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import { RootState } from "../../store/root";
 import { UserModel } from "../../models/UserModel";
+import { loadStory } from "../../shared/animations/triggers";
 
 @Component( {
                 selector : "app-stories",
                 templateUrl : "./stories.component.html",
-                styleUrls : [ "./stories.component.scss" ]
+                styleUrls : [ "./stories.component.scss" ],
+                animations : [ loadStory ]
             } )
 export class StoriesComponent implements OnInit, OnDestroy {
     

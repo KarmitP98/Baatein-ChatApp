@@ -1,8 +1,17 @@
 <ion-header class = "ion-no-border">
     <ion-toolbar>
         <ion-title>
-            Welcome <strong>{{currentUser?.name}}</strong>!
+            <ion-label>{{currentUser?.name}}</ion-label>
         </ion-title>
+        <ion-buttons slot = "end">
+            <ion-button fill = "clear" shape = "round">
+                <ion-icon name = "custom-search"></ion-icon>
+            </ion-button>
+            <ion-button fill = "clear" shape = "round"
+                        (click) = "showMenu($event)">
+                <ion-icon name = "custom-menu"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 

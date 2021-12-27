@@ -1,0 +1,8 @@
+<svg width = "25" height = "25" viewBox = "0 0 25 25" fill = "none"
+     xmlns = "http://www.w3.org/2000/svg">
+    <path d = "M21.6481 11.1842C21.6481 16.4846 17.1867 20.8684 11.5741 20.8684C5.96146 20.8684 1.5 16.4846 1.5 11.1842C1.5 5.8838 5.96146 1.5 11.5741 1.5C17.1867 1.5 21.6481 5.8838 21.6481 11.1842Z"
+          stroke = "currentColor" stroke-width = "3"/>
+    <line x1 = "1.5" y1 = "-1.5" x2 = "7.96759" y2 = "-1.5"
+          transform = "matrix(0.719114 0.694892 -0.719114 0.694892 16.3399 18.4211)"
+          stroke = "currentColor" stroke-width = "3" stroke-linecap = "round"/>
+</svg>

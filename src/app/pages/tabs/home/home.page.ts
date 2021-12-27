@@ -5,6 +5,10 @@ import { ChatService } from "../../../services/chat.service";
 import { Subscription } from "rxjs";
 import ChatModel from "../../../models/ChatModel";
 import { UserModel } from "../../../models/UserModel";
+import { PopoverController } from "@ionic/angular";
+import { HomePageMenuComponent } from "../../../components/home-page-menu/home-page-menu.component";
+import { AuthService } from "../../../services/auth.service";
+import { Router } from "@angular/router";
 
 @Component( {
                 selector : "app-home",
@@ -19,7 +23,11 @@ export class HomePage implements OnInit, OnDestroy {
     currentUser : UserModel;
     loading = true;
     
-    constructor( private store : Store<RootState>, private chatService : ChatService ) { }
+    constructor( private store : Store<RootState>,
+                 private chatService : ChatService,
+                 private popoverController : PopoverController,
+                 private authService : AuthService,
+                 private router : Router ) { }
     
     ngOnInit() {
         // Fetch the value of current user from the store.
@@ -51,5 +59,29 @@ export class HomePage implements OnInit, OnDestroy {
     
     getCurrentUserAvatar() : string {
         return this.currentUser.profilePic || "assets/Avatars/user-default.jpg";
+    }
+    
+    async showMenu( event : MouseEvent ) {
+        const pop = await this.popoverController
+                              .create( {
+                                           component : HomePageMenuComponent,
+                                           animated : true,
+                                           backdropDismiss : true,
+                                           showBackdrop : true,
+                                           keyboardClose : true,
+                                           event
+                                       } );
+        await pop.present();
+        
+        const { data } = await pop.onWillDismiss();
+        if ( data?.selected ) {
+            switch ( data.selected ) {
+                case "logout":
+                    await this.authService.logOut();
+                    break;
+                case "profile":
+                    await this.router.navigate( [ "/", "tabs", "settings" ] );
+            }
+        }
     }
 }

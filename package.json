@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "android-run-live": "ionic cordova run android -l"
+    "android-run-live-emulator": "ionic cordova run android -l --target=Pixel_5_Ionic_Tester",
+    "android-run-live-device": "ionic dordova run android -l --device"
   },
   "private": true,
   "dependencies": {
