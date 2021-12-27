@@ -14,6 +14,8 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { StoreModule } from "@ngrx/store";
 import { rootReducer } from "./store/root";
 import { Camera } from "@awesome-cordova-plugins/camera/ngx";
+import { FormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 const firebaseConfig = {
     apiKey : "AIzaSyD8MXZJ9gYQcRCrd1-sqUfaF7UMXmlgDOk",
@@ -35,7 +37,7 @@ const firebaseConfig = {
                            AppRoutingModule,
                            AngularFireModule.initializeApp( firebaseConfig ),
                            BrowserAnimationsModule,
-                           StoreModule.forRoot( rootReducer ) ],
+                           StoreModule.forRoot( rootReducer ), FormsModule, MatFormFieldModule ],
                providers : [
                    StatusBar,
                    SplashScreen,

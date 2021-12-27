@@ -1,0 +1,12 @@
+<div class = "simple-input">
+    <mat-form-field appearance = "standard">
+        <input (keydown.enter) = "close(true)" [(ngModel)] = "input"
+               [placeholder] = "placeholder"
+               [type] = "inputType" matInput>
+        <ion-icon (click) = "close(true)" matRipple matSuffix
+                  name = "custom-search"></ion-icon>
+    </mat-form-field>
+    <ion-button (click) = "close(false)" color = "danger" expand = "block">
+        Cancel
+    </ion-button>
+</div>

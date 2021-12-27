@@ -4,11 +4,12 @@
             <ion-label>{{currentUser?.name}}</ion-label>
         </ion-title>
         <ion-buttons slot = "end">
-            <ion-button fill = "clear" shape = "round">
+            <ion-button (click) = "showInputPopover($event)" fill = "clear"
+                        shape = "round">
                 <ion-icon name = "custom-search"></ion-icon>
             </ion-button>
-            <ion-button fill = "clear" shape = "round"
-                        (click) = "showMenu($event)">
+            <ion-button (click) = "showMenu($event)" fill = "clear"
+                        shape = "round">
                 <ion-icon name = "custom-menu"></ion-icon>
             </ion-button>
         </ion-buttons>

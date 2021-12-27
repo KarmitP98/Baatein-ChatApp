@@ -16,6 +16,8 @@ import { MatRippleModule } from "@angular/material/core";
 import { ViewStoryComponent } from "../../../components/view-story/view-story.component";
 import { StoryMenuComponent } from "../../../components/story-menu/story-menu.component";
 import { HomePageMenuComponent } from "../../../components/home-page-menu/home-page-menu.component";
+import { SimpleInputPopoverComponent } from "../../../components/simple-input-popover/simple-input-popover.component";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule( {
                imports : [
@@ -25,7 +27,8 @@ import { HomePageMenuComponent } from "../../../components/home-page-menu/home-p
                    HomePageRoutingModule,
                    SignupPageComponentModule,
                    MatButtonModule,
-                   MatRippleModule
+                   MatRippleModule,
+                   MatInputModule
                ],
                declarations : [ HomePage,
                                 ChatItemComponent,
@@ -33,6 +36,7 @@ import { HomePageMenuComponent } from "../../../components/home-page-menu/home-p
                                 StoryItemComponent,
                                 ViewStoryComponent,
                                 StoryMenuComponent,
-                                HomePageMenuComponent ]
+                                HomePageMenuComponent,
+                                SimpleInputPopoverComponent ]
            } )
 export class HomePageModule {}

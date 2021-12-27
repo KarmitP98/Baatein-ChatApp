@@ -9,6 +9,7 @@ import { PopoverController } from "@ionic/angular";
 import { HomePageMenuComponent } from "../../../components/home-page-menu/home-page-menu.component";
 import { AuthService } from "../../../services/auth.service";
 import { Router } from "@angular/router";
+import { SimpleInputPopoverComponent } from "../../../components/simple-input-popover/simple-input-popover.component";
 
 @Component( {
                 selector : "app-home",
@@ -22,6 +23,7 @@ export class HomePage implements OnInit, OnDestroy {
     chats : ChatModel[] = [];
     currentUser : UserModel;
     loading = true;
+    searchTerm : string = "";
     
     constructor( private store : Store<RootState>,
                  private chatService : ChatService,
@@ -84,4 +86,25 @@ export class HomePage implements OnInit, OnDestroy {
             }
         }
     }
+    
+    async showInputPopover( event : MouseEvent ) {
+        const pop = await this.popoverController
+                              .create( {
+                                           component : SimpleInputPopoverComponent,
+                                           componentProps : { placeholder : "Search chats", title : "Search chats..." },
+                                           animated : true,
+                                           backdropDismiss : true,
+                                           showBackdrop : true,
+                                           keyboardClose : true,
+                                           cssClass : "custom-input-popover",
+                                           event
+                                       } );
+        await pop.present();
+        
+        const { data } = await pop.onWillDismiss();
+        if ( data?.input ) {
+            this.searchTerm = data.input;
+        }
+    }
+    
 }
